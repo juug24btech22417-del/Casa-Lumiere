@@ -8,6 +8,8 @@ import { PlotCard } from '@/components/sections/PlotCard';
 import { BookingModal } from '@/components/sections/BookingModal';
 import { Button } from '@/components/ui/Button';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { TopographyOverlay } from '@/components/ui/TopographyOverlay';
+import { InkReveal } from '@/components/ui/InkReveal';
 
 const MOCK_PLOTS = [
   { id: '1', plot_number: 'A-01', price: '₹45,00,000', area: '2,400', status: 'available' as const, image: 'https://images.unsplash.com/photo-1500382017468-9049fed7ee27?q=80&w=800' },
@@ -27,22 +29,29 @@ export const PlotExplorer = () => {
 
   return (
     <section id="plots" className="py-28 relative overflow-hidden">
-      {/* Rich section background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-deep-forest via-surface to-deep-forest" />
+      {/* Rich section background (transparent to show grid) */}
       <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-gold/[0.04] rounded-full blur-[180px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gold/[0.03] rounded-full blur-[140px] pointer-events-none" />
+
+      {/* ═══ SCROLLYTELLING: Topography layers build as you scroll ═══ */}
+      <TopographyOverlay />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         {/* Header + Filter */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-8 mb-16">
-          <ScrollReveal>
-            <h2 className="text-4xl md:text-6xl font-serif text-ivory mb-3">
-              Interactive <span className="text-gold-gradient">Explorer</span>
-            </h2>
-            <p className="text-cream text-lg max-w-lg font-light">
-              Navigate our premium holdings. Select a plot for full details.
-            </p>
-          </ScrollReveal>
+          <div>
+            <span className="text-gold/40 text-[10px] font-mono tracking-[0.5em] uppercase block mb-4">02 / 04</span>
+            <InkReveal>
+              <h2 className="text-4xl md:text-6xl font-serif text-ivory mb-3">
+                Interactive <span className="text-gold-gradient">Explorer</span>
+              </h2>
+            </InkReveal>
+            <InkReveal startAt={0.8} endAt={0.4}>
+              <p className="text-cream text-lg max-w-lg font-light">
+                Navigate our premium holdings. Select a plot for full details.
+              </p>
+            </InkReveal>
+          </div>
 
           <div className="flex p-1 glass rounded-full">
             {FILTERS.map(f => (

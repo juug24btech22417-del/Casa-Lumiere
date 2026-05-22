@@ -1,14 +1,31 @@
 "use client";
 
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from '@/components/ui/Button';
 import { GoldParticles } from '@/components/ui/GoldParticles';
 import { Magnetic } from '@/components/ui/Magnetic';
 
 export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
   const [imgLoaded, setImgLoaded] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
   const title = "Invest in the Horizon.";
+
+  // ── Scroll-linked Museum Frame Effect ──
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"], // track from hero top→viewport top, to hero bottom→viewport top
+  });
+
+  // Frame padding melts away: 36px → 0px
+  const framePadding = useTransform(scrollYProgress, [0, 0.45], [36, 0]);
+  // Frame border radius shrinks: 20px → 0px
+  const frameBorderRadius = useTransform(scrollYProgress, [0, 0.45], [20, 0]);
+  // Frame border opacity fades: 1 → 0
+  const frameBorderOpacity = useTransform(scrollYProgress, [0, 0.3], [0.6, 0]);
+  // Content fades and lifts as you scroll past
+  const contentOpacity = useTransform(scrollYProgress, [0.3, 0.7], [1, 0]);
+  const contentY = useTransform(scrollYProgress, [0.3, 0.7], [0, -60]);
 
   const letterContainer = {
     hidden: { opacity: 0 },
@@ -20,50 +37,73 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
   };
 
   return (
-    <section className="relative h-screen w-full flex items-center justify-center overflow-hidden">
-      {/* Layer 1: Rich CSS gradient (ALWAYS visible — the cinematic base) */}
-      <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(245,220,180,0.9),rgba(245,233,216,1))]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_80%_80%,rgba(212,160,84,0.12),transparent)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_20%_60%,rgba(232,192,136,0.15),transparent)]" />
-      </div>
-
-      {/* Layer 2: Photo (loads on top of gradient) */}
-      <div className="absolute inset-0">
+    <section ref={heroRef} className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+      {/* ══════ MUSEUM FRAME WRAPPER ══════ */}
+      <motion.div
+        className="absolute inset-0 z-0"
+        style={{
+          padding: framePadding,
+        }}
+      >
+        {/* The "frame" border that fades away */}
         <motion.div
-          animate={{ scale: [1, 1.08] }}
-          transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
-          className="w-full h-full"
+          className="relative w-full h-full overflow-hidden"
+          style={{
+            borderRadius: frameBorderRadius,
+            boxShadow: useTransform(
+              frameBorderOpacity,
+              (o) => `inset 0 0 0 1px rgba(168,89,58,${o * 0.3}), 0 20px 60px -15px rgba(0,0,0,${o * 0.08})`
+            ),
+          }}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="https://images.unsplash.com/photo-1500382017468-9049fed7ee27?q=80&w=2000"
-            alt="Luxury Estate"
-            className={`w-full h-full object-cover transition-opacity duration-1000 ${imgLoaded ? 'opacity-25' : 'opacity-0'}`}
-            loading="eager"
-            onLoad={() => setImgLoaded(true)}
-          />
+          {/* Layer 1: Rich CSS gradient (ALWAYS visible — the cinematic base) */}
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(245,220,180,0.9),rgba(245,233,216,1))]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_50%_50%_at_80%_80%,rgba(212,160,84,0.12),transparent)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(ellipse_40%_40%_at_20%_60%,rgba(232,192,136,0.15),transparent)]" />
+          </div>
+
+          {/* Layer 2: Photo (loads on top of gradient) */}
+          <div className="absolute inset-0">
+            <motion.div
+              animate={{ scale: [1, 1.08] }}
+              transition={{ duration: 20, repeat: Infinity, repeatType: "reverse", ease: "linear" }}
+              className="w-full h-full"
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="https://images.unsplash.com/photo-1500382017468-9049fed7ee27?q=80&w=2000"
+                alt="Luxury Estate"
+                className={`w-full h-full object-cover transition-opacity duration-1000 ${imgLoaded ? 'opacity-25' : 'opacity-0'}`}
+                loading="eager"
+                onLoad={() => setImgLoaded(true)}
+              />
+            </motion.div>
+            <div className="absolute inset-0 bg-gradient-to-b from-deep-forest/60 via-transparent to-deep-forest" />
+            <div className="absolute inset-0 bg-gradient-to-r from-deep-forest/50 via-transparent to-deep-forest/50" />
+          </div>
+
+          {/* Layer 3: Ambient gold orbs */}
+          <div className="absolute top-[20%] left-[30%] w-[500px] h-[500px] bg-gold/[0.06] rounded-full blur-[150px] pointer-events-none" />
+          <div className="absolute bottom-[15%] right-[20%] w-[400px] h-[400px] bg-gold/[0.04] rounded-full blur-[120px] pointer-events-none" />
+
+          {/* Layer 4: Particles */}
+          <GoldParticles count={60} className="opacity-60" />
+
+          {/* Layer 5: Decorative grid lines */}
+          <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
+            <div className="absolute top-0 left-1/4 w-px h-full bg-white" />
+            <div className="absolute top-0 left-2/4 w-px h-full bg-white" />
+            <div className="absolute top-0 left-3/4 w-px h-full bg-white" />
+          </div>
         </motion.div>
-        <div className="absolute inset-0 bg-gradient-to-b from-deep-forest/60 via-transparent to-deep-forest" />
-        <div className="absolute inset-0 bg-gradient-to-r from-deep-forest/50 via-transparent to-deep-forest/50" />
-      </div>
+      </motion.div>
 
-      {/* Layer 3: Ambient gold orbs */}
-      <div className="absolute top-[20%] left-[30%] w-[500px] h-[500px] bg-gold/[0.06] rounded-full blur-[150px] pointer-events-none" />
-      <div className="absolute bottom-[15%] right-[20%] w-[400px] h-[400px] bg-gold/[0.04] rounded-full blur-[120px] pointer-events-none" />
-
-      {/* Layer 4: Particles */}
-      <GoldParticles count={60} className="opacity-60" />
-
-      {/* Layer 5: Decorative grid lines */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.03]">
-        <div className="absolute top-0 left-1/4 w-px h-full bg-white" />
-        <div className="absolute top-0 left-2/4 w-px h-full bg-white" />
-        <div className="absolute top-0 left-3/4 w-px h-full bg-white" />
-      </div>
-
-      {/* Content */}
-      <div className="relative z-10 text-center px-6 max-w-5xl">
+      {/* ══════ CONTENT (fades up as you scroll) ══════ */}
+      <motion.div
+        className="relative z-10 text-center px-6 max-w-5xl"
+        style={{ opacity: contentOpacity, y: contentY }}
+      >
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
@@ -115,15 +155,16 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
             </button>
           </Magnetic>
         </motion.div>
-      </div>
+      </motion.div>
 
       {/* Scroll indicator */}
       <motion.div
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-cream/40"
+        style={{ opacity: contentOpacity }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-cream/40 z-10"
       >
-        <span className="text-[9px] uppercase tracking-[0.3em]">Scroll</span>
+        <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 2, repeat: Infinity }}>
+          <span className="text-[9px] uppercase tracking-[0.3em]">Scroll</span>
+        </motion.div>
         <div className="w-px h-10 bg-gradient-to-b from-gold/50 to-transparent" />
       </motion.div>
     </section>

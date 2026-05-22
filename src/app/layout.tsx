@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { UnitProvider } from "@/lib/UnitContext";
-import { ArchitecturalGrid } from "@/components/ui/ArchitecturalGrid";
 import "./globals.css";
 
 const inter = Inter({
@@ -38,11 +37,7 @@ export default function RootLayout({
         <div className="paper-grain" />
 
         <UnitProvider>
-          {/* Architectural blueprints base layer */}
-          <div className="relative w-full h-full min-h-screen">
-            <ArchitecturalGrid />
-            {children}
-          </div>
+          {children}
         </UnitProvider>
       </body>
     </html>

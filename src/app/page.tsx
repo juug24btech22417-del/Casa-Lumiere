@@ -14,6 +14,7 @@ import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { AppDock } from '@/components/ui/AppDock';
 import { BookingModal } from '@/components/sections/BookingModal';
 import { SmoothScroll } from '@/components/ui/SmoothScroll';
+import { ArchitecturalGrid } from '@/components/ui/ArchitecturalGrid';
 
 export default function Home() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
@@ -25,13 +26,16 @@ export default function Home() {
       <Navbar onContactClick={openBooking} />
       
       <SmoothScroll>
-        <Hero onExploreClick={() => document.getElementById('plots')?.scrollIntoView({ behavior: 'smooth' })} />
-        <StatsBar />
-        <TrustBanner />
-        <PlotExplorer />
-        <WhyChooseUs />
-        <Testimonials />
-        <Footer />
+        <div className="relative w-full">
+          <ArchitecturalGrid />
+          <Hero onExploreClick={() => document.getElementById('plots')?.scrollIntoView({ behavior: 'smooth' })} />
+          <StatsBar />
+          <TrustBanner />
+          <PlotExplorer />
+          <WhyChooseUs />
+          <Testimonials />
+          <Footer />
+        </div>
       </SmoothScroll>
 
       {/* Floating UI elements (rendered outside scroll translating container) */}

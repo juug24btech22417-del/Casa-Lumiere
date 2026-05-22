@@ -3,6 +3,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { InkReveal } from '@/components/ui/InkReveal';
 import { ShieldCheck, Map, Zap, FileText } from 'lucide-react';
 
 const FEATURES = [
@@ -15,21 +16,24 @@ const FEATURES = [
 export const WhyChooseUs = () => {
   return (
     <section id="why" className="py-28 relative overflow-hidden">
-      {/* Section background with depth */}
-      <div className="absolute inset-0 bg-gradient-to-b from-deep-forest via-surface to-deep-forest" />
+      {/* Section background with depth (transparent to show grid) */}
       <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gold/[0.08] rounded-full blur-[160px] -translate-x-1/3 -translate-y-1/3 pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gold/[0.05] rounded-full blur-[140px] translate-x-1/3 translate-y-1/3 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <ScrollReveal className="text-center mb-20">
-          <span className="text-gold text-[10px] uppercase tracking-[0.5em] font-bold block mb-4">The Standard</span>
-          <h2 className="text-4xl md:text-6xl font-serif text-ivory mb-5">
-            Why Trust <span className="text-gold-gradient">RuralLand</span>
-          </h2>
-          <p className="text-cream text-lg max-w-2xl mx-auto font-light">
-            We bridge the gap between traditional land acquisition and modern investment standards.
-          </p>
-        </ScrollReveal>
+        <div className="text-center mb-20 flex flex-col items-center">
+          <span className="text-gold/40 text-[10px] font-mono tracking-[0.5em] uppercase block mb-4">03 / 04</span>
+          <InkReveal direction="center">
+            <h2 className="text-4xl md:text-6xl font-serif text-ivory mb-5">
+              Why Trust <span className="text-gold-gradient">RuralLand</span>
+            </h2>
+          </InkReveal>
+          <InkReveal direction="center" startAt={0.9} endAt={0.5}>
+            <p className="text-cream text-lg max-w-2xl mx-auto font-light">
+              We bridge the gap between traditional land acquisition and modern investment standards.
+            </p>
+          </InkReveal>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {FEATURES.map((f, i) => (
