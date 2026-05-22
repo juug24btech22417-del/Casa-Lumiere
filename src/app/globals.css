@@ -1,0 +1,113 @@
+@import "tailwindcss";
+
+/* ═══════════════════════════════════════════════════════════════
+   DESIGN SYSTEM — RuralLand Alto Editorial
+   Palette extracted from Alto HTML template.
+   ═══════════════════════════════════════════════════════════════ */
+
+@theme {
+  /* ── Core Palette (Alto Editorial) ── */
+  --color-deep-forest: oklch(97% 0.006 90);   /* #F7F4F0 — warm white background */
+  --color-surface: oklch(100% 0.002 95);       /* #FFFFFE — pure warm white for cards */
+  --color-surface-light: oklch(92% 0.006 95); /* #EDE8E3 — slightly deeper surface */
+  --color-gold: oklch(52% 0.10 28);            /* #A8593A — warm terracotta accent */
+  --color-gold-light: oklch(62% 0.10 28);      /* #C47054 — lighter terracotta hover */
+  --color-gold-dark: oklch(42% 0.10 28);       /* #8A4028 — pressed/dark terracotta */
+  --color-champagne: oklch(88% 0.006 90);      /* #E2DDD8 — border / divider tone */
+  --color-cream: oklch(48% 0.015 70);          /* #7A6E65 — muted text */
+  --color-ivory: oklch(22% 0.02 70);           /* #2D2620 — primary text / headlines */
+
+  /* ── Status ── */
+  --color-available: #2D9E6E;
+  --color-developing: #C07E10;
+  --color-sold: #C0504A;
+
+  /* ── Typography ── */
+  --font-serif: 'Iowan Old Style', 'Charter', var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-inter), -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+
+  /* ── Animations ── */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-shimmer: shimmer 8s linear infinite;
+  --animate-pulse-gold: pulse-gold 3s ease-in-out infinite;
+}
+
+/* ── Keyframes ── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-12px); }
+}
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 oklch(52% 0.10 28 / 0.4); }
+  50% { box-shadow: 0 0 24px 8px oklch(52% 0.10 28 / 0); }
+}
+
+/* ── Base ── */
+@layer base {
+  html { scroll-behavior: smooth; }
+  body {
+    @apply bg-deep-forest text-ivory font-sans;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  ::selection {
+    background: oklch(52% 0.10 28 / 0.15);
+  }
+}
+
+/* ── Reusable Utilities ── */
+@layer utilities {
+  /* Glass surfaces — light editorial style */
+  .glass {
+    background: oklch(100% 0.002 95 / 0.88);
+    backdrop-filter: blur(24px) saturate(1.2);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2);
+    border: 1px solid oklch(88% 0.006 90);
+  }
+  .glass-card {
+    background: oklch(100% 0.002 95 / 0.92);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid oklch(88% 0.006 90);
+  }
+
+  /* Terracotta text gradient */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, oklch(52% 0.10 28) 0%, oklch(62% 0.10 28) 50%, oklch(58% 0.10 28) 100%);
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: shimmer 8s linear infinite;
+  }
+
+  /* Shadows — warm subtle */
+  .shadow-gold {
+    box-shadow: 0 4px 30px -8px oklch(52% 0.10 28 / 0.2);
+  }
+  .shadow-gold-lg {
+    box-shadow: 0 8px 40px -12px oklch(52% 0.10 28 / 0.18),
+                0 0 80px -40px oklch(52% 0.10 28 / 0.1);
+  }
+
+  /* Hide scrollbar */
+  .no-scrollbar::-webkit-scrollbar { display: none; }
+  .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+}
+
+/* ── Global Tactile Paper Grain Overlay ── */
+.paper-grain {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  opacity: 0.025; /* Very subtle and elegant */
+  pointer-events: none;
+  z-index: 9999;
+  mix-blend-mode: multiply;
+  background: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+}

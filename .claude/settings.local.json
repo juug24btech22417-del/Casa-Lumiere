@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(mkdir -p \"C:\\\\Users\\\\dhruv\\\\Desktop\\\\RealEstate\")",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --yes)",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --yes --package-name \"real-estate-showcase\")",
+      "Read(//c/Users/dhruv/Desktop/**)",
+      "Bash(npx create-next-app@latest real-estate-showcase --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --use-npm --yes)",
+      "Bash(timeout 30 s powershell -Command \"while \\(!\\(Test-Path 'C:\\\\Users\\\\dhruv\\\\Desktop\\\\real-estate-showcase\\\\package.json'\\)\\) { Start-Sleep -Seconds 2 }\")",
+      "Bash(powershell *)",
+      "Bash(bash *)",
+      "Bash(npm install *)",
+      "Bash(printf *)"
+    ]
+  }
+}
