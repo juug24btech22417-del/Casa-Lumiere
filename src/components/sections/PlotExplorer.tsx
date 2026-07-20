@@ -8,6 +8,7 @@ import { InteractiveSitePlan } from '@/components/map/InteractiveSitePlan';
 import { PlotCard } from '@/components/sections/PlotCard';
 import { BanashriEnclaveView } from '@/components/sections/BanashriEnclaveView';
 import { TopographyOverlay } from '@/components/ui/TopographyOverlay';
+import { LocationMap } from '@/components/ui/LocationMap';
 import { InkReveal } from '@/components/ui/InkReveal';
 import { PRICING } from '@/lib/pricing';
 
@@ -105,6 +106,19 @@ export const PlotExplorer = () => {
             <BanashriEnclaveView onBack={() => setSelectedId(null)} />
           )}
         </AnimatePresence>
+
+        {/* ═══ FIND US — compact map + address, shown in the home grid view ═══ */}
+        {!selectedId && (
+          <div className="mt-16">
+            <LocationMap
+              map={PRICING.banashriEnclave.map}
+              size="compact"
+              layout="side-by-side"
+              showCta
+              title="Find Us"
+            />
+          </div>
+        )}
       </div>
     </section>
   );

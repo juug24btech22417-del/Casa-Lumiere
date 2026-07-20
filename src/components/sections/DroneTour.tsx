@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { ScrollReveal } from '@/components/ui/ScrollReveal';
+import { DroneVideo } from '@/components/ui/DroneVideo';
 import { Play, ChevronLeft, ChevronRight, Maximize2 } from 'lucide-react';
 
 const GALLERY = [
@@ -34,6 +35,29 @@ export const DroneTour = () => {
             Experience the estate from above before you visit.
           </p>
         </ScrollReveal>
+
+        {/* ═══ LIVE DRONE CAPTURE — Banashri Enclave aerial video ═══ */}
+        <div className="mb-16">
+          <div className="flex items-end justify-between mb-5">
+            <div>
+              <span className="text-gold/40 text-[10px] font-mono tracking-[0.5em] uppercase block mb-2">
+                Live Capture
+              </span>
+              <h3 className="text-2xl md:text-3xl font-serif text-ivory">
+                Banashri <span className="text-gold-gradient">Enclave</span> from above
+              </h3>
+            </div>
+            <p className="hidden md:block text-cream/50 text-xs max-w-xs text-right font-light">
+              A real drone pass — roads, lighting and landscape as they stand today.
+            </p>
+          </div>
+          <DroneVideo
+            src="/banashri-drone.mp4"
+            caption="Drone Capture"
+            showBadge
+            aspect="16/9"
+          />
+        </div>
 
         {/* Main viewer */}
         <div className="relative rounded-2xl overflow-hidden glass border border-champagne">
