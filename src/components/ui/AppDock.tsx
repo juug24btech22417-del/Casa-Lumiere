@@ -3,12 +3,11 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Calculator, Camera, FileText, SlidersHorizontal } from 'lucide-react';
+import { Calculator, Camera, SlidersHorizontal } from 'lucide-react';
 
 const APPS = [
   { icon: <Calculator size={20} />, label: 'EMI', href: '/emi-calculator' },
   { icon: <Camera size={20} />, label: 'Drone', href: '/drone-tour' },
-  { icon: <FileText size={20} />, label: 'Docs', href: '/documents' },
   { icon: <SlidersHorizontal size={20} />, label: 'Vision', href: '/vision' },
 ];
 
