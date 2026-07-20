@@ -3,24 +3,35 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 
-const PARTNERS = ["HDFC BANK", "SBI REALTY", "TATA PROJECTS", "SOTHEBY'S", "GODREJ PROPERTIES", "DLF LUXURY"];
+const VALUES = [
+  'Direct from Developer',
+  'Clear Title',
+  'Transparent Pricing',
+  'Personal Attention',
+  'Vastu-Compliant Layout',
+];
 
 export const TrustBanner = () => {
   return (
     <section className="py-12 border-y border-champagne overflow-hidden">
       <p className="text-center text-[10px] uppercase tracking-[0.4em] text-cream font-medium mb-8">
-        Trusted by Industry Leaders
+        Why Buy From Us
       </p>
       <div className="relative flex overflow-hidden">
         <motion.div
           className="flex gap-20 whitespace-nowrap items-center"
-          animate={{ x: ["0%", "-50%"] }}
-          transition={{ duration: 30, repeat: Infinity, ease: "linear" }}
+          animate={{ x: ['0%', '-50%'] }}
+          transition={{ duration: 30, repeat: Infinity, ease: 'linear' }}
         >
-          {[...PARTNERS, ...PARTNERS].map((name, i) => (
-            <span key={i} className="text-xl md:text-2xl font-serif text-cream hover:text-gold transition-colors duration-500 cursor-default tracking-widest">
-              {name}
-            </span>
+          {[...VALUES, ...VALUES].map((text, i) => (
+            <React.Fragment key={i}>
+              <span className="text-xl md:text-2xl font-serif text-cream hover:text-gold transition-colors duration-500 cursor-default tracking-widest">
+                {text}
+              </span>
+              <span className="text-gold/40 text-xl select-none" aria-hidden>
+                ·
+              </span>
+            </React.Fragment>
           ))}
         </motion.div>
         {/* Side fades */}
