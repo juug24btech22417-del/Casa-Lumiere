@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { X } from 'lucide-react';
 
-const PHONE = "919606571200";
+const PHONE = "919342960200";
 
 export const WhatsAppButton = () => {
   const [showTooltip, setShowTooltip] = useState(false);
