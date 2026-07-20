@@ -44,9 +44,26 @@ export const Footer = () => {
           {/* Legal */}
           <div>
             <h4 className="text-ivory font-serif mb-6">Legal</h4>
-            <ul className="space-y-3">
-              {['Privacy Policy', 'Terms of Service', 'Cookie Policy', 'Security Archive'].map(l => (
-                <li key={l}><a href="#" className="text-cream hover:text-gold transition-colors text-sm">{l}</a></li>
+            <ul className="space-y-4">
+              {[
+                { label: 'Privacy Policy', desc: 'How we handle your information' },
+                { label: 'Terms of Service', desc: 'The basics of working with us' },
+                { label: 'Cookie Policy', desc: 'What we track on this site' },
+                { label: 'Security Archive', desc: 'Our track record to date' },
+              ].map(item => (
+                <li key={item.label}>
+                  <a
+                    href="#"
+                    className="block group"
+                  >
+                    <span className="text-cream group-hover:text-gold transition-colors text-sm">
+                      {item.label}
+                    </span>
+                    <span className="block text-cream/50 text-[11px] font-light leading-snug mt-0.5">
+                      {item.desc}
+                    </span>
+                  </a>
+                </li>
               ))}
             </ul>
           </div>
