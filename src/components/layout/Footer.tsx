@@ -2,8 +2,23 @@
 
 import React from 'react';
 import { Globe, Mail, MessageSquare, Share2, ArrowUp } from 'lucide-react';
+import { CONTACT } from '@/lib/pricing';
 
-export const Footer = () => {
+export type LegalKind = 'privacy' | 'terms' | 'security' | 'cookies';
+
+interface FooterProps {
+  /** Called when a legal link in the footer is clicked */
+  onLegalClick: (kind: LegalKind) => void;
+}
+
+const LEGAL_LINKS: { label: string; kind: LegalKind; desc: string }[] = [
+  { label: 'Privacy Policy', kind: 'privacy', desc: 'How we handle your information' },
+  { label: 'Terms of Service', kind: 'terms', desc: 'The basics of working with us' },
+  { label: 'Cookie Policy', kind: 'cookies', desc: 'Manage cookie preferences' },
+  { label: 'Security Archive', kind: 'security', desc: 'Our track record to date' },
+];
+
+export const Footer = ({ onLegalClick }: FooterProps) => {
   const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   return (
@@ -17,7 +32,7 @@ export const Footer = () => {
           <div className="space-y-5">
             <div className="flex items-center gap-3">
               <div className="w-10 h-10 border-2 border-gold rounded-lg flex items-center justify-center text-gold font-serif text-lg font-bold">R</div>
-              <span className="font-serif text-xl text-ivory">RuralLand</span>
+              <span className="font-serif text-xl text-ivory">{CONTACT.brand}</span>
             </div>
             <p className="text-cream text-sm leading-relaxed max-w-xs">
               Premium rural estates — sustainable, secure, and crafted for the modern investor.
@@ -45,16 +60,12 @@ export const Footer = () => {
           <div>
             <h4 className="text-ivory font-serif mb-6">Legal</h4>
             <ul className="space-y-4">
-              {[
-                { label: 'Privacy Policy', desc: 'How we handle your information' },
-                { label: 'Terms of Service', desc: 'The basics of working with us' },
-                { label: 'Cookie Policy', desc: 'What we track on this site' },
-                { label: 'Security Archive', desc: 'Our track record to date' },
-              ].map(item => (
-                <li key={item.label}>
-                  <a
-                    href="#"
-                    className="block group"
+              {LEGAL_LINKS.map(item => (
+                <li key={item.kind}>
+                  <button
+                    type="button"
+                    onClick={() => onLegalClick(item.kind)}
+                    className="block group text-left w-full"
                   >
                     <span className="text-cream group-hover:text-gold transition-colors text-sm">
                       {item.label}
@@ -62,7 +73,7 @@ export const Footer = () => {
                     <span className="block text-cream/50 text-[11px] font-light leading-snug mt-0.5">
                       {item.desc}
                     </span>
-                  </a>
+                  </button>
                 </li>
               ))}
             </ul>
@@ -83,7 +94,7 @@ export const Footer = () => {
 
         {/* Bottom bar */}
         <div className="pt-8 border-t border-champagne flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-cream/60 text-xs">© 2026 RuralLand Estates. All rights reserved.</p>
+          <p className="text-cream/60 text-xs">© 2026 {CONTACT.brand} Estates. All rights reserved.</p>
           <button onClick={scrollTop} className="group flex items-center gap-2 text-cream hover:text-gold transition-colors cursor-pointer">
             <span className="text-[10px] uppercase tracking-widest font-bold">Back to Top</span>
             <div className="w-8 h-8 rounded-full glass flex items-center justify-center group-hover:border-gold/30 transition-all">

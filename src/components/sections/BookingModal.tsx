@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { Calendar, Clock, X, CheckCircle2 } from 'lucide-react';
+import { CONTACT } from '@/lib/pricing';
 
 interface BookingModalProps {
   isOpen: boolean;
@@ -25,9 +26,8 @@ export const BookingModal = ({ isOpen, onClose, plotNumber }: BookingModalProps)
   }, []);
 
   const handleWhatsApp = () => {
-    const num = "919606571200";
     const msg = encodeURIComponent(`Hello! I'm ${form.name}. I'd like to inquire about Plot ${plotNumber}. Phone: ${form.phone}`);
-    window.open(`https://wa.me/${num}?text=${msg}`, '_blank');
+    window.open(`https://wa.me/${CONTACT.whatsapp}?text=${msg}`, '_blank');
     onClose();
   };
 
