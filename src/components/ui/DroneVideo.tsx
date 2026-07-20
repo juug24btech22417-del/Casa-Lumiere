@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX, Maximize2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -18,13 +18,22 @@ interface DroneVideoProps {
   aspect?: '16/9' | '4/3' | '21/9' | '9/16';
   /** Whether to autoplay + loop. Default true */
   autoplay?: boolean;
+  /**
+   * Whether the video has an audio track. When true, the player shows
+   * a "Tap for sound" hint for the first 6 seconds so the user knows
+   * they can enable audio (browsers require user interaction before
+   * unmuted playback).
+   */
+  hasAudio?: boolean;
   className?: string;
 }
 
 /**
  * DroneVideo — autoplaying, muted, looped video player with optional
  * tap-to-unmute and fullscreen controls. Cinematic styling with
- * a gold play overlay.
+ * a gold play overlay. When `hasAudio` is true, shows a one-time
+ * "Tap for sound" hint (browsers require user interaction before
+ * unmuted playback is allowed).
  */
 export const DroneVideo = ({
   src,
@@ -33,12 +42,21 @@ export const DroneVideo = ({
   showBadge = true,
   aspect = '16/9',
   autoplay = true,
+  hasAudio = false,
   className,
 }: DroneVideoProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(autoplay);
   const [isMuted, setIsMuted] = useState(true);
   const [showControls, setShowControls] = useState(false);
+  const [showSoundHint, setShowSoundHint] = useState(hasAudio);
+
+  // Auto-fade the "Tap for sound" hint after 6 seconds
+  useEffect(() => {
+    if (!hasAudio) return;
+    const t = setTimeout(() => setShowSoundHint(false), 6000);
+    return () => clearTimeout(t);
+  }, [hasAudio]);
 
   const aspectClass = {
     '16/9': 'aspect-[16/9]',
@@ -65,6 +83,10 @@ export const DroneVideo = ({
     if (!v) return;
     v.muted = !v.muted;
     setIsMuted(v.muted);
+    if (!v.muted) {
+      // Dismiss the sound hint as soon as audio is enabled
+      setShowSoundHint(false);
+    }
   };
 
   const requestFullscreen = (e: React.MouseEvent) => {
@@ -121,6 +143,27 @@ export const DroneVideo = ({
           </div>
         )}
 
+        {/* Sound hint (top-right, auto-fades) */}
+        <AnimatePresence>
+          {hasAudio && showSoundHint && isMuted && (
+            <motion.button
+              type="button"
+              onClick={toggleMute}
+              initial={{ opacity: 0, y: -8 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute top-4 right-4 z-10 px-3.5 py-2 rounded-full glass border border-gold/50 flex items-center gap-2 hover:border-gold transition-colors cursor-pointer"
+              aria-label="Enable sound"
+            >
+              <VolumeX size={12} className="text-gold" />
+              <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-gold">
+                Tap for sound
+              </span>
+            </motion.button>
+          )}
+        </AnimatePresence>
+
         {/* Center play / pause indicator (visible when paused) */}
         <AnimatePresence>
           {!isPlaying && (
@@ -139,7 +182,7 @@ export const DroneVideo = ({
           )}
         </AnimatePresence>
 
-        {/* Bottom controls bar (visible on hover) */}
+        {/* Bottom controls bar (visible on hover or when paused) */}
         <div
           className={cn(
             'absolute bottom-0 left-0 right-0 z-10 p-4 flex items-center gap-3 transition-opacity duration-300',
@@ -156,7 +199,12 @@ export const DroneVideo = ({
           </button>
           <button
             onClick={toggleMute}
-            className="w-9 h-9 rounded-full glass flex items-center justify-center text-cream hover:text-gold transition-colors cursor-pointer"
+            className={cn(
+              "w-9 h-9 rounded-full glass flex items-center justify-center transition-colors cursor-pointer",
+              hasAudio && isMuted
+                ? "text-gold border border-gold/40 hover:border-gold"
+                : "text-cream hover:text-gold"
+            )}
             aria-label={isMuted ? 'Unmute' : 'Mute'}
           >
             {isMuted ? <VolumeX size={14} /> : <Volume2 size={14} />}

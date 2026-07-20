@@ -339,6 +339,7 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
           caption="Drone Capture"
           showBadge
           aspect="16/9"
+          hasAudio
         />
       </div>
 

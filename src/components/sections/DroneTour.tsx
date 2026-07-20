@@ -56,6 +56,7 @@ export const DroneTour = () => {
             caption="Drone Capture"
             showBadge
             aspect="16/9"
+            hasAudio
           />
         </div>
 
