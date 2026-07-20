@@ -11,11 +11,11 @@ interface FooterProps {
   onLegalClick: (kind: LegalKind) => void;
 }
 
-const LEGAL_LINKS: { label: string; kind: LegalKind; desc: string }[] = [
-  { label: 'Privacy Policy', kind: 'privacy', desc: 'How we handle your information' },
-  { label: 'Terms of Service', kind: 'terms', desc: 'The basics of working with us' },
-  { label: 'Cookie Policy', kind: 'cookies', desc: 'Manage cookie preferences' },
-  { label: 'Security Archive', kind: 'security', desc: 'Our track record to date' },
+const LEGAL_LINKS: { label: string; kind: LegalKind }[] = [
+  { label: 'Privacy Policy', kind: 'privacy' },
+  { label: 'Terms of Service', kind: 'terms' },
+  { label: 'Cookie Policy', kind: 'cookies' },
+  { label: 'Security Archive', kind: 'security' },
 ];
 
 export const Footer = ({ onLegalClick }: FooterProps) => {
@@ -59,20 +59,15 @@ export const Footer = ({ onLegalClick }: FooterProps) => {
           {/* Legal */}
           <div>
             <h4 className="text-ivory font-serif mb-6">Legal</h4>
-            <ul className="space-y-4">
+            <ul className="space-y-3">
               {LEGAL_LINKS.map(item => (
                 <li key={item.kind}>
                   <button
                     type="button"
                     onClick={() => onLegalClick(item.kind)}
-                    className="block group text-left w-full"
+                    className="text-cream hover:text-gold transition-colors text-sm text-left cursor-pointer"
                   >
-                    <span className="text-cream group-hover:text-gold transition-colors text-sm">
-                      {item.label}
-                    </span>
-                    <span className="block text-cream/50 text-[11px] font-light leading-snug mt-0.5">
-                      {item.desc}
-                    </span>
+                    {item.label}
                   </button>
                 </li>
               ))}
