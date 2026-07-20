@@ -10,6 +10,7 @@ interface PlotCardProps {
   plot: {
     id: string;
     plot_number: string;
+    site_name?: string;
     price: string;
     area: string;
     status: 'available' | 'developing' | 'sold';
@@ -108,11 +109,25 @@ export const PlotCard = ({ plot, isActive, onClick }: PlotCardProps) => {
       <div className="p-5 space-y-4">
         <div className="flex justify-between items-start">
           <div>
-            <h3 className="text-2xl font-serif text-ivory">Plot {plot.plot_number}</h3>
-            <div className="flex items-center gap-1.5 text-gold-dark mt-1">
-              <MapPin size={12} />
-              <span className="text-[10px] uppercase tracking-widest">Premium Sector</span>
-            </div>
+            {plot.site_name ? (
+              <>
+                <h3 className="text-2xl font-serif text-ivory leading-tight">{plot.site_name}</h3>
+                <div className="flex items-center gap-1.5 text-gold-dark mt-1">
+                  <MapPin size={12} />
+                  <span className="text-[10px] uppercase tracking-widest">
+                    Plot {plot.plot_number}
+                  </span>
+                </div>
+              </>
+            ) : (
+              <>
+                <h3 className="text-2xl font-serif text-ivory">Plot {plot.plot_number}</h3>
+                <div className="flex items-center gap-1.5 text-gold-dark mt-1">
+                  <MapPin size={12} />
+                  <span className="text-[10px] uppercase tracking-widest">Premium Sector</span>
+                </div>
+              </>
+            )}
           </div>
           <div className="text-right">
             <span className="text-gold-dark text-lg font-semibold">{plot.price}</span>
