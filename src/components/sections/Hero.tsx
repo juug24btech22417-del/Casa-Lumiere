@@ -138,7 +138,7 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
           animate="show"
           variants={{
             hidden: { opacity: 0 },
-            show: { opacity: 1, transition: { delayChildren: 0.9, staggerChildren: 0.12 } },
+            show: { opacity: 1, transition: { duration: 0.6, delayChildren: 0.9, staggerChildren: 0.12 } },
           }}
           className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10"
         >
