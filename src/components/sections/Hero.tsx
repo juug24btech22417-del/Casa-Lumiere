@@ -129,7 +129,7 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
           transition={{ delay: 0.7, duration: 0.8 }}
           className="text-cream/80 text-base md:text-lg max-w-xl mx-auto mb-10 font-light leading-relaxed text-center"
         >
-          Each one is its own project-- planned, plotted, and built end-to-end. Pick the one closest to you.
+          Each one is its own project— planned, plotted, and built end-to-end. Pick the one closest to you.
         </motion.p>
 
         {/* ══════ ESTATE INDEX CARDS ══════ */}
