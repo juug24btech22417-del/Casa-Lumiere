@@ -34,7 +34,7 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
   const contentY = useTransform(scrollYProgress, [0.3, 0.7], [0, -60]);
 
   return (
-    <section ref={heroRef} className="relative h-screen w-full flex items-center justify-center overflow-hidden">
+    <section ref={heroRef} className="relative h-screen w-full overflow-hidden">
       {/* ══════ MUSEUM FRAME WRAPPER (unchanged) ══════ */}
       <motion.div
         className="absolute inset-0 z-0"
@@ -94,42 +94,43 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
       </motion.div>
 
       {/* ══════ CONTENT ══════ */}
-      <motion.div
-        className="relative z-10 w-full mx-auto max-w-6xl px-6 flex flex-col items-center"
-        style={{ opacity: contentOpacity, y: contentY }}
-      >
-        {/* Overline pill */}
+      <div className="absolute inset-0 z-10 flex items-center justify-center px-6">
         <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-8"
+          className="w-full max-w-6xl flex flex-col items-center"
+          style={{ opacity: contentOpacity, y: contentY }}
         >
-          <span className="inline-block px-5 py-2 rounded-full border border-gold/40 bg-gold/15 text-[10px] uppercase tracking-[0.5em] text-gold-dark font-bold backdrop-blur-sm">
-            Estates · Live and upcoming
-          </span>
-        </motion.div>
+          {/* Overline pill */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-8"
+          >
+            <span className="inline-block px-5 py-2 rounded-full border border-gold/40 bg-gold/15 text-[10px] uppercase tracking-[0.5em] text-gold-dark font-bold backdrop-blur-sm">
+              Estates · Live and upcoming
+            </span>
+          </motion.div>
 
-        {/* Headline — 2 lines, centred, ~2pt smaller than before */}
-        <motion.h1
-          initial={{ opacity: 0, y: 18 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="text-[2.75rem] sm:text-[3.25rem] md:text-[4.125rem] font-serif text-ivory leading-[1.05] mb-7 text-center"
-        >
-          <span className="block">A growing collection</span>
-          <span className="block">of hand-built estates.</span>
-        </motion.h1>
+          {/* Headline — 2 lines, centred, ~2pt smaller than before */}
+          <motion.h1
+            initial={{ opacity: 0, y: 18 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+            className="text-[2.75rem] sm:text-[3.25rem] md:text-[4.125rem] font-serif text-ivory leading-[1.05] mb-7 text-center"
+          >
+            <span className="block">A growing collection</span>
+            <span className="block">of hand-built estates.</span>
+          </motion.h1>
 
-        {/* Subtitle */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.7, duration: 0.8 }}
-          className="text-cream/80 text-[0.95rem] md:text-[1.0625rem] font-light leading-relaxed text-center max-w-2xl mb-10"
-        >
-          Each one is its own project— planned, plotted, and built end-to-end. Pick the one closest to you.
-        </motion.p>
+          {/* Subtitle */}
+          <motion.p
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.7, duration: 0.8 }}
+            className="text-cream/80 text-[0.95rem] md:text-[1.0625rem] font-light leading-relaxed text-center max-w-2xl mb-10"
+          >
+            Each one is its own project— planned, plotted, and built end-to-end. Pick the one closest to you.
+          </motion.p>
 
         {/* ══════ ESTATE INDEX CARDS ══════ */}
         <motion.div
@@ -139,7 +140,7 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
             hidden: { opacity: 0 },
             show: { opacity: 1, transition: { duration: 0.6, delayChildren: 0.9, staggerChildren: 0.12 } },
           }}
-          className="grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto mb-10"
+          className="grid grid-cols-1 sm:grid-cols-3 gap-4 w-full max-w-3xl mb-10"
         >
           {ESTATES.map(estate => {
             const isActive = estate.status === 'available';
@@ -197,7 +198,6 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.4, duration: 0.7 }}
-          className="flex justify-center"
         >
           <Magnetic>
             <Button size="md" onClick={onExploreClick} className="uppercase shadow-gold-lg">
@@ -206,7 +206,8 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
             </Button>
           </Magnetic>
         </motion.div>
-      </motion.div>
+        </motion.div>
+      </div>
 
       {/* Scroll indicator (unchanged) */}
       <motion.div
