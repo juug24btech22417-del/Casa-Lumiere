@@ -3,9 +3,7 @@
 import React, { useState, useRef } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, MapPin } from 'lucide-react';
-import { Button } from '@/components/ui/Button';
 import { GoldParticles } from '@/components/ui/GoldParticles';
-import { Magnetic } from '@/components/ui/Magnetic';
 import { ESTATES, type EstateMeta } from '@/lib/pricing';
 
 const STATUS_STYLE: Record<EstateMeta['status'], string> = {
@@ -194,18 +192,10 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
         </motion.div>
 
         {/* Single primary CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.4, duration: 0.7 }}
-        >
-          <Magnetic>
-            <Button size="md" onClick={onExploreClick} className="uppercase shadow-gold-lg">
-              View Banashri Enclave
-              <ArrowRight size={14} className="ml-2 inline-block" />
-            </Button>
-          </Magnetic>
-        </motion.div>
+        {/* Removed: the hero CTA. Visitors will discover the active
+            Banashri Enclave card and click it (it's the only card
+            with a hover-lift) or scroll to discover the rest of the
+            page. */}
         </motion.div>
       </div>
 
