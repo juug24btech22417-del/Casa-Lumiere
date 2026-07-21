@@ -52,13 +52,8 @@ export const BeforeAfterSlider = () => {
           <img
             src="/vision-after.jpeg"
             alt="Banashri Enclave — after development"
-            className="absolute inset-0 w-full h-full object-cover saturate-[1.15] contrast-[1.08]"
+            className="absolute inset-0 w-full h-full object-cover"
           />
-          {/* Deep-forest darken (40%) + top/bottom vignette so the colours
-              read richer and the labels stay legible on bright skies. */}
-          <div className="absolute inset-0 bg-deep-forest/40 pointer-events-none" />
-          <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-deep-forest/55 to-transparent pointer-events-none" />
-          <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-deep-forest/55 to-transparent pointer-events-none" />
 
           {/* "After" label */}
           <div className="absolute top-5 right-5 px-4 py-2 bg-available/25 border border-available/40 rounded-full z-10 backdrop-blur-sm">
@@ -74,14 +69,11 @@ export const BeforeAfterSlider = () => {
             <img
               src="/vision-before.jpeg"
               alt="Banashri Enclave — raw land before development"
-              className="absolute inset-0 w-full h-full object-cover saturate-[1.15] contrast-[1.08]"
+              className="absolute inset-0 w-full h-full object-cover"
             />
-            <div className="absolute inset-0 bg-deep-forest/40 pointer-events-none" />
-            <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-deep-forest/55 to-transparent pointer-events-none" />
-            <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-deep-forest/55 to-transparent pointer-events-none" />
 
             {/* "Before" label */}
-            <div className="absolute top-5 left-5 px-4 py-2 bg-deep-forest/90 border border-champagne rounded-full backdrop-blur-sm">
+            <div className="absolute top-5 left-5 px-4 py-2 bg-black/80 border border-champagne rounded-full backdrop-blur-sm">
               <span className="text-[10px] uppercase tracking-widest text-cream font-bold">Raw Land</span>
             </div>
           </div>
