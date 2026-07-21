@@ -5,7 +5,7 @@ import { AnimatedCounter } from '@/components/ui/AnimatedCounter';
 
 const STATS = [
   { value: 12, label: 'Premium Plots', suffix: '+' },
-  { value: 100, label: 'Acres Managed', suffix: '' },
+  { value: 100, label: 'Acres Managed', suffix: '+' },
   { value: 24, label: 'Site Security', suffix: '/7' },
   { value: 100, label: 'Legal Verified', suffix: '%' },
 ];
