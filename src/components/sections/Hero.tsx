@@ -95,7 +95,7 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
 
       {/* ══════ CONTENT ══════ */}
       <motion.div
-        className="relative z-10 w-full max-w-6xl px-6"
+        className="relative z-10 w-full mx-auto max-w-6xl px-6 flex flex-col items-center"
         style={{ opacity: contentOpacity, y: contentY }}
       >
         {/* Overline pill */}
@@ -103,7 +103,7 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-8 w-full flex justify-center"
+          className="mb-8"
         >
           <span className="inline-block px-5 py-2 rounded-full border border-gold/40 bg-gold/15 text-[10px] uppercase tracking-[0.5em] text-gold-dark font-bold backdrop-blur-sm">
             Estates · Live and upcoming
@@ -115,7 +115,7 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="text-[2.75rem] sm:text-[3.25rem] md:text-[4.125rem] font-serif text-ivory leading-[1.05] mb-7 text-center w-full"
+          className="text-[2.75rem] sm:text-[3.25rem] md:text-[4.125rem] font-serif text-ivory leading-[1.05] mb-7 text-center"
         >
           <span className="block">A growing collection</span>
           <span className="block">of hand-built estates.</span>
@@ -126,7 +126,7 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.8 }}
-          className="text-cream/80 text-[0.95rem] md:text-[1.0625rem] font-light leading-relaxed text-center w-full max-w-2xl mx-auto mb-10"
+          className="text-cream/80 text-[0.95rem] md:text-[1.0625rem] font-light leading-relaxed text-center max-w-2xl mb-10"
         >
           Each one is its own project— planned, plotted, and built end-to-end. Pick the one closest to you.
         </motion.p>
