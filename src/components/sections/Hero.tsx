@@ -103,19 +103,19 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-7 flex justify-center"
+          className="mb-8 flex justify-center"
         >
           <span className="inline-block px-5 py-2 rounded-full border border-gold/40 bg-gold/15 text-[10px] uppercase tracking-[0.5em] text-gold-dark font-bold backdrop-blur-sm">
             Estates · Live and upcoming
           </span>
         </motion.div>
 
-        {/* Headline — 2 lines, smaller than before */}
+        {/* Headline — 2 lines, centred */}
         <motion.h1
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="text-4xl sm:text-5xl md:text-6xl font-serif text-ivory leading-[1.05] mb-6 text-center max-w-3xl mx-auto"
+          className="text-5xl sm:text-6xl md:text-7xl font-serif text-ivory leading-[1.05] mb-7 text-center max-w-4xl mx-auto"
         >
           A growing collection
           <br />
@@ -127,7 +127,7 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.8 }}
-          className="text-cream/80 text-base md:text-lg max-w-xl mx-auto mb-10 font-light leading-relaxed text-center"
+          className="text-cream/80 text-base md:text-lg max-w-2xl mx-auto mb-10 font-light leading-relaxed text-center"
         >
           Each one is its own project— planned, plotted, and built end-to-end. Pick the one closest to you.
         </motion.p>
