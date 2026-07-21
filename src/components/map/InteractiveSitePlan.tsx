@@ -156,18 +156,16 @@ export const InteractiveSitePlan = ({ plots, selectedId, onPlotClick }: SitePlan
         );
       })()}
 
-      {/* Legend */}
+      {/* Legend — matches the hand-drawn plan: yellow = sold, white = available */}
       <div className="absolute bottom-4 left-4 z-20 flex items-center gap-4">
-        {[
-          { color: 'bg-available', label: 'Available' },
-          { color: 'bg-developing', label: 'Developing' },
-          { color: 'bg-sold', label: 'Sold' },
-        ].map(item => (
-          <div key={item.label} className="flex items-center gap-1.5">
-            <div className={`w-2 h-2 rounded-full ${item.color}`} />
-            <span className="text-[9px] uppercase tracking-widest text-cream font-bold">{item.label}</span>
-          </div>
-        ))}
+        <div className="flex items-center gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-sm border border-cream/60 bg-white/80" />
+          <span className="text-[9px] uppercase tracking-widest text-cream font-bold">Available</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <div className="w-2.5 h-2.5 rounded-sm bg-sold" />
+          <span className="text-[9px] uppercase tracking-widest text-cream font-bold">Sold</span>
+        </div>
       </div>
 
       {/* Title badge */}
