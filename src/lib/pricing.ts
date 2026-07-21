@@ -92,3 +92,52 @@ export const CONTACT = {
   /** Site brand name */
   brand: 'Banashri Enclave',
 };
+
+/**
+ * The portfolio of estates owned by the developer.
+ *
+ * Each entry powers the hero "Estate Index" cards and any future
+ * estate-listing pages. Add a new estate here and it shows up
+ * automatically — no other file needs to change.
+ *
+ * - `status: 'available'` cards are rendered at full opacity and have
+ *   a hover-lift; their `onClick` typically navigates to the project.
+ * - `status: 'coming-soon'` cards are muted, non-interactive, and
+ *   show a "Coming soon" badge.
+ */
+export interface EstateMeta {
+  /** URL-safe id used for routes / keys */
+  slug: string;
+  /** Human-readable estate name */
+  name: string;
+  /** Short region label, e.g. "Karnataka" */
+  location: string;
+  /** Total plot count for the estate */
+  plotCount: number;
+  /** Whether the estate is open for sales or pre-announced */
+  status: 'available' | 'coming-soon';
+}
+
+export const ESTATES: EstateMeta[] = [
+  {
+    slug: 'banashri-enclave',
+    name: 'Banashri Enclave',
+    location: 'Karnataka',
+    plotCount: 86,
+    status: 'available',
+  },
+  {
+    slug: 'anantapur-heights',
+    name: 'Anantapur Heights',
+    location: 'Andhra Pradesh',
+    plotCount: 60,
+    status: 'coming-soon',
+  },
+  {
+    slug: 'konaseema-bay',
+    name: 'Konaseema Bay',
+    location: 'Andhra Pradesh',
+    plotCount: 120,
+    status: 'coming-soon',
+  },
+];

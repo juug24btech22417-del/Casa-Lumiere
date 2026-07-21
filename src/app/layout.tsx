@@ -18,7 +18,7 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   title: "RuralLand — Premium Estate Development",
   description:
-    "Invest in the soul of the earth. Experience a new standard of rural land development — transparent, immersive, and meticulously planned for the future.",
+    "A growing collection of hand-built estates in South India. Each one is its own project — planned, plotted, and built end-to-end.",
   keywords: ["rural land", "real estate", "premium plots", "land investment", "estate development"],
 };
 
