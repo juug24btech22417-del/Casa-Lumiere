@@ -24,10 +24,11 @@ interface SitePlanProps {
 /**
  * A-01 hit-target on the hand-drawn master plan.
  * Coords are percentages of the rendered image bounding box.
- * (Tuned to the first plot cluster on the plan's left-centre.)
+ * (Tuned to the left-most cluster of the updated plan: A-01 is
+ * the top-left plot in that cluster, roughly 18% across / 38% down.)
  */
 const HOTSPOT_LAYOUT = [
-  { id: '1', x: 30, y: 50, w: 8, h: 10 },
+  { id: '1', x: 18, y: 38, w: 4, h: 6 },
 ];
 
 export const InteractiveSitePlan = ({ plots, selectedId, onPlotClick }: SitePlanProps) => {
