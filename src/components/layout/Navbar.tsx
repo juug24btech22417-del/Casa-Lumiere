@@ -66,9 +66,25 @@ export const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
             <UnitToggle />
           </Magnetic>
           <Magnetic>
-            <Button variant="outline" size="sm" onClick={onContactClick} className="ml-2">
-              Contact Us
-            </Button>
+            {/* Custom fill-sweep hover: white -> crimson wiping in from
+                the left on hover, and wiping back out to the left on
+                mouse-leave (transform-origin: left). */}
+            <button
+              type="button"
+              onClick={onContactClick}
+              className={cn(
+                "relative overflow-hidden ml-2 px-5 py-2.5 rounded-full text-xs font-medium tracking-wider",
+                "border border-cream/30 text-ivory cursor-pointer",
+                // Pseudo-element that scales from 0 -> 1 on hover, and
+                // back to 0 on mouse-leave (origin: left).
+                "before:absolute before:inset-0 before:bg-gold-dark before:origin-left",
+                "before:scale-x-0 before:transition-transform before:duration-500 before:ease-[cubic-bezier(0.22,1,0.36,1)]",
+                "hover:before:scale-x-100 hover:border-gold-dark hover:text-ivory",
+                "transition-colors duration-500"
+              )}
+            >
+              <span className="relative z-10">Contact Us</span>
+            </button>
           </Magnetic>
         </div>
 
