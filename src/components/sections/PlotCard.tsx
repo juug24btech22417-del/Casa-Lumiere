@@ -11,7 +11,6 @@ interface PlotCardProps {
     id: string;
     plot_number: string;
     site_name?: string;
-    price: string;
     area: string;
     status: 'available' | 'developing' | 'sold';
     image: string;
@@ -130,7 +129,6 @@ export const PlotCard = ({ plot, isActive, onClick }: PlotCardProps) => {
             )}
           </div>
           <div className="text-right">
-            <span className="text-gold-dark text-lg font-semibold">{plot.price}</span>
             <p className="text-[9px] text-cream/50 uppercase tracking-widest">{formatArea(parseFloat(plot.area.replace(/,/g, '')))}</p>
           </div>
         </div>

@@ -10,7 +10,6 @@ import { useUnit } from '@/lib/UnitContext';
 interface Plot {
   id: string;
   plot_number: string;
-  price: string;
   area: string;
   status: 'available' | 'developing' | 'sold';
   image: string;
@@ -149,7 +148,6 @@ export const InteractiveSitePlan = ({ plots, selectedId, onPlotClick }: SitePlan
             }}
           >
             <p className="text-ivory text-sm font-serif font-bold">Plot {plot.plot_number}</p>
-            <p className="text-gold text-xs font-semibold">{plot.price}</p>
             <p className="text-cream/60 text-[10px] uppercase tracking-widest mt-0.5">
               {formatArea(parseFloat(plot.area.replace(/,/g, '')))}
             </p>

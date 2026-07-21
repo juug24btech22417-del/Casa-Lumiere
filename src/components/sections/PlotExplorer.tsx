@@ -17,7 +17,6 @@ const MOCK_PLOTS = [
     id: '1',
     plot_number: PRICING.banashriEnclave.plotNumber,
     site_name: PRICING.banashriEnclave.siteName,
-    price: '₹20,00,000',
     area: PRICING.banashriEnclave.sqft.toLocaleString(),
     status: 'available' as const,
     image: '/site-progress-5.jpeg',
@@ -26,7 +25,6 @@ const MOCK_PLOTS = [
 
 export const PlotExplorer = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
-  const activePlot = MOCK_PLOTS.find(p => p.id === selectedId);
 
   return (
     <section id="plots" className="py-28 relative overflow-hidden">

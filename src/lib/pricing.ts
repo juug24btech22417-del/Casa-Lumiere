@@ -11,14 +11,14 @@ export interface ProjectPricing {
   plotNumber: string;
   /** Human-readable site / project name */
   siteName: string;
-  /** Base price in INR (raw number, no formatting) */
+  /** Base price in INR (raw number, no formatting).
+   *  Currently NOT displayed on the site — kept for EMI calculations
+   *  and to re-enable public pricing later from a single edit point. */
   base: number;
-  /** Plot dimensions as a string, e.g. "30 × 40" */
+  /** Plot dimensions as a string, e.g. "9 × 12" */
   dimensions: string;
   /** Total area in square feet */
   sqft: number;
-  /** Short note about price changes / availability */
-  priceNote: string;
   /** Map / location config for this project */
   map: {
     /** Address or short location label */
@@ -41,9 +41,8 @@ export const PRICING: Record<string, ProjectPricing> = {
     plotNumber: 'A-01',
     siteName: 'Banashri Enclave',
     base: 20_00_000,
-    dimensions: '30 × 40',
-    sqft: 1200,
-    priceNote: 'Price may increase in the future',
+    dimensions: '9 × 12',
+    sqft: 108,
     map: {
       label: 'Banashri Enclave',
       lat: 16.0486747,

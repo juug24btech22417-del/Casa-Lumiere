@@ -9,14 +9,13 @@ import {
   MapPin,
   Maximize2,
   Navigation,
-  TrendingUp,
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { LocationMap } from '@/components/ui/LocationMap';
 import { DroneVideo } from '@/components/ui/DroneVideo';
 import { BookingModal } from '@/components/sections/BookingModal';
-import { formatINR, PRICING, buildDirectionsUrl } from '@/lib/pricing';
+import { PRICING, buildDirectionsUrl } from '@/lib/pricing';
 
 interface BanashriEnclaveViewProps {
   /** Opens the booking modal */
@@ -224,20 +223,12 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
                 {pricing.plotNumber}
               </div>
               <div>
-                <div className="flex items-baseline gap-2">
-                  <span className="text-3xl md:text-4xl font-serif text-ivory font-semibold">
-                    {formatINR(pricing.base)}
-                  </span>
-                  <span className="text-[10px] text-cream/50 font-mono uppercase tracking-widest">
-                    onw.
-                  </span>
-                </div>
-                <div className="flex items-center gap-2 mt-1.5">
-                  <TrendingUp size={11} className="text-gold/70" />
-                  <span className="text-[10px] text-gold/70 font-mono uppercase tracking-widest">
-                    {pricing.priceNote}
-                  </span>
-                </div>
+                <p className="text-ivory font-serif text-lg md:text-xl leading-tight">
+                  {pricing.siteName}
+                </p>
+                <p className="text-[10px] text-cream/50 font-mono uppercase tracking-widest mt-1">
+                  Premium sector
+                </p>
               </div>
             </div>
 
