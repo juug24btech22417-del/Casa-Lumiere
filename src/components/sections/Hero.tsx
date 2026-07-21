@@ -103,23 +103,22 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-8 flex justify-center"
+          className="mb-8 w-full flex justify-center"
         >
           <span className="inline-block px-5 py-2 rounded-full border border-gold/40 bg-gold/15 text-[10px] uppercase tracking-[0.5em] text-gold-dark font-bold backdrop-blur-sm">
             Estates · Live and upcoming
           </span>
         </motion.div>
 
-        {/* Headline — 2 lines, centred */}
+        {/* Headline — 2 lines, centred, ~2pt smaller than before */}
         <motion.h1
           initial={{ opacity: 0, y: 18 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-          className="text-5xl sm:text-6xl md:text-7xl font-serif text-ivory leading-[1.05] mb-7 text-center max-w-4xl mx-auto"
+          className="text-[2.75rem] sm:text-[3.25rem] md:text-[4.125rem] font-serif text-ivory leading-[1.05] mb-7 text-center w-full"
         >
-          A growing collection
-          <br />
-          of hand-built estates.
+          <span className="block">A growing collection</span>
+          <span className="block">of hand-built estates.</span>
         </motion.h1>
 
         {/* Subtitle */}
@@ -127,7 +126,7 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.7, duration: 0.8 }}
-          className="text-cream/80 text-base md:text-lg max-w-2xl mx-auto mb-10 font-light leading-relaxed text-center"
+          className="text-cream/80 text-[0.95rem] md:text-[1.0625rem] font-light leading-relaxed text-center w-full max-w-2xl mx-auto mb-10"
         >
           Each one is its own project— planned, plotted, and built end-to-end. Pick the one closest to you.
         </motion.p>
