@@ -19,7 +19,7 @@ const statusLabel = (t: (k: string) => string, status: EstateMeta['status']) => 
 };
 
 export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
   const [imgLoaded, setImgLoaded] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
 
@@ -175,11 +175,11 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
 
                 {/* Name + location */}
                 <h3 className="text-ivory text-base font-serif font-semibold leading-tight mb-1.5">
-                  {estate.name}
+                  {estate.nameI18n[locale]}
                 </h3>
                 <p className="flex items-center gap-1.5 text-cream/60 text-[11px] font-light">
                   <MapPin size={10} className="text-gold/60" />
-                  {estate.location} · {estate.plotCount} plots
+                  {estate.locationI18n[locale]} · {estate.plotCount} {t('hero_card_plots_suffix')}
                 </p>
 
                 {/* Hover chevron for active card */}

@@ -28,6 +28,31 @@ const en: Strings = {
     'Each one is its own project— planned, plotted, and built end-to-end. Pick the one closest to you.',
   hero_card_status_available: 'Available',
   hero_card_status_coming_soon: 'Coming soon',
+  // Suffix used on the hero estate card: "Karnataka · 86 plots"
+  hero_card_plots_suffix: 'plots',
+
+  // Interactive site plan
+  map_title: 'Estate Layout',
+  map_legend_available: 'Available',
+  map_legend_sold: 'Sold',
+
+  // Why trust us section
+  why_headline_1: 'Why Trust',
+  why_headline_2: 'RuralLand',
+  why_subtitle:
+    'We bridge the gap between traditional land acquisition and modern investment standards.',
+  why_feature_legal_title: 'Legal Security',
+  why_feature_legal_desc:
+    'Every plot undergoes a 42-point legal audit with 100% clear title guarantee.',
+  why_feature_mapping_title: 'Precision Mapping',
+  why_feature_mapping_desc:
+    'GPS-tagged boundaries with centimeter-accurate digital topographical surveys.',
+  why_feature_infra_title: 'Rapid Infrastructure',
+  why_feature_infra_desc:
+    'Access roads, utilities, and sustainable amenities planned before development.',
+  why_feature_vault_title: 'Digital Vault',
+  why_feature_vault_desc:
+    'Access deeds, surveys, and permits anytime through our secure cloud archive.',
 
   // Navbar
   contact_us: 'Contact Us',
@@ -73,6 +98,30 @@ const hi: Strings = {
     'हर एक अपनी अलग परियोजना है — अपना लेआउट, अपनी जगह, एक ही व्यक्ति द्वारा पूरी तरह से योजना बनाकर बनाया गया। अपने सबसे नज़दीक वाला चुनें।',
   hero_card_status_available: 'उपलब्ध',
   hero_card_status_coming_soon: 'जल्द आ रहा है',
+  hero_card_plots_suffix: 'प्लॉट्स',
+
+  // Interactive site plan
+  map_title: 'एस्टेट लेआउट',
+  map_legend_available: 'उपलब्ध',
+  map_legend_sold: 'बिक चुके',
+
+  // Why trust us section
+  why_headline_1: 'हम पर भरोसा',
+  why_headline_2: 'क्यों',
+  why_subtitle:
+    'हम पारंपरिक भूमि अधिग्रहण और आधुनिक निवेश मानकों के बीच की दूरी को पाटते हैं।',
+  why_feature_legal_title: 'कानूनी सुरक्षा',
+  why_feature_legal_desc:
+    'हर प्लॉट का 42-बिंदु कानूनी ऑडिट होता है, 100% स्वच्छ हक-पत्र की गारंटी के साथ।',
+  why_feature_mapping_title: 'सटीक मानचित्रण',
+  why_feature_mapping_desc:
+    'GPS-टैग की गई सीमाएँ, सेंटीमीटर-स्तर की सटीक डिजिटल स्थलाकृतिक सर्वेक्षण के साथ।',
+  why_feature_infra_title: 'तेज़ अधोसंरचना',
+  why_feature_infra_desc:
+    'विकास से पहले पहुँच मार्ग, उपयोगिताएँ, और टिकाऊ सुविधाओं की योजना बनाई जाती है।',
+  why_feature_vault_title: 'डिजिटल तिजोरी',
+  why_feature_vault_desc:
+    'कभी भी हमारे सुरक्षित क्लाउड संग्रह से विलेख, सर्वेक्षण और अनुमतियाँ देखें।',
 
   // Navbar
   contact_us: 'संपर्क करें',
@@ -118,6 +167,30 @@ const kn: Strings = {
     'ಪ್ರತಿಯೊಂದೂ ಅದರದೇ ಆದ ಯೋಜನೆ — ಅದರದೇ ಲೇಔಟ್, ಅದರದೇ ಸ್ಥಳ, ಒಬ್ಬನೇ ವ್ಯಕ್ತಿಯಿಂದ ಸಂಪೂರ್ಣವಾಗಿ ಯೋಜಿಸಲ್ಪಟ್ಟು ನಿರ್ಮಿಸಲ್ಪಟ್ಟಿದೆ. ನಿಮಗೆ ಹತ್ತಿರವಿರುವುದನ್ನು ಆರಿಸಿ.',
   hero_card_status_available: 'ಲಭ್ಯವಿದೆ',
   hero_card_status_coming_soon: 'ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿದೆ',
+  hero_card_plots_suffix: 'ಪ್ಲಾಟ್‌ಗಳು',
+
+  // Interactive site plan
+  map_title: 'ಎಸ್ಟೇಟ್ ಲೇಔಟ್',
+  map_legend_available: 'ಲಭ್ಯವಿದೆ',
+  map_legend_sold: 'ಮಾರಲಾಗಿದೆ',
+
+  // Why trust us section
+  why_headline_1: 'ನಮ್ಮನ್ನು ಏಕೆ',
+  why_headline_2: 'ನಂಬಬೇಕು',
+  why_subtitle:
+    'ಸಾಂಪ್ರದಾಯಿಕ ಭೂಮಿ ಸ್ವಾಧೀನ ಮತ್ತು ಆಧುನಿಕ ಹೂಡಿಕೆ ಮಾನದಂಡಗಳ ನಡುವಿನ ಅಂತರವನ್ನು ನಾವು ತುಂಬುತ್ತೇವೆ.',
+  why_feature_legal_title: 'ಕಾನೂನು ಭದ್ರತೆ',
+  why_feature_legal_desc:
+    'ಪ್ರತಿ ಪ್ಲಾಟ್‌ಗೆ 42-ಅಂಶಗಳ ಕಾನೂನು ತಪಾಸಣೆ, 100% ಸ್ಪಷ್ಟ ಹಕ್ಕು ಖಾತರಿಯೊಂದಿಗೆ.',
+  why_feature_mapping_title: 'ನಿಖರವಾದ ಮ್ಯಾಪಿಂಗ್',
+  why_feature_mapping_desc:
+    'GPS-ಟ್ಯಾಗ್ ಮಾಡಿದ ಗಡಿಗಳು, ಸೆಂಟಿಮೀಟರ್-ನಿಖರವಾದ ಡಿಜಿಟಲ್ ಟೋಪೋಗ್ರಾಫಿಕ್ ಸಮೀಕ್ಷೆಗಳೊಂದಿಗೆ.',
+  why_feature_infra_title: 'ವೇಗದ ಮೂಲಸೌಕರ್ಯ',
+  why_feature_infra_desc:
+    'ಅಭಿವೃದ್ಧಿಗೆ ಮುನ್ನ ಪ್ರವೇಶ ರಸ್ತೆಗಳು, ಉಪಯುಕ್ತತೆಗಳು ಮತ್ತು ಸುಸ್ಥಿರ ಸೌಲಭ್ಯಗಳನ್ನು ಯೋಜಿಸಲಾಗುತ್ತದೆ.',
+  why_feature_vault_title: 'ಡಿಜಿಟಲ್ ವಾಲ್ಟ್',
+  why_feature_vault_desc:
+    'ನಮ್ಮ ಸುರಕ್ಷಿತ ಕ್ಲೌಡ್ ಸಂಗ್ರಹದಿಂದ ಯಾವಾಗಲೂ ಡೀಡ್‌ಗಳು, ಸಮೀಕ್ಷೆಗಳು ಮತ್ತು ಅನುಮತಿಗಳನ್ನು ಪ್ರವೇಶಿಸಿ.',
 
   // Navbar
   contact_us: 'ಸಂಪರ್ಕಿಸಿ',

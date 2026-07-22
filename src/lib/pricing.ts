@@ -104,14 +104,22 @@ export const CONTACT = {
  *   a hover-lift; their `onClick` typically navigates to the project.
  * - `status: 'coming-soon'` cards are muted, non-interactive, and
  *   show a "Coming soon" badge.
+ *
+ * `name` and `location` are the English source of truth. `nameI18n`
+ * and `locationI18n` provide localized variants for the hero card so
+ * the estate can be displayed in the active locale.
  */
 export interface EstateMeta {
   /** URL-safe id used for routes / keys */
   slug: string;
-  /** Human-readable estate name */
+  /** Human-readable estate name (English — source of truth) */
   name: string;
-  /** Short region label, e.g. "Karnataka" */
+  /** Short region label, e.g. "Karnataka" (English — source of truth) */
   location: string;
+  /** Localized variants for the hero card. Keys are locale codes. */
+  nameI18n: Record<'en' | 'hi' | 'kn', string>;
+  /** Localized variants for the region label. Keys are locale codes. */
+  locationI18n: Record<'en' | 'hi' | 'kn', string>;
   /** Total plot count for the estate */
   plotCount: number;
   /** Whether the estate is open for sales or pre-announced */
@@ -123,6 +131,16 @@ export const ESTATES: EstateMeta[] = [
     slug: 'banashri-enclave',
     name: 'Banashri Enclave',
     location: 'Karnataka',
+    nameI18n: {
+      en: 'Banashri Enclave',
+      hi: 'बनश्री एनक्लेव',
+      kn: 'ಬನಶ್ರೀ ಎನ್ಕ್ಲೇವ್',
+    },
+    locationI18n: {
+      en: 'Karnataka',
+      hi: 'कर्नाटक',
+      kn: 'ಕರ್ನಾಟಕ',
+    },
     plotCount: 86,
     status: 'available',
   },
@@ -130,6 +148,16 @@ export const ESTATES: EstateMeta[] = [
     slug: 'anantapur-heights',
     name: 'Anantapur Heights',
     location: 'Andhra Pradesh',
+    nameI18n: {
+      en: 'Anantapur Heights',
+      hi: 'अनंतपुर हाइट्स',
+      kn: 'ಅನಂತಪುರ ಹೈಟ್ಸ್',
+    },
+    locationI18n: {
+      en: 'Andhra Pradesh',
+      hi: 'आंध्र प्रदेश',
+      kn: 'ಆಂಧ್ರ ಪ್ರದೇಶ',
+    },
     plotCount: 60,
     status: 'coming-soon',
   },
@@ -137,6 +165,16 @@ export const ESTATES: EstateMeta[] = [
     slug: 'konaseema-bay',
     name: 'Konaseema Bay',
     location: 'Andhra Pradesh',
+    nameI18n: {
+      en: 'Konaseema Bay',
+      hi: 'कोनासीमा बे',
+      kn: 'ಕೊನಸೀಮ ಬೇ',
+    },
+    locationI18n: {
+      en: 'Andhra Pradesh',
+      hi: 'आंध्र प्रदेश',
+      kn: 'ಆಂಧ್ರ ಪ್ರದೇಶ',
+    },
     plotCount: 120,
     status: 'coming-soon',
   },

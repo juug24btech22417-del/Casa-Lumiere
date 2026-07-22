@@ -6,6 +6,7 @@ import { useRef } from 'react';
 import { cn } from '@/lib/utils';
 import { Compass } from 'lucide-react';
 import { useUnit } from '@/lib/UnitContext';
+import { useLocale } from '@/lib/LocaleContext';
 
 interface Plot {
   id: string;
@@ -34,6 +35,7 @@ const HOTSPOT_LAYOUT = [
 export const InteractiveSitePlan = ({ plots, selectedId, onPlotClick }: SitePlanProps) => {
   const [hoveredId, setHoveredId] = useState<string | null>(null);
   const { formatArea } = useUnit();
+  const { t } = useLocale();
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Subtle parallax + Ken-Burns drift while the section is in view
@@ -160,18 +162,18 @@ export const InteractiveSitePlan = ({ plots, selectedId, onPlotClick }: SitePlan
       <div className="absolute bottom-4 left-4 z-20 flex items-center gap-4">
         <div className="flex items-center gap-1.5">
           <div className="w-2.5 h-2.5 rounded-sm border border-cream/60 bg-white/80" />
-          <span className="text-[9px] uppercase tracking-widest text-cream font-bold">Available</span>
+          <span className="text-[9px] uppercase tracking-widest text-cream font-bold">{t('map_legend_available')}</span>
         </div>
         <div className="flex items-center gap-1.5">
           <div className="w-2.5 h-2.5 rounded-sm bg-sold" />
-          <span className="text-[9px] uppercase tracking-widest text-cream font-bold">Sold</span>
+          <span className="text-[9px] uppercase tracking-widest text-cream font-bold">{t('map_legend_sold')}</span>
         </div>
       </div>
 
       {/* Title badge */}
       <div className="absolute top-4 left-4 z-20 px-4 py-2 glass rounded-full flex items-center gap-2">
         <div className="w-2 h-2 rounded-full bg-available animate-pulse" />
-        <span className="text-[10px] uppercase tracking-widest text-cream/70 font-bold">Estate Layout</span>
+        <span className="text-[10px] uppercase tracking-widest text-cream/70 font-bold">{t('map_title')}</span>
       </div>
 
       {/* Compass icon */}
