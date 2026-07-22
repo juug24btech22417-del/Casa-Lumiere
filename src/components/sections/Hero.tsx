@@ -5,18 +5,21 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { ArrowRight, MapPin } from 'lucide-react';
 import { GoldParticles } from '@/components/ui/GoldParticles';
 import { ESTATES, type EstateMeta } from '@/lib/pricing';
+import { useLocale } from '@/lib/LocaleContext';
 
 const STATUS_STYLE: Record<EstateMeta['status'], string> = {
   available: 'text-available bg-available/15 border-available/30',
   'coming-soon': 'text-cream/55 bg-cream/10 border-cream/20',
 };
 
-const STATUS_LABEL: Record<EstateMeta['status'], string> = {
-  available: 'Available',
-  'coming-soon': 'Coming soon',
+// Resolved at render time using the live translator.
+const statusLabel = (t: (k: string) => string, status: EstateMeta['status']) => {
+  if (status === 'available') return t('hero_card_status_available');
+  return t('hero_card_status_coming_soon');
 };
 
 export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
+  const { t } = useLocale();
   const [imgLoaded, setImgLoaded] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
 
@@ -105,7 +108,7 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
             className="mb-8"
           >
             <span className="inline-block px-5 py-2 rounded-full border border-gold/40 bg-gold/15 text-[10px] uppercase tracking-[0.5em] text-gold-dark font-bold backdrop-blur-sm">
-              Estates · Live and upcoming
+              {t('hero_overline')}
             </span>
           </motion.div>
 
@@ -116,8 +119,8 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
             transition={{ duration: 0.9, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
             className="text-[2.75rem] sm:text-[3.25rem] md:text-[4.125rem] font-serif text-ivory leading-[1.05] mb-7 text-center"
           >
-            <span className="block">A growing collection</span>
-            <span className="block">of hand-built estates.</span>
+            <span className="block">{t('hero_headline_1')}</span>
+            <span className="block">{t('hero_headline_2')}</span>
           </motion.h1>
 
           {/* Subtitle */}
@@ -127,7 +130,7 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
             transition={{ delay: 0.7, duration: 0.8 }}
             className="text-cream/80 text-[0.95rem] md:text-[1.0625rem] font-light leading-relaxed text-center max-w-2xl mb-10"
           >
-            Each one is its own project— planned, plotted, and built end-to-end. Pick the one closest to you.
+            {t('hero_subtitle')}
           </motion.p>
 
         {/* ══════ ESTATE INDEX CARDS ══════ */}
@@ -167,7 +170,7 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
                     STATUS_STYLE[estate.status],
                   ].join(' ')}
                 >
-                  {STATUS_LABEL[estate.status]}
+                  {statusLabel(t, estate.status)}
                 </span>
 
                 {/* Name + location */}

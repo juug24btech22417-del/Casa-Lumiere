@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import { UnitProvider } from "@/lib/UnitContext";
+import { LocaleProvider } from "@/lib/LocaleContext";
 import "./globals.css";
 
 const inter = Inter({
@@ -36,9 +37,11 @@ export default function RootLayout({
         {/* Tactile paper brochure noise overlay */}
         <div className="paper-grain" />
 
-        <UnitProvider>
-          {children}
-        </UnitProvider>
+        <LocaleProvider>
+          <UnitProvider>
+            {children}
+          </UnitProvider>
+        </LocaleProvider>
       </body>
     </html>
   );

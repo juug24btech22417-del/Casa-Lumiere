@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/Button';
 import { Menu, X } from 'lucide-react';
 import { UnitToggle } from '@/components/ui/UnitToggle';
 import { Magnetic } from '@/components/ui/Magnetic';
+import { useLocale } from '@/lib/LocaleContext';
 
 const NAV_LINKS = [
   { label: 'The Map', href: '#plots' },
@@ -15,6 +16,7 @@ const NAV_LINKS = [
 ];
 
 export const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
+  const { t } = useLocale();
   const [scrolled, setScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -83,7 +85,7 @@ export const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
                 "transition-colors duration-500"
               )}
             >
-              <span className="relative z-10">Contact Us</span>
+              <span className="relative z-10">{t('contact_us')}</span>
             </button>
           </Magnetic>
         </div>
@@ -109,7 +111,7 @@ export const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
                   {link.label}
                 </a>
               ))}
-              <Button size="sm" onClick={() => { onContactClick(); setMobileOpen(false); }}>Contact Us</Button>
+              <Button size="sm" onClick={() => { onContactClick(); setMobileOpen(false); }}>{t('contact_us')}</Button>
             </div>
           </motion.div>
         )}
