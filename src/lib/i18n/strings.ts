@@ -193,17 +193,18 @@ const en: Strings = {
   terms_b10: 'For any questions regarding these Terms of Service, please contact us using the contact details available on our website.',
 
   // Security document (footer → Security Archive). Four sections; only
-  // the first two have bullet lists.
+  // the first two have bullet lists. Keys are numbered 1..4 to match
+  // the same section-builder logic privacy/terms use.
   security_intro: 'At {brand}, we take the security of your personal information seriously. We implement reasonable technical and organizational measures to help protect the information you share with us.',
-  security_h_protect: 'How We Protect Your Data',
-  security_b_protect_items: 'All communication with our website is encrypted using HTTPS|Customer information is stored securely using Supabase|Access to customer data is restricted to authorized personnel only|We regularly monitor our systems to help prevent unauthorized access|We follow industry-standard security practices to safeguard your information',
-  security_h_responsibility: 'Your Responsibility',
-  security_b_responsibility_intro: 'To help keep your information secure, please:',
-  security_b_responsibility_items: 'Provide accurate contact details|Notify us if you believe your information has been used without your permission|Avoid sharing sensitive personal or financial information through forms unless specifically requested',
-  security_h_breach: 'Data Breach Response',
-  security_b_breach: 'If we become aware of a security incident affecting your personal information, we will investigate promptly and take appropriate steps to contain the issue. Where required by applicable law, affected users will be notified.',
-  security_h_contact: 'Contact',
-  security_b_contact: 'If you have any questions or concerns about our security practices, please contact us using the details provided on our website.',
+  security_h1: 'How We Protect Your Data',
+  security_b1_items: 'All communication with our website is encrypted using HTTPS|Customer information is stored securely using Supabase|Access to customer data is restricted to authorized personnel only|We regularly monitor our systems to help prevent unauthorized access|We follow industry-standard security practices to safeguard your information',
+  security_h2: 'Your Responsibility',
+  security_b2_intro: 'To help keep your information secure, please:',
+  security_b2_items: 'Provide accurate contact details|Notify us if you believe your information has been used without your permission|Avoid sharing sensitive personal or financial information through forms unless specifically requested',
+  security_h3: 'Data Breach Response',
+  security_b3: 'If we become aware of a security incident affecting your personal information, we will investigate promptly and take appropriate steps to contain the issue. Where required by applicable law, affected users will be notified.',
+  security_h4: 'Contact',
+  security_b4: 'If you have any questions or concerns about our security practices, please contact us using the details provided on our website.',
 };
 
 const hi: Strings = {
@@ -372,15 +373,15 @@ const hi: Strings = {
 
   // Security document
   security_intro: '{brand} में, हम आपकी व्यक्तिगत जानकारी की सुरक्षा को गंभीरता से लेते हैं। हम आपके द्वारा साझा की गई जानकारी की सुरक्षा के लिए उचित तकनीकी और संगठनात्मक उपाय लागू करते हैं।',
-  security_h_protect: 'हम आपके डेटा की सुरक्षा कैसे करते हैं',
-  security_b_protect_items: 'हमारी वेबसाइट के साथ सभी संचार HTTPS का उपयोग करके एन्क्रिप्ट किए जाते हैं|ग्राहक जानकारी Supabase का उपयोग करके सुरक्षित रूप से संग्रहीत की जाती है|ग्राहक डेटा तक पहुँच केवल अधिकृत कर्मियों तक सीमित है|हम अनधिकृत पहुँच को रोकने के लिए नियमित रूप से अपने सिस्टम की निगरानी करते हैं|हम आपकी जानकारी की सुरक्षा के लिए उद्योग-मानक सुरक्षा प्रथाओं का पालन करते हैं',
-  security_h_responsibility: 'आपकी ज़िम्मेदारी',
-  security_b_responsibility_intro: 'अपनी जानकारी को सुरक्षित रखने में मदद के लिए, कृपया:',
-  security_b_responsibility_items: 'सटीक संपर्क विवरण प्रदान करें|यदि आपको लगता है कि आपकी जानकारी का उपयोग आपकी अनुमति के बिना किया गया है तो हमें सूचित करें|विशेष रूप से अनुरोध किए जाने तक फॉर्म के माध्यम से संवेदनशील व्यक्तिगत या वित्तीय जानकारी साझा करने से बचें',
-  security_h_breach: 'डेटा उल्लंघन प्रतिक्रिया',
-  security_b_breach: 'यदि हमें आपकी व्यक्तिगत जानकारी को प्रभावित करने वाली किसी सुरक्षा घटना की जानकारी मिलती है, तो हम तुरंत जाँच करेंगे और मुद्दे को रोकने के लिए उचित कदम उठाएँगे। जहाँ लागू कानून द्वारा आवश्यक हो, प्रभावित उपयोगकर्ताओं को सूचित किया जाएगा।',
-  security_h_contact: 'संपर्क',
-  security_b_contact: 'यदि हमारी सुरक्षा प्रथाओं के बारे में आपके कोई प्रश्न या चिंताएँ हैं, तो कृपया हमारी वेबसाइट पर दिए गए विवरण का उपयोग करके हमसे संपर्क करें।',
+  security_h1: 'हम आपके डेटा की सुरक्षा कैसे करते हैं',
+  security_b1_items: 'हमारी वेबसाइट के साथ सभी संचार HTTPS का उपयोग करके एन्क्रिप्ट किए जाते हैं|ग्राहक जानकारी Supabase का उपयोग करके सुरक्षित रूप से संग्रहीत की जाती है|ग्राहक डेटा तक पहुँच केवल अधिकृत कर्मियों तक सीमित है|हम अनधिकृत पहुँच को रोकने के लिए नियमित रूप से अपने सिस्टम की निगरानी करते हैं|हम आपकी जानकारी की सुरक्षा के लिए उद्योग-मानक सुरक्षा प्रथाओं का पालन करते हैं',
+  security_h2: 'आपकी ज़िम्मेदारी',
+  security_b2_intro: 'अपनी जानकारी को सुरक्षित रखने में मदद के लिए, कृपया:',
+  security_b2_items: 'सटीक संपर्क विवरण प्रदान करें|यदि आपको लगता है कि आपकी जानकारी का उपयोग आपकी अनुमति के बिना किया गया है तो हमें सूचित करें|विशेष रूप से अनुरोध किए जाने तक फॉर्म के माध्यम से संवेदनशील व्यक्तिगत या वित्तीय जानकारी साझा करने से बचें',
+  security_h3: 'डेटा उल्लंघन प्रतिक्रिया',
+  security_b3: 'यदि हमें आपकी व्यक्तिगत जानकारी को प्रभावित करने वाली किसी सुरक्षा घटना की जानकारी मिलती है, तो हम तुरंत जाँच करेंगे और मुद्दे को रोकने के लिए उचित कदम उठाएँगे। जहाँ लागू कानून द्वारा आवश्यक हो, प्रभावित उपयोगकर्ताओं को सूचित किया जाएगा।',
+  security_h4: 'संपर्क',
+  security_b4: 'यदि हमारी सुरक्षा प्रथाओं के बारे में आपके कोई प्रश्न या चिंताएँ हैं, तो कृपया हमारी वेबसाइट पर दिए गए विवरण का उपयोग करके हमसे संपर्क करें।',
 };
 
 const kn: Strings = {
@@ -549,15 +550,15 @@ const kn: Strings = {
 
   // Security document
   security_intro: '{brand} ನಲ್ಲಿ, ನಾವು ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಮಾಹಿತಿಯ ಸುರಕ್ಷತೆಯನ್ನು ಗಂಭೀರವಾಗಿ ತೆಗೆದುಕೊಳ್ಳುತ್ತೇವೆ. ನೀವು ಹಂಚಿಕೊಳ್ಳುವ ಮಾಹಿತಿಯನ್ನು ರಕ್ಷಿಸಲು ನಾವು ಸಮಂಜಸವಾದ ತಾಂತ್ರಿಕ ಮತ್ತು ಸಂಘಟನಾತ್ಮಕ ಕ್ರಮಗಳನ್ನು ಜಾರಿಗೊಳಿಸುತ್ತೇವೆ.',
-  security_h_protect: 'ನಾವು ನಿಮ್ಮ ಡೇಟಾವನ್ನು ಹೇಗೆ ರಕ್ಷಿಸುತ್ತೇವೆ',
-  security_b_protect_items: 'ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನೊಂದಿಗೆ ಎಲ್ಲಾ ಸಂವಹನವನ್ನು HTTPS ಬಳಸಿ ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಲಾಗಿದೆ|ಗ್ರಾಹಕ ಮಾಹಿತಿಯನ್ನು Supabase ಬಳಸಿ ಸುರಕ್ಷಿತವಾಗಿ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ|ಗ್ರಾಹಕ ಡೇಟಾಕ್ಕೆ ಪ್ರವೇಶವನ್ನು ಅಧಿಕೃತ ಸಿಬ್ಬಂದಿಗೆ ಮಾತ್ರ ಸೀಮಿತಗೊಳಿಸಲಾಗಿದೆ|ಅನಧಿಕೃತ ಪ್ರವೇಶವನ್ನು ತಡೆಯಲು ನಾವು ನಮ್ಮ ಸಿಸ್ಟಂಗಳನ್ನು ನಿಯಮಿತವಾಗಿ ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡುತ್ತೇವೆ|ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ರಕ್ಷಿಸಲು ನಾವು ಉದ್ಯಮ-ಮಾನಕ ಭದ್ರತಾ ಅಭ್ಯಾಸಗಳನ್ನು ಅನುಸರಿಸುತ್ತೇವೆ',
-  security_h_responsibility: 'ನಿಮ್ಮ ಜವಾಬ್ದಾರಿ',
-  security_b_responsibility_intro: 'ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ಇಡಲು ಸಹಾಯ ಮಾಡಲು, ದಯವಿಟ್ಟು:',
-  security_b_responsibility_items: 'ನಿಖರವಾದ ಸಂಪರ್ಕ ವಿವರಗಳನ್ನು ಒದಗಿಸಿ|ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ನಿಮ್ಮ ಅನುಮತಿಯಿಲ್ಲದೆ ಬಳಸಲಾಗಿದೆ ಎಂದು ನೀವು ನಂಬಿದರೆ ನಮಗೆ ತಿಳಿಸಿ|ನಿರ್ದಿಷ್ಟವಾಗಿ ಕೇಳದಿದ್ದರೆ ಫಾರ್ಮ್‌ಗಳ ಮೂಲಕ ಸೂಕ್ಷ್ಮ ವೈಯಕ್ತಿಕ ಅಥವಾ ಹಣಕಾಸಿನ ಮಾಹಿತಿಯನ್ನು ಹಂಚಿಕೊಳ್ಳುವುದನ್ನು ತಪ್ಪಿಸಿ',
-  security_h_breach: 'ಡೇಟಾ ಉಲ್ಲಂಘನೆ ಪ್ರತಿಕ್ರಿಯೆ',
-  security_b_breach: 'ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಮಾಹಿತಿಯನ್ನು ಪರಿಣಾಮ ಬೀರುವ ಯಾವುದೇ ಭದ್ರತಾ ಘಟನೆಯ ಬಗ್ಗೆ ನಮಗೆ ತಿಳಿದಾಗ, ನಾವು ತಕ್ಷಣ ತನಿಖೆ ನಡೆಸುತ್ತೇವೆ ಮತ್ತು ಸಮಸ್ಯೆಯನ್ನು ತಡೆಯಲು ಸೂಕ್ತ ಕ್ರಮಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳುತ್ತೇವೆ. ಅನ್ವಯವಾಗುವ ಕಾನೂನಿನ ಅಗತ್ಯವಿದ್ದಲ್ಲಿ, ಪರಿಣಾಮ ಬೀರಿದ ಬಳಕೆದಾರರಿಗೆ ತಿಳಿಸಲಾಗುತ್ತದೆ.',
-  security_h_contact: 'ಸಂಪರ್ಕ',
-  security_b_contact: 'ನಮ್ಮ ಭದ್ರತಾ ಅಭ್ಯಾಸಗಳ ಬಗ್ಗೆ ನಿಮಗೆ ಯಾವುದೇ ಪ್ರಶ್ನೆಗಳು ಅಥವಾ ಕಾಳಜಿಗಳಿದ್ದರೆ, ದಯವಿಟ್ಟು ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಒದಗಿಸಲಾದ ವಿವರಗಳನ್ನು ಬಳಸಿ ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ.',
+  security_h1: 'ನಾವು ನಿಮ್ಮ ಡೇಟಾವನ್ನು ಹೇಗೆ ರಕ್ಷಿಸುತ್ತೇವೆ',
+  security_b1_items: 'ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನೊಂದಿಗೆ ಎಲ್ಲಾ ಸಂವಹನವನ್ನು HTTPS ಬಳಸಿ ಎನ್‌ಕ್ರಿಪ್ಟ್ ಮಾಡಲಾಗಿದೆ|ಗ್ರಾಹಕ ಮಾಹಿತಿಯನ್ನು Supabase ಬಳಸಿ ಸುರಕ್ಷಿತವಾಗಿ ಸಂಗ್ರಹಿಸಲಾಗಿದೆ|ಗ್ರಾಹಕ ಡೇಟಾಕ್ಕೆ ಪ್ರವೇಶವನ್ನು ಅಧಿಕೃತ ಸಿಬ್ಬಂದಿಗೆ ಮಾತ್ರ ಸೀಮಿತಗೊಳಿಸಲಾಗಿದೆ|ಅನಧಿಕೃತ ಪ್ರವೇಶವನ್ನು ತಡೆಯಲು ನಾವು ನಮ್ಮ ಸಿಸ್ಟಂಗಳನ್ನು ನಿಯಮಿತವಾಗಿ ಮೇಲ್ವಿಚಾರಣೆ ಮಾಡುತ್ತೇವೆ|ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ರಕ್ಷಿಸಲು ನಾವು ಉದ್ಯಮ-ಮಾನಕ ಭದ್ರತಾ ಅಭ್ಯಾಸಗಳನ್ನು ಅನುಸರಿಸುತ್ತೇವೆ',
+  security_h2: 'ನಿಮ್ಮ ಜವಾಬ್ದಾರಿ',
+  security_b2_intro: 'ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ಸುರಕ್ಷಿತವಾಗಿ ಇಡಲು ಸಹಾಯ ಮಾಡಲು, ದಯವಿಟ್ಟು:',
+  security_b2_items: 'ನಿಖರವಾದ ಸಂಪರ್ಕ ವಿವರಗಳನ್ನು ಒದಗಿಸಿ|ನಿಮ್ಮ ಮಾಹಿತಿಯನ್ನು ನಿಮ್ಮ ಅನುಮತಿಯಿಲ್ಲದೆ ಬಳಸಲಾಗಿದೆ ಎಂದು ನೀವು ನಂಬಿದರೆ ನಮಗೆ ತಿಳಿಸಿ|ನಿರ್ದಿಷ್ಟವಾಗಿ ಕೇಳದಿದ್ದರೆ ಫಾರ್ಮ್‌ಗಳ ಮೂಲಕ ಸೂಕ್ಷ್ಮ ವೈಯಕ್ತಿಕ ಅಥವಾ ಹಣಕಾಸಿನ ಮಾಹಿತಿಯನ್ನು ಹಂಚಿಕೊಳ್ಳುವುದನ್ನು ತಪ್ಪಿಸಿ',
+  security_h3: 'ಡೇಟಾ ಉಲ್ಲಂಘನೆ ಪ್ರತಿಕ್ರಿಯೆ',
+  security_b3: 'ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಮಾಹಿತಿಯನ್ನು ಪರಿಣಾಮ ಬೀರುವ ಯಾವುದೇ ಭದ್ರತಾ ಘಟನೆಯ ಬಗ್ಗೆ ನಮಗೆ ತಿಳಿದಾಗ, ನಾವು ತಕ್ಷಣ ತನಿಖೆ ನಡೆಸುತ್ತೇವೆ ಮತ್ತು ಸಮಸ್ಯೆಯನ್ನು ತಡೆಯಲು ಸೂಕ್ತ ಕ್ರಮಗಳನ್ನು ತೆಗೆದುಕೊಳ್ಳುತ್ತೇವೆ. ಅನ್ವಯವಾಗುವ ಕಾನೂನಿನ ಅಗತ್ಯವಿದ್ದಲ್ಲಿ, ಪರಿಣಾಮ ಬೀರಿದ ಬಳಕೆದಾರರಿಗೆ ತಿಳಿಸಲಾಗುತ್ತದೆ.',
+  security_h4: 'ಸಂಪರ್ಕ',
+  security_b4: 'ನಮ್ಮ ಭದ್ರತಾ ಅಭ್ಯಾಸಗಳ ಬಗ್ಗೆ ನಿಮಗೆ ಯಾವುದೇ ಪ್ರಶ್ನೆಗಳು ಅಥವಾ ಕಾಳಜಿಗಳಿದ್ದರೆ, ದಯವಿಟ್ಟು ನಮ್ಮ ವೆಬ್‌ಸೈಟ್‌ನಲ್ಲಿ ಒದಗಿಸಲಾದ ವಿವರಗಳನ್ನು ಬಳಸಿ ನಮ್ಮನ್ನು ಸಂಪರ್ಕಿಸಿ.',
 };
 
 const DICTIONARY: Record<Locale, Strings> = { en, hi, kn };
