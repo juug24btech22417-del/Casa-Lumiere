@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft,
@@ -66,6 +66,15 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
   const [direction, setDirection] = useState(1);
   const [bookingOpen, setBookingOpen] = useState(false);
   const [showMap, setShowMap] = useState(false);
+  const photoStageRef = useRef<HTMLDivElement>(null);
+
+  const openBooking = () => {
+    // If the user has scrolled past the photo stage, bring it back
+    // into view first so the booking modal opens over the stage they
+    // actually engaged with — not over the drone video below it.
+    photoStageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setBookingOpen(true);
+  };
 
   // Auto-advance photos every 5s
   useEffect(() => {
@@ -91,7 +100,7 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
       className="relative w-full"
     >
       {/* ═══ STAGE 1 — PHOTO STAGE (78vh) ═══ */}
-      <div className="relative w-full h-[78vh] min-h-[640px] rounded-3xl overflow-hidden border border-champagne bg-deep-forest">
+      <div ref={photoStageRef} className="relative w-full h-[78vh] min-h-[640px] rounded-3xl overflow-hidden border border-champagne bg-deep-forest">
         {/* Photo layer */}
         <div className="absolute inset-0">
           <AnimatePresence mode="wait" custom={direction}>
@@ -262,7 +271,7 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
               </a>
               <Button
                 size="md"
-                onClick={() => setBookingOpen(true)}
+                onClick={openBooking}
                 className="animate-pulse-gold"
               >
                 {t('view_book_site_visit')}
