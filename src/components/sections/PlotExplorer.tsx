@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MapPin } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -23,8 +23,24 @@ const MOCK_PLOTS = [
   },
 ];
 
+/** Custom event the Hero card dispatches when clicked. The PlotExplorer
+ *  listens for it and pre-selects the only available plot, so clicking
+ *  the Banashri Enclave card at the top of the page lands the user in
+ *  the immersive view, same as if they had scrolled down and clicked
+ *  the plot directly. */
+const OPEN_EVENT = 'realestate:openBanashri';
+
 export const PlotExplorer = () => {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  useEffect(() => {
+    const onOpen = () => {
+      // Always select the single available plot.
+      setSelectedId(MOCK_PLOTS[0]?.id ?? null);
+    };
+    window.addEventListener(OPEN_EVENT, onOpen);
+    return () => window.removeEventListener(OPEN_EVENT, onOpen);
+  }, []);
 
   return (
     <section id="plots" className="py-28 relative overflow-hidden">

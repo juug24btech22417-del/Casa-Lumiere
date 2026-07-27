@@ -145,6 +145,13 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
         >
           {ESTATES.map(estate => {
             const isActive = estate.status === 'available';
+            const handleClick = () => {
+              // Scroll to the plots section, then open the immersive
+              // view. PlotExplorer listens for the open event and
+              // pre-selects the only available plot.
+              onExploreClick();
+              window.dispatchEvent(new Event('realestate:openBanashri'));
+            };
             return (
               <motion.button
                 key={estate.slug}
@@ -154,7 +161,7 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
                   show: { opacity: isActive ? 1 : 0.55, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
                 }}
                 whileHover={isActive ? { y: -4 } : undefined}
-                onClick={isActive ? onExploreClick : undefined}
+                onClick={isActive ? handleClick : undefined}
                 disabled={!isActive}
                 className={[
                   'group relative text-left p-4 rounded-xl border bg-white/[0.04] backdrop-blur-sm transition-all',

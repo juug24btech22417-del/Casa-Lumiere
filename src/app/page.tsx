@@ -17,6 +17,7 @@ import { LegalDocumentModal, type LegalDocumentKind } from '@/components/modals/
 import { CookiePreferencesModal } from '@/components/modals/CookiePreferencesModal';
 import { SmoothScroll } from '@/components/ui/SmoothScroll';
 import { ArchitecturalGrid } from '@/components/ui/ArchitecturalGrid';
+import { scrollToAnchor } from '@/lib/smoothScroll';
 
 // All three legal documents (Privacy, Terms, Security) render inline
 // in the LegalDocumentModal — short, public-facing contracts, no form
@@ -45,7 +46,7 @@ export default function Home() {
       <SmoothScroll>
         <div className="relative w-full">
           <ArchitecturalGrid />
-          <Hero onExploreClick={() => document.getElementById('plots')?.scrollIntoView({ behavior: 'smooth' })} />
+          <Hero onExploreClick={() => scrollToAnchor('plots')} />
           <StatsBar />
           <TrustBanner />
           <PlotExplorer />
