@@ -266,15 +266,15 @@ const Newsletter = () => {
     setError(null);
     setSuccess(null);
 
-    // The leads table is shared with the booking/legal flows but its
-    // actual column set is whatever the Supabase project has — we
-    // discovered this the hard way (an `ai_summary` column we
-    // assumed existed turned out not to be there). Try the minimal
-    // set first: just email, the value we actually have. If the
-    // project requires other columns or has a unique constraint on
-    // email, the error message will say so and we'll add them.
+    // Send ONLY what's actually required. We're discovering the
+    // schema on the fly because the leads table's column set
+    // differs from what the codebase assumed (an earlier version of
+    // the legal modal had used full_name / phone_number / email /
+    // ai_summary, but those columns don't exist in the actual
+    // Supabase project). Sending the empty object lets PostgREST
+    // tell us what columns are NOT NULL.
     const { error: insertError } = await supabase.from('leads').insert([
-      { email },
+      {},
     ]);
 
     setSubmitting(false);
