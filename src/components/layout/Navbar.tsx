@@ -6,7 +6,6 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/Button';
 import { Menu, X } from 'lucide-react';
 import { UnitToggle } from '@/components/ui/UnitToggle';
-import { Magnetic } from '@/components/ui/Magnetic';
 import { LanguagePopover } from '@/components/ui/LanguagePopover';
 import { useLocale } from '@/lib/LocaleContext';
 import { LOCALES } from '@/lib/i18n/strings';
@@ -66,34 +65,25 @@ export const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
             </a>
           ))}
           <div className="w-px h-5 bg-cream/20 mx-2" />
-          <Magnetic>
-            <UnitToggle />
-          </Magnetic>
+          <UnitToggle />
           <div className="w-px h-5 bg-cream/20 mx-2" />
-          <Magnetic>
-            <LanguagePopover />
-          </Magnetic>
-          <Magnetic>
-            {/* Custom fill-sweep hover: white -> crimson wiping in from
-                the left on hover, and wiping back out to the left on
-                mouse-leave (transform-origin: left). */}
-            <button
-              type="button"
-              onClick={onContactClick}
-              className={cn(
-                "relative overflow-hidden ml-2 px-5 py-2.5 rounded-full text-xs font-medium tracking-wider",
-                "border border-cream/30 text-ivory cursor-pointer",
-                // Pseudo-element that scales from 0 -> 1 on hover, and
-                // back to 0 on mouse-leave (origin: left).
-                "before:absolute before:inset-0 before:bg-gold-dark before:origin-left",
-                "before:scale-x-0 before:transition-transform before:duration-500 before:ease-[cubic-bezier(0.22,1,0.36,1)]",
-                "hover:before:scale-x-100 hover:border-gold-dark hover:text-ivory",
-                "transition-colors duration-500"
-              )}
-            >
-              <span className="relative z-10">{t('contact_us')}</span>
-            </button>
-          </Magnetic>
+          <LanguagePopover />
+          <button
+            type="button"
+            onClick={onContactClick}
+            className={cn(
+              "relative overflow-hidden ml-2 px-5 py-2.5 rounded-full text-xs font-medium tracking-wider",
+              "border border-cream/30 text-ivory cursor-pointer",
+              // Pseudo-element that scales from 0 -> 1 on hover, and
+              // back to 0 on mouse-leave (origin: left).
+              "before:absolute before:inset-0 before:bg-gold-dark before:origin-left",
+              "before:scale-x-0 before:transition-transform before:duration-500 before:ease-[cubic-bezier(0.22,1,0.36,1)]",
+              "hover:before:scale-x-100 hover:border-gold-dark hover:text-ivory",
+              "transition-colors duration-500"
+            )}
+          >
+            <span className="relative z-10">{t('contact_us')}</span>
+          </button>
         </div>
 
         {/* Mobile toggle */}
