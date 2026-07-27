@@ -1,11 +1,12 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
-import { Mail, MessageSquare, Share2, ArrowUp, Check } from 'lucide-react';
+import React, { useEffect, useRef, useState, FormEvent } from 'react';
+import { Mail, MessageSquare, Share2, ArrowUp, Check, Loader2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONTACT } from '@/lib/pricing';
 import { useLocale } from '@/lib/LocaleContext';
 import { scrollToAnchor } from '@/lib/smoothScroll';
+import { supabase } from '@/lib/supabase';
 
 export type LegalKind = 'privacy' | 'terms' | 'security' | 'cookies';
 
@@ -123,16 +124,7 @@ export const Footer = ({ onLegalClick }: FooterProps) => {
           <div>
             <h4 className="text-ivory font-serif mb-6">{t('footer_newsletter')}</h4>
             <p className="text-cream text-sm mb-5">{t('footer_newsletter_text')}</p>
-            <div className="flex gap-2">
-              <input
-                type="email"
-                placeholder={t('footer_newsletter_placeholder')}
-                className="bg-deep-forest border border-champagne rounded-full px-4 py-2.5 text-sm text-ivory focus:outline-none focus:border-gold transition-colors flex-1 placeholder:text-cream/60"
-              />
-              <button className="w-10 h-10 rounded-full bg-gold text-deep-forest flex items-center justify-center hover:bg-gold-light transition-colors cursor-pointer">
-                <ArrowUp className="rotate-45" size={16} />
-              </button>
-            </div>
+            <Newsletter />
           </div>
         </div>
 
@@ -248,3 +240,118 @@ const ShareButton = ({ copiedLabel }: { copiedLabel: string }) => {
     </div>
   );
 };
+
+/**
+ * Newsletter signup form. Submits the email to Supabase `leads` table
+ * with `ai_summary = "Newsletter signup"` (so the same table holds both
+ * site-visit leads and newsletter signups, distinguishable by summary).
+ *   - Validation: HTML `type="email"` + `required` is enough.
+ *   - Feedback: inline success message under the form, auto-clears in
+ *     6s. Errors render in red. Never throws — Supabase failure logs.
+ */
+const Newsletter = () => {
+  const { t } = useLocale();
+  const [email, setEmail] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [error, setError] = useState<string | null>(null);
+  const resetTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  useEffect(() => () => {
+    if (resetTimer.current) clearTimeout(resetTimer.current);
+  }, []);
+
+  const onSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (submitting) return;
+    setSubmitting(true);
+    setError(null);
+    setSuccess(null);
+
+    const { error: insertError } = await supabase.from('leads').insert([
+      {
+        email,
+        status: 'new',
+        ai_summary: 'Newsletter signup',
+      },
+    ]);
+
+    setSubmitting(false);
+
+    if (insertError) {
+      console.warn('Newsletter insert failed:', insertError.message);
+      setError(t('footer_newsletter_error'));
+      return;
+    }
+
+    setSuccess(t('footer_newsletter_success'));
+    setEmail('');
+    // Auto-clear the success line after a few seconds.
+    if (resetTimer.current) clearTimeout(resetTimer.current);
+    resetTimer.current = setTimeout(() => setSuccess(null), 6000);
+  };
+
+  return (
+    <div>
+      <form onSubmit={onSubmit} className="flex gap-2">
+        <input
+          type="email"
+          required
+          value={email}
+          onChange={e => setEmail(e.target.value)}
+          placeholder={t('footer_newsletter_placeholder')}
+          disabled={submitting}
+          aria-label={t('footer_newsletter_placeholder')}
+          className="bg-deep-forest border border-champagne rounded-full px-4 py-2.5 text-sm text-ivory focus:outline-none focus:border-gold transition-colors flex-1 placeholder:text-cream/60 disabled:opacity-60"
+        />
+        <button
+          type="submit"
+          disabled={submitting}
+          aria-label={t('footer_newsletter_signup')}
+          className="w-10 h-10 rounded-full bg-gold text-deep-forest flex items-center justify-center hover:bg-gold-light transition-colors cursor-pointer disabled:opacity-60 disabled:cursor-not-allowed"
+        >
+          {submitting ? (
+            <Loader2 size={14} className="animate-spin" />
+          ) : (
+            <ArrowUp className="rotate-45" size={16} />
+          )}
+        </button>
+      </form>
+
+      {/* Status line — success (with check) or error. mt-2 + leading-
+          relaxed keeps it tucked under the input without shifting the
+          column. Either message is small enough that they don't push
+          other footer content around. */}
+      <div className="min-h-[1.25rem] mt-2">
+        <AnimatePresence mode="wait">
+          {success && (
+            <motion.p
+              key="success"
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.18 }}
+              className="text-available text-[11px] flex items-center gap-1.5"
+            >
+              <Check size={11} />
+              {success}
+            </motion.p>
+          )}
+          {error && (
+            <motion.p
+              key="error"
+              initial={{ opacity: 0, y: 4 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -4 }}
+              transition={{ duration: 0.18 }}
+              className="text-red-300 text-[11px]"
+            >
+              {error}
+            </motion.p>
+          )}
+        </AnimatePresence>
+      </div>
+    </div>
+  );
+};
+

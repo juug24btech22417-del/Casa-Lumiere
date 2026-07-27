@@ -126,6 +126,9 @@ const en: Strings = {
   footer_newsletter: 'Newsletter',
   footer_newsletter_text: 'Exclusive updates on new estate releases.',
   footer_newsletter_placeholder: 'Email address',
+  footer_newsletter_signup: 'Subscribe',
+  footer_newsletter_success: "You're on the list. We'll be in touch.",
+  footer_newsletter_error: 'Something went wrong — please try again.',
 
   // Footer — bottom
   footer_back_to_top: 'Back to Top',
@@ -307,6 +310,9 @@ const hi: Strings = {
   footer_newsletter: 'न्यूज़लेटर',
   footer_newsletter_text: 'नई एस्टेट रिलीज़ के विशेष अपडेट।',
   footer_newsletter_placeholder: 'ईमेल पता',
+  footer_newsletter_signup: 'सदस्यता लें',
+  footer_newsletter_success: 'आप सूची में हैं। हम जल्द ही संपर्क करेंगे।',
+  footer_newsletter_error: 'कुछ गड़बड़ हो गई — कृपया फिर से कोशिश करें।',
 
   // Footer — bottom
   footer_back_to_top: 'ऊपर जाएँ',
@@ -484,6 +490,9 @@ const kn: Strings = {
   footer_newsletter: 'ನ್ಯೂಸ್‌ಲೆಟರ್',
   footer_newsletter_text: 'ಹೊಸ ಎಸ್ಟೇಟ್ ಬಿಡುಗಡೆಗಳ ವಿಶೇಷ ನವೀಕರಣಗಳು.',
   footer_newsletter_placeholder: 'ಇಮೇಲ್ ವಿಳಾಸ',
+  footer_newsletter_signup: 'ಚಂದಾದಾರರಾಗಿ',
+  footer_newsletter_success: 'ನೀವು ಪಟ್ಟಿಯಲ್ಲಿದ್ದೀರಿ. ನಾವು ಶೀಘ್ರದಲ್ಲೇ ಸಂಪರ್ಕದಲ್ಲಿರುತ್ತೇವೆ.',
+  footer_newsletter_error: 'ಏನೋ ತಪ್ಪಾಗಿದೆ — ದಯವಿಟ್ಟು ಮತ್ತೆ ಪ್ರಯತ್ನಿಸಿ.',
 
   // Footer — bottom
   footer_back_to_top: 'ಮೇಲಕ್ಕೆ ಹೋಗಿ',
