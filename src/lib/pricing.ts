@@ -155,12 +155,12 @@ export const ESTATES: EstateMeta[] = [
   },
   {
     slug: 'vasavi-enclaves',
-    name: 'Vasavi Enclaves at Guledgudd',
+    name: 'Vasavi Enclaves',
     location: 'Guledgudd',
     nameI18n: {
-      en: 'Vasavi Enclaves at Guledgudd',
-      hi: 'गुलेदगुड्ड में वासवी एनक्लेव',
-      kn: 'ಗುಳೇದಗುಡ್ಡದಲ್ಲಿ ವಾಸವಿ ಎನ್ಕ್ಲೇವ್',
+      en: 'Vasavi Enclaves',
+      hi: 'वासवी एनक्लेव',
+      kn: 'ವಾಸವಿ ಎನ್ಕ್ಲೇವ್',
     },
     locationI18n: {
       en: 'Guledgudd',
