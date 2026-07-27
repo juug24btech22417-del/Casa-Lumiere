@@ -36,6 +36,13 @@ export const PlotCard = ({ plot, isActive, onClick }: PlotCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const { formatArea } = useUnit();
   const { t } = useLocale();
+  // The plot card image is below the fold on desktop, but it sits in
+  // a place where users frequently land directly (clicking the hero
+  // card, refreshing mid-scroll). `loading="lazy"` makes the browser
+  // wait until the element is near the viewport before fetching, so
+  // a user who scrolls fast sees a blank placeholder for ~500ms.
+  // We start it loading as soon as the card mounts, and reveal it
+  // as soon as the browser decodes the first frame (`onLoad`).
   const [imgLoaded, setImgLoaded] = useState(false);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -83,11 +90,19 @@ export const PlotCard = ({ plot, isActive, onClick }: PlotCardProps) => {
         <img
           src={plot.image}
           alt=""
+          // decoding="async" lets the browser keep painting while the
+          // JPEG/PNG is decompressed — pairs with onLoad so the fade
+          // triggers as soon as the first frame is ready, not 1s later.
+          decoding="async"
+          fetchPriority={isActive ? 'high' : 'auto'}
           className={cn(
-            "absolute inset-0 w-full h-full object-cover transition-all duration-1000 group-hover:scale-110",
+            "absolute inset-0 w-full h-full object-cover transition-opacity duration-300 group-hover:scale-110",
             imgLoaded ? "opacity-100" : "opacity-0"
           )}
-          loading="lazy"
+          // Eager instead of lazy: the explorer section is the
+          // primary CTA destination — we don't want to wait for the
+          // intersection observer to start the fetch.
+          loading="eager"
           onLoad={() => setImgLoaded(true)}
           onError={() => setImgLoaded(false)}
         />

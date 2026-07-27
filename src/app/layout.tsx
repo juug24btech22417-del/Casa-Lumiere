@@ -37,6 +37,18 @@ export default function RootLayout({
         {/* Tactile paper brochure noise overlay */}
         <div className="paper-grain" />
 
+        {/* Preload the plot card image so it's in the browser cache by
+            the time the user scrolls down to the Interactive Explorer
+            section. fetchpriority="high" hints the browser to start it
+            as early as possible — without it, the image fetch would
+            queue after scripts and styles. */}
+        <link
+          rel="preload"
+          as="image"
+          href="/site-progress-5.jpeg"
+          fetchPriority="high"
+        />
+
         <LocaleProvider>
           <UnitProvider>
             {children}
