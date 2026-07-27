@@ -1,11 +1,10 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
-import { Globe, Mail, MessageSquare, Share2, ArrowUp, Check } from 'lucide-react';
+import { Mail, MessageSquare, Share2, ArrowUp, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONTACT } from '@/lib/pricing';
 import { useLocale } from '@/lib/LocaleContext';
-import { LOCALES, type Locale } from '@/lib/i18n/strings';
 
 export type LegalKind = 'privacy' | 'terms' | 'security' | 'cookies';
 
@@ -15,7 +14,7 @@ interface FooterProps {
 }
 
 export const Footer = ({ onLegalClick }: FooterProps) => {
-  const { t, locale, setLocale } = useLocale();
+  const { t } = useLocale();
   const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
   // Nav links driven by translation keys so the list re-renders on locale change.
@@ -58,9 +57,6 @@ export const Footer = ({ onLegalClick }: FooterProps) => {
               {t('footer_brand_tagline')}
             </p>
             <div className="flex gap-3">
-              {/* Globe — language switcher popover */}
-              <LanguagePopover locale={locale} setLocale={setLocale} />
-
               {/* Mail — opens default mail client */}
               <FooterIconLink href={mailHref} label="Email">
                 <Mail size={16} />
@@ -231,71 +227,6 @@ const ShareButton = ({ copiedLabel }: { copiedLabel: string }) => {
           >
             <Check size={10} className="text-available" />
             {copiedLabel}
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
-  );
-};
-
-const LanguagePopover = ({ locale, setLocale }: { locale: Locale; setLocale: (l: Locale) => void }) => {
-  const [open, setOpen] = useState(false);
-  const wrapRef = useRef<HTMLDivElement>(null);
-
-  // Close on outside click
-  useEffect(() => {
-    if (!open) return;
-    const handler = (e: MouseEvent) => {
-      if (wrapRef.current && !wrapRef.current.contains(e.target as Node)) {
-        setOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handler);
-    return () => document.removeEventListener('mousedown', handler);
-  }, [open]);
-
-  return (
-    <div className="relative" ref={wrapRef}>
-      <button
-        type="button"
-        onClick={() => setOpen(o => !o)}
-        aria-label="Language"
-        aria-expanded={open}
-        className="w-9 h-9 rounded-full glass flex items-center justify-center text-gold/50 hover:text-gold hover:border-gold/30 transition-all cursor-pointer"
-      >
-        <Globe size={16} />
-      </button>
-      <AnimatePresence>
-        {open && (
-          <motion.div
-            initial={{ opacity: 0, y: 6, scale: 0.96 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 6, scale: 0.96 }}
-            transition={{ duration: 0.18, ease: [0.22, 1, 0.36, 1] }}
-            className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 z-20 glass rounded-xl border border-cream/20 shadow-gold-lg p-1.5 flex gap-1"
-          >
-            {LOCALES.map(opt => {
-              const active = opt.code === locale;
-              return (
-                <button
-                  key={opt.code}
-                  type="button"
-                  onClick={() => {
-                    setLocale(opt.code);
-                    setOpen(false);
-                  }}
-                  className={[
-                    'px-3 py-1.5 rounded-lg text-[11px] font-medium transition-colors cursor-pointer min-w-[2.5rem] text-center',
-                    active
-                      ? 'bg-gold text-ivory'
-                      : 'text-cream/70 hover:text-ivory hover:bg-white/[0.06]',
-                  ].join(' ')}
-                  aria-pressed={active}
-                >
-                  {opt.native}
-                </button>
-              );
-            })}
           </motion.div>
         )}
       </AnimatePresence>

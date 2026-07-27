@@ -7,7 +7,9 @@ import { Button } from '@/components/ui/Button';
 import { Menu, X } from 'lucide-react';
 import { UnitToggle } from '@/components/ui/UnitToggle';
 import { Magnetic } from '@/components/ui/Magnetic';
+import { LanguagePopover } from '@/components/ui/LanguagePopover';
 import { useLocale } from '@/lib/LocaleContext';
+import { LOCALES } from '@/lib/i18n/strings';
 
 const NAV_LINKS = [
   { label: 'The Map', href: '#plots' },
@@ -16,7 +18,7 @@ const NAV_LINKS = [
 ];
 
 export const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
-  const { t } = useLocale();
+  const { t, locale, setLocale } = useLocale();
   const [scrolled, setScrolled] = useState(false);
   const [progress, setProgress] = useState(0);
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -67,6 +69,10 @@ export const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
           <Magnetic>
             <UnitToggle />
           </Magnetic>
+          <div className="w-px h-5 bg-cream/20 mx-2" />
+          <Magnetic>
+            <LanguagePopover />
+          </Magnetic>
           <Magnetic>
             {/* Custom fill-sweep hover: white -> crimson wiping in from
                 the left on hover, and wiping back out to the left on
@@ -111,6 +117,30 @@ export const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
                   {link.label}
                 </a>
               ))}
+
+              {/* Language picker — row of pills for mobile (popover lives in the desktop cluster) */}
+              <div className="flex items-center gap-1 p-1 glass rounded-full border border-cream/15">
+                {LOCALES.map(opt => {
+                  const active = opt.code === locale;
+                  return (
+                    <button
+                      key={opt.code}
+                      type="button"
+                      onClick={() => setLocale(opt.code)}
+                      aria-pressed={active}
+                      className={[
+                        'px-3 py-1.5 rounded-full text-[10px] font-medium uppercase tracking-widest transition-colors cursor-pointer min-w-[2.5rem]',
+                        active
+                          ? 'bg-gold text-ivory'
+                          : 'text-cream/70 hover:text-ivory',
+                      ].join(' ')}
+                    >
+                      {opt.native}
+                    </button>
+                  );
+                })}
+              </div>
+
               <Button size="sm" onClick={() => { onContactClick(); setMobileOpen(false); }}>{t('contact_us')}</Button>
             </div>
           </motion.div>
