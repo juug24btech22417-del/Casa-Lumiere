@@ -3,16 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ShieldCheck, FileText, Calendar } from 'lucide-react';
+import { X, ShieldCheck, FileText, Lock, Calendar } from 'lucide-react';
 import { useLocale } from '@/lib/LocaleContext';
 
 /**
- * A read-only viewer for the Privacy Policy / Terms of Service.
- * Unlike `LegalRequestModal` (which asks the user to fill a form so
- * a copy can be emailed), this one renders the full document content
- * inline. Privacy and Terms are short enough to read on-screen; Security
- * Archive still needs a request form (each document is per-plot), so
- * that's still handled by the form modal.
+ * A read-only viewer for the Privacy Policy / Terms of Service /
+ * Security document. Each is short, public-facing, and now rendered
+ * inline instead of going through a "request a copy" form.
  *
  * Content comes from the i18n dictionary (strings.ts) so it follows
  * the active locale automatically.
@@ -21,7 +18,7 @@ import { useLocale } from '@/lib/LocaleContext';
  * — see the comment in BookingModal.tsx for the same trick.
  */
 
-export type LegalDocumentKind = 'privacy' | 'terms';
+export type LegalDocumentKind = 'privacy' | 'terms' | 'security';
 
 interface LegalDocumentModalProps {
   isOpen: boolean;
@@ -54,41 +51,75 @@ const useMounted = (): boolean => {
   return m;
 };
 
+/** Per-kind structural metadata:
+ *  - sectionCount: how many h1..hN sections the document has
+ *  - introKey: which i18n key to render as the document's preamble
+ *  - title/icon: shown in the header */
+const KIND_META: Record<LegalDocumentKind, {
+  sectionCount: number;
+  introKey: string;
+  title: string;
+  icon: React.ReactNode;
+}> = {
+  privacy: {
+    sectionCount: 10,
+    introKey: 'legal_intro',
+    title: 'footer_legal_privacy',
+    icon: <ShieldCheck size={18} />,
+  },
+  terms: {
+    sectionCount: 10,
+    introKey: 'legal_intro',
+    title: 'footer_legal_terms',
+    icon: <FileText size={18} />,
+  },
+  security: {
+    sectionCount: 4,
+    introKey: 'security_intro',
+    title: 'footer_legal_security',
+    icon: <Lock size={18} />,
+  },
+};
+
 export const LegalDocumentModal = ({ isOpen, onClose, kind }: LegalDocumentModalProps) => {
   const { t } = useLocale();
   const mounted = useMounted();
-
-  // Title/icon are locale-aware via t().
-  const meta: Record<LegalDocumentKind, { title: string; icon: React.ReactNode }> = {
-    privacy: { title: t('footer_legal_privacy'), icon: <ShieldCheck size={18} /> },
-    terms: { title: t('footer_legal_terms'), icon: <FileText size={18} /> },
-  };
 
   // Resolve {brand} once and substitute everywhere it appears.
   const brand = t('legal_brand_name');
   const sub = (s: string) => s.replace(/\{brand\}/g, brand);
 
+  // Treat a t() result that equals its key as missing. This is the
+  // same fallback convention used elsewhere in the project.
+  const isMissing = (v: string, k: string) => !v || v === k;
+
+  const meta = KIND_META[kind];
+
   /** Build one document section by index. Reads from i18n keys
-   *  `${prefix}_h${n}`, `${prefix}_b${n}`, `${prefix}_b${n}_lead`,
-   *  `${prefix}_b${n}_sub`, `${prefix}_b${n}_items`. */
+   *  `${prefix}_h${n}`, `${prefix}_b${n}`, plus optional
+   *  `${prefix}_b${n}_lead` / `_sub` / `_intro` / `_items` variants.
+   *
+   *  Rules for combining the parts:
+   *  1. `lead` is the lead paragraph above everything else.
+   *     It comes from `b${n}_lead` when present (e.g. "We do not
+   *     sell or rent your personal information.").
+   *  2. `bulletsSub` is a short pre-bullet line. It comes from
+   *     `b${n}_intro` (security) or `b${n}_sub` (privacy section 4),
+   *     or, for sections where the pre-bullet text was stored as the
+   *     base `b${n}` key (privacy section 1), from `b${n}` itself.
+   *  3. `body` is the main paragraph. It is `b${n}` when there is
+   *     no `_items` and no `_lead` (privacy section 3, security
+   *     sections 3 & 4). Otherwise no body — the section reads as
+   *     `lead → (bulletsSub) → bullets` or `bulletsSub → bullets`. */
   const buildSection = (idx: number): DocumentSection => {
     const n = String(idx);
     const prefix = kind;
     const baseKey = `${prefix}_b${n}`;
     const heading = t(`${prefix}_h${n}`);
 
-    // Empty-but-present string check: t() returns the key itself when
-    // missing, so we treat a result that *equals* the key as missing.
-    // This is the same convention used elsewhere in the project.
-    const isMissing = (v: string, k: string) => !v || v === k;
-
     const leadKey = `${baseKey}_lead`;
     const leadRaw = t(leadKey);
     const lead = isMissing(leadRaw, leadKey) ? undefined : sub(leadRaw);
-
-    const subKey = `${baseKey}_sub`;
-    const subRaw = t(subKey);
-    const bulletsSub = isMissing(subRaw, subKey) ? undefined : sub(subRaw);
 
     const itemsKey = `${baseKey}_items`;
     const itemsRaw = t(itemsKey);
@@ -96,17 +127,27 @@ export const LegalDocumentModal = ({ isOpen, onClose, kind }: LegalDocumentModal
       ? undefined
       : itemsRaw.split('|').map(s => s.trim()).filter(Boolean);
 
-    // The "main" body. If there's a lead, the lead is the body and
-    // there is no separate body paragraph (the lead+sub+items handles
-    // it). If there's no lead, the body is the bare paragraph.
+    // Pre-bullet line: try `_intro` (security), then `_sub` (privacy
+    // section 4), then fall back to the base `b${n}` (privacy section
+    // 1 — "When you use our website...").
+    let bulletsSub: string | undefined;
+    if (bulletItems) {
+      const introRaw = t(`${baseKey}_intro`);
+      const subRaw = t(`${baseKey}_sub`);
+      const baseRaw = t(baseKey);
+      if (!isMissing(introRaw, `${baseKey}_intro`)) {
+        bulletsSub = sub(introRaw);
+      } else if (!isMissing(subRaw, `${baseKey}_sub`)) {
+        bulletsSub = sub(subRaw);
+      } else if (!isMissing(baseRaw, baseKey)) {
+        bulletsSub = sub(baseRaw);
+      }
+    }
+
+    // Body: only when there are no bullets and no lead. The base key
+    // is the body in that case.
     let body: string | undefined;
-    if (!lead) {
-      const bodyRaw = t(baseKey);
-      body = isMissing(bodyRaw, baseKey) ? undefined : sub(bodyRaw);
-    } else {
-      // Lead sections may have a body in addition to the lead (some
-      // share a `<p>lead</p> <p>body</p> <ul>...</ul>` structure). Most
-      // don't, but we still probe the base key.
+    if (!bulletItems && !lead) {
       const bodyRaw = t(baseKey);
       body = isMissing(bodyRaw, baseKey) ? undefined : sub(bodyRaw);
     }
@@ -123,7 +164,7 @@ export const LegalDocumentModal = ({ isOpen, onClose, kind }: LegalDocumentModal
   };
 
   const sections: DocumentSection[] = [];
-  for (let i = 1; i <= 10; i++) sections.push(buildSection(i));
+  for (let i = 1; i <= meta.sectionCount; i++) sections.push(buildSection(i));
 
   if (!isOpen || !mounted) return null;
 
@@ -150,10 +191,12 @@ export const LegalDocumentModal = ({ isOpen, onClose, kind }: LegalDocumentModal
           {/* Header — pinned, doesn't scroll with the body. */}
           <div className="px-7 pt-7 pb-5 border-b border-cream/10 flex items-start gap-3 shrink-0">
             <div className="w-10 h-10 rounded-xl bg-gold/15 border border-gold/30 flex items-center justify-center text-gold shrink-0">
-              {meta[kind].icon}
+              {meta.icon}
             </div>
             <div className="flex-1 min-w-0">
-              <h3 className="text-xl text-ivory font-serif leading-tight">{meta[kind].title}</h3>
+              <h3 className="text-xl text-ivory font-serif leading-tight">
+                {t(meta.title)}
+              </h3>
               <p className="text-cream/55 text-[11px] mt-1.5 flex items-center gap-1.5">
                 <Calendar size={11} className="text-gold/70" />
                 {t('legal_last_updated')}: {LAST_UPDATED}
@@ -169,11 +212,11 @@ export const LegalDocumentModal = ({ isOpen, onClose, kind }: LegalDocumentModal
           </div>
 
           {/* Document body — scrollable. The "01", "02" ... prefix on
-              each section heading is rendered in a muted gold for a
+              each section heading is rendered in a muted gold for an
               editorial / contract feel. */}
           <div className="flex-1 overflow-y-auto px-7 py-6">
             <p className="text-cream/75 text-sm leading-relaxed mb-6">
-              {sub(t('legal_intro'))}
+              {sub(t(meta.introKey))}
             </p>
             {sections.map(s => (
               <section key={s.key} className="mb-5 last:mb-2">
@@ -220,4 +263,5 @@ export const LegalDocumentModal = ({ isOpen, onClose, kind }: LegalDocumentModal
     document.body
   );
 };
+
 

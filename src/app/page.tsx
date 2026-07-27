@@ -13,21 +13,19 @@ import { AIAssistant } from '@/components/chat/AIAssistant';
 import { WhatsAppButton } from '@/components/ui/WhatsAppButton';
 import { AppDock } from '@/components/ui/AppDock';
 import { BookingModal } from '@/components/sections/BookingModal';
-import { LegalRequestModal, type LegalRequestKind } from '@/components/modals/LegalRequestModal';
 import { LegalDocumentModal, type LegalDocumentKind } from '@/components/modals/LegalDocumentModal';
 import { CookiePreferencesModal } from '@/components/modals/CookiePreferencesModal';
 import { SmoothScroll } from '@/components/ui/SmoothScroll';
 import { ArchitecturalGrid } from '@/components/ui/ArchitecturalGrid';
 
-// Privacy + Terms show the full document inline (short, public-facing).
-// Security Archive still needs a per-plot request, so it goes through
-// the form-based LegalRequestModal.
-const FORM_LEGAL_KINDS: LegalRequestKind[] = ['security'];
-const DOCUMENT_LEGAL_KINDS: LegalDocumentKind[] = ['privacy', 'terms'];
+// All three legal documents (Privacy, Terms, Security) render inline
+// in the LegalDocumentModal — short, public-facing contracts, no form
+// needed. The Cookie Policy still has its own preferences modal because
+// it lets the user toggle actual cookie categories.
+const DOCUMENT_LEGAL_KINDS: LegalDocumentKind[] = ['privacy', 'terms', 'security'];
 
 export default function Home() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
-  const [legalRequest, setLegalRequest] = useState<LegalRequestKind | null>(null);
   const [legalDocument, setLegalDocument] = useState<LegalDocumentKind | null>(null);
   const [isCookieModalOpen, setIsCookieModalOpen] = useState(false);
 
@@ -37,8 +35,6 @@ export default function Home() {
       setIsCookieModalOpen(true);
     } else if (DOCUMENT_LEGAL_KINDS.includes(kind as LegalDocumentKind)) {
       setLegalDocument(kind as LegalDocumentKind);
-    } else if (FORM_LEGAL_KINDS.includes(kind as LegalRequestKind)) {
-      setLegalRequest(kind as LegalRequestKind);
     }
   };
 
@@ -68,12 +64,6 @@ export default function Home() {
         isOpen={isBookingOpen}
         onClose={() => setIsBookingOpen(false)}
         plotNumber="General Inquiry"
-      />
-
-      <LegalRequestModal
-        isOpen={legalRequest !== null}
-        kind={legalRequest ?? 'security'}
-        onClose={() => setLegalRequest(null)}
       />
 
       <LegalDocumentModal
