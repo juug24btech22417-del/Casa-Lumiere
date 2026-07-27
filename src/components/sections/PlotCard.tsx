@@ -36,14 +36,17 @@ export const PlotCard = ({ plot, isActive, onClick }: PlotCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const { formatArea } = useUnit();
   const { t } = useLocale();
-  // The plot card image is below the fold on desktop, but it sits in
-  // a place where users frequently land directly (clicking the hero
-  // card, refreshing mid-scroll). `loading="lazy"` makes the browser
-  // wait until the element is near the viewport before fetching, so
-  // a user who scrolls fast sees a blank placeholder for ~500ms.
-  // We start it loading as soon as the card mounts, and reveal it
-  // as soon as the browser decodes the first frame (`onLoad`).
-  const [imgLoaded, setImgLoaded] = useState(false);
+  // Image render strategy:
+  //   - default to opacity-100 (visible). The gradient layer behind
+  //     covers any brief moment the image hasn't decoded yet, so the
+  //     user never sees a blank card.
+  //   - if the image FAILS to load (`onError`), drop back to the
+  //     gradient so the broken-image icon doesn't show.
+  //   - we no longer fade in on success: on a refresh the browser
+  //     already has the bytes cached, and even on first load the
+  //     preload kicks off in <head>, so by the time React paints
+  //     the <img> it's effectively instant. A fade-in felt sluggish.
+  const [imgFailed, setImgFailed] = useState(false);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
   const springX = useSpring(mx, { stiffness: 200, damping: 20 });
@@ -85,26 +88,23 @@ export const PlotCard = ({ plot, isActive, onClick }: PlotCardProps) => {
           <div className="absolute bottom-4 right-4 text-gold/10 font-serif text-5xl font-bold">{plot.plot_number}</div>
         </div>
 
-        {/* Overlay: real image fades in when loaded */}
+        {/* Overlay: real image is rendered at full opacity from the
+            very first paint. The gradient below covers any brief
+            decode delay (it's the same warm beige). If the image
+            errors out, we hide it so the broken-image icon never
+            shows. */}
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={plot.image}
           alt=""
-          // decoding="async" lets the browser keep painting while the
-          // JPEG/PNG is decompressed — pairs with onLoad so the fade
-          // triggers as soon as the first frame is ready, not 1s later.
           decoding="async"
           fetchPriority={isActive ? 'high' : 'auto'}
-          className={cn(
-            "absolute inset-0 w-full h-full object-cover transition-opacity duration-300 group-hover:scale-110",
-            imgLoaded ? "opacity-100" : "opacity-0"
-          )}
-          // Eager instead of lazy: the explorer section is the
-          // primary CTA destination — we don't want to wait for the
-          // intersection observer to start the fetch.
           loading="eager"
-          onLoad={() => setImgLoaded(true)}
-          onError={() => setImgLoaded(false)}
+          className={cn(
+            "absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform",
+            imgFailed && "hidden"
+          )}
+          onError={() => setImgFailed(true)}
         />
 
         {/* Top gradient for contrast */}
