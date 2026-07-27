@@ -5,6 +5,7 @@ import { Mail, MessageSquare, Share2, ArrowUp, Check } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { CONTACT } from '@/lib/pricing';
 import { useLocale } from '@/lib/LocaleContext';
+import { scrollToAnchor } from '@/lib/smoothScroll';
 
 export type LegalKind = 'privacy' | 'terms' | 'security' | 'cookies';
 
@@ -12,6 +13,16 @@ interface FooterProps {
   /** Called when a legal link in the footer is clicked */
   onLegalClick: (kind: LegalKind) => void;
 }
+
+// Same anchor-click handler as the navbar. See the note in Navbar.tsx
+// for why the browser's default `#fragment` scroll doesn't work here.
+const handleAnchorClick = (href: string) => (e: React.MouseEvent) => {
+  const id = href.startsWith('#') ? href.slice(1) : '';
+  if (!id) return;
+  if (typeof window !== 'undefined' && window.location.pathname !== '/') return;
+  e.preventDefault();
+  scrollToAnchor(id);
+};
 
 export const Footer = ({ onLegalClick }: FooterProps) => {
   const { t } = useLocale();
@@ -78,7 +89,11 @@ export const Footer = ({ onLegalClick }: FooterProps) => {
             <ul className="space-y-3">
               {NAV_LINKS.map(link => (
                 <li key={link.key}>
-                  <a href={link.href} className="text-cream hover:text-gold transition-colors text-sm">
+                  <a
+                    href={link.href}
+                    onClick={handleAnchorClick(link.href)}
+                    className="text-cream hover:text-gold transition-colors text-sm"
+                  >
                     {t(link.key)}
                   </a>
                 </li>

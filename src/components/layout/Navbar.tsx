@@ -9,12 +9,27 @@ import { UnitToggle } from '@/components/ui/UnitToggle';
 import { LanguagePopover } from '@/components/ui/LanguagePopover';
 import { useLocale } from '@/lib/LocaleContext';
 import { LOCALES } from '@/lib/i18n/strings';
+import { scrollToAnchor } from '@/lib/smoothScroll';
 
 const NAV_LINKS = [
   { label: 'The Map', href: '#plots' },
   { label: 'Our Edge', href: '#why' },
   { label: 'Stories', href: '#testimonials' },
 ];
+
+// The navbar's in-page links point to `#plots`, `#why`, `#testimonials`.
+// Plain `<a href="#...">` would rely on the browser's default fragment
+// scroll, which doesn't play nicely with our <SmoothScroll> wrapper
+// (a motion.div with will-change: transform). We intercept the click
+// and call our own smoothScroll helper so the page actually moves.
+const handleAnchorClick = (href: string) => (e: React.MouseEvent) => {
+  const id = href.startsWith('#') ? href.slice(1) : '';
+  if (!id) return;
+  // If we're on a different page, let the link navigate normally.
+  if (typeof window !== 'undefined' && window.location.pathname !== '/') return;
+  e.preventDefault();
+  scrollToAnchor(id);
+};
 
 export const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
   const { t, locale, setLocale } = useLocale();
@@ -58,6 +73,7 @@ export const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
             <a
               key={link.label}
               href={link.href}
+              onClick={handleAnchorClick(link.href)}
               className="relative text-xs uppercase tracking-widest text-cream hover:text-gold-dark transition-colors group"
             >
               {link.label}
@@ -103,7 +119,7 @@ export const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
           >
             <div className="flex flex-col items-center gap-6 py-8">
               {NAV_LINKS.map(link => (
-                <a key={link.label} href={link.href} className="text-sm uppercase tracking-widest text-cream" onClick={() => setMobileOpen(false)}>
+                <a key={link.label} href={link.href} onClick={(e) => { handleAnchorClick(link.href)(e); setMobileOpen(false); }} className="text-sm uppercase tracking-widest text-cream">
                   {link.label}
                 </a>
               ))}
