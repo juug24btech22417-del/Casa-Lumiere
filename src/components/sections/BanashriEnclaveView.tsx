@@ -72,7 +72,17 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
     // If the user has scrolled past the photo stage, bring it back
     // into view first so the booking modal opens over the stage they
     // actually engaged with — not over the drone video below it.
-    photoStageRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    //
+    // Note: window.scrollTo (not scrollIntoView) is needed here.
+    // <SmoothScroll> uses a transformed container for inertia, so
+    // the page's native scroll position drives the content's
+    // translate. Scrolling by photoStage.offsetTop scrolls the
+    // ghost spacer, which moves the photo stage into view.
+    const el = photoStageRef.current;
+    if (el) {
+      const top = el.getBoundingClientRect().top + window.scrollY;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
     setBookingOpen(true);
   };
 
