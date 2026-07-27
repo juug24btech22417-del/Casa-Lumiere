@@ -95,7 +95,7 @@ export const CONTACT = {
   /** WhatsApp number with country code, no '+' or spaces — used in wa.me URLs */
   whatsapp: '919342960200',
   /** Email shown to visitors */
-  email: 'contact@banashrienclave.in',
+  email: 'msbijapur2012@gmail.com',
   /** Display-only phone (with spaces) */
   phoneDisplay: '+91 93429 60200',
   /** Site brand name */
