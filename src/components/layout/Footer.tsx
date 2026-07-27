@@ -270,6 +270,13 @@ const Newsletter = () => {
 
     const { error: insertError } = await supabase.from('leads').insert([
       {
+        // The leads table was originally designed for site-visit
+        // requests (full_name, phone_number, email, status, ai_summary)
+        // so its NOT NULL columns vary by deployment. Send explicit
+        // nulls for the optional ones so this works whether or not
+        // those columns have NOT NULL constraints.
+        full_name: null,
+        phone_number: null,
         email,
         status: 'new',
         ai_summary: 'Newsletter signup',
@@ -279,8 +286,10 @@ const Newsletter = () => {
     setSubmitting(false);
 
     if (insertError) {
-      console.warn('Newsletter insert failed:', insertError.message);
-      setError(t('footer_newsletter_error'));
+      console.warn('Newsletter insert failed:', insertError.message, insertError);
+      // Surface the real reason in the UI while debugging — switch to
+      // the friendly t() string once we know what's actually failing.
+      setError(`${t('footer_newsletter_error')} (${insertError.message})`);
       return;
     }
 
