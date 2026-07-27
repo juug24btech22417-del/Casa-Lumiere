@@ -20,8 +20,8 @@ export const Footer = ({ onLegalClick }: FooterProps) => {
   // Nav links driven by translation keys so the list re-renders on locale change.
   const NAV_LINKS: { key: string; href: string }[] = [
     { key: 'footer_nav_map', href: '#plots' },
-    { key: 'footer_nav_plans', href: '#' },
-    { key: 'footer_nav_updates', href: '#' },
+    { key: 'footer_nav_plans', href: '/emi-calculator' },
+    { key: 'footer_nav_updates', href: '/drone-tour' },
     { key: 'footer_nav_vision', href: '/vision' },
   ];
 
