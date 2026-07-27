@@ -1,10 +1,10 @@
 -- Newsletter signup support.
 --
 -- The leads table exists but its column set doesn't include
--- `email` (or `ai_summary`). The newsletter form on the website
--- writes to leads with `{ email }` and fails with "Could not find
--- the 'email' column of 'leads' in the schema cache" until this
--- column exists.
+-- `email`. The newsletter form on the website writes to leads
+-- with `{ email, source: 'newsletter' }` and fails with
+-- "Could not find the 'email' column of 'leads' in the schema
+-- cache" until this column exists.
 --
 -- Run this once in the Supabase SQL editor (or `supabase db push`
 -- if you have the CLI configured). It's idempotent — safe to re-run.

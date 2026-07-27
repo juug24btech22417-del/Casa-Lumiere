@@ -268,10 +268,11 @@ const Newsletter = () => {
 
     // Insert into `leads`. Run supabase/newsletter.sql once to ensure
     // the table has an `email` column; after that this payload saves
-    // the signup.
+    // the signup. `source = 'newsletter'` lets us distinguish footer
+    // newsletter signups from other lead sources (e.g. AI Assistant).
     const { error: insertError } = await supabase
       .from('leads')
-      .insert([{ email }]);
+      .insert([{ email, source: 'newsletter' }]);
 
     setSubmitting(false);
 
