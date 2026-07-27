@@ -9,8 +9,12 @@
 export interface ProjectPricing {
   /** Plot reference number, e.g. "A-01" */
   plotNumber: string;
-  /** Human-readable site / project name */
+  /** Human-readable site / project name (English — source of truth) */
   siteName: string;
+  /** Localized variants of `siteName`. Used by the immersive view,
+   *  the booking modal, and anywhere else the project's name needs
+   *  to render in the active locale. Keys are locale codes. */
+  siteNameI18n: Record<'en' | 'hi' | 'kn', string>;
   /** Base price in INR (raw number, no formatting).
    *  Currently NOT displayed on the site — kept for EMI calculations
    *  and to re-enable public pricing later from a single edit point. */
@@ -40,6 +44,11 @@ export const PRICING: Record<string, ProjectPricing> = {
   banashriEnclave: {
     plotNumber: 'A-01',
     siteName: 'Banashri Enclave',
+    siteNameI18n: {
+      en: 'Banashri Enclave',
+      hi: 'बनश्री एनक्लेव',
+      kn: 'ಬನಶ್ರೀ ಎನ್ಕ್ಲೇವ್',
+    },
     base: 20_00_000,
     dimensions: '9 × 12',
     sqft: 108,

@@ -5,6 +5,7 @@ import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { ArrowUpRight, Eye, MapPin, Ruler, ShieldCheck } from 'lucide-react';
 import { useUnit } from '@/lib/UnitContext';
+import { useLocale } from '@/lib/LocaleContext';
 
 interface PlotCardProps {
   plot: {
@@ -34,6 +35,7 @@ const GRADIENTS = [
 export const PlotCard = ({ plot, isActive, onClick }: PlotCardProps) => {
   const cardRef = useRef<HTMLDivElement>(null);
   const { formatArea } = useUnit();
+  const { t } = useLocale();
   const [imgLoaded, setImgLoaded] = useState(false);
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -95,7 +97,7 @@ export const PlotCard = ({ plot, isActive, onClick }: PlotCardProps) => {
 
         {/* Status badge */}
         <span className={cn("absolute top-3 left-3 z-20 px-3 py-1 rounded-full text-[9px] font-bold uppercase tracking-widest border backdrop-blur-sm", STATUS_STYLE[plot.status])}>
-          {plot.status}
+          {t(`plot_status_${plot.status}` as const)}
         </span>
 
         {/* Hover arrow */}
@@ -114,16 +116,16 @@ export const PlotCard = ({ plot, isActive, onClick }: PlotCardProps) => {
                 <div className="flex items-center gap-1.5 text-gold-dark mt-1">
                   <MapPin size={12} />
                   <span className="text-[10px] uppercase tracking-widest">
-                    Plot {plot.plot_number}
+                    {t('plot_plot_label')} {plot.plot_number}
                   </span>
                 </div>
               </>
             ) : (
               <>
-                <h3 className="text-2xl font-serif text-ivory">Plot {plot.plot_number}</h3>
+                <h3 className="text-2xl font-serif text-ivory">{t('plot_plot_label')} {plot.plot_number}</h3>
                 <div className="flex items-center gap-1.5 text-gold-dark mt-1">
                   <MapPin size={12} />
-                  <span className="text-[10px] uppercase tracking-widest">Premium Sector</span>
+                  <span className="text-[10px] uppercase tracking-widest">{t('plot_premium_sector')}</span>
                 </div>
               </>
             )}
@@ -135,7 +137,7 @@ export const PlotCard = ({ plot, isActive, onClick }: PlotCardProps) => {
 
         <div className="flex gap-6 pt-3 border-t border-cream/15 text-cream/60 text-xs">
           <span className="flex items-center gap-1.5"><Ruler size={13} className="text-gold/50" /> {formatArea(parseFloat(plot.area.replace(/,/g, '')))}</span>
-          <span className="flex items-center gap-1.5"><ShieldCheck size={13} className="text-gold/50" /> Verified</span>
+          <span className="flex items-center gap-1.5"><ShieldCheck size={13} className="text-gold/50" /> {t('plot_verified')}</span>
         </div>
 
         {/* Visitor counter — social proof */}
@@ -143,7 +145,7 @@ export const PlotCard = ({ plot, isActive, onClick }: PlotCardProps) => {
           <div className="flex items-center gap-2 pt-2 text-[9px] text-cream/50">
             <Eye size={11} className="text-gold/40" />
               <span className="uppercase tracking-widest font-bold">
-              <span className="text-gold-dark">{12 + parseInt(plot.id) * 7}</span> people viewing today
+              <span className="text-gold-dark">{12 + parseInt(plot.id) * 7}</span> {t('plot_viewing_today')}
             </span>
           </div>
         )}

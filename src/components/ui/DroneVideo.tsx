@@ -4,6 +4,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Play, Pause, Volume2, VolumeX, Maximize2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useLocale } from '@/lib/LocaleContext';
 
 interface DroneVideoProps {
   /** Path under /public, e.g. "/banashri-drone.mp4" */
@@ -45,6 +46,7 @@ export const DroneVideo = ({
   hasAudio = false,
   className,
 }: DroneVideoProps) => {
+  const { t } = useLocale();
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(autoplay);
   const [isMuted, setIsMuted] = useState(true);
@@ -158,7 +160,7 @@ export const DroneVideo = ({
             >
               <VolumeX size={12} className="text-gold" />
               <span className="text-[10px] font-mono uppercase tracking-[0.25em] text-gold">
-                Tap for sound
+                {t('drone_tap_for_sound')}
               </span>
             </motion.button>
           )}

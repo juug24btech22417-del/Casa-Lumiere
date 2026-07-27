@@ -54,6 +54,53 @@ const en: Strings = {
   why_feature_vault_desc:
     'Access deeds, surveys, and permits anytime through our secure cloud archive.',
 
+  // Plot card (home page — Interactive Explorer)
+  plot_status_available: 'Available',
+  plot_status_developing: 'Under development',
+  plot_status_sold: 'Sold',
+  plot_plot_label: 'Plot',
+  plot_premium_sector: 'Premium Sector',
+  plot_verified: 'Verified',
+  plot_viewing_today: 'people viewing today',
+
+  // Banashri Enclave immersive view
+  view_back_to_all_plots: 'Back to all plots',
+  view_view_on_map: 'View on map',
+  view_hide_map: 'Hide map',
+  view_live_from_site: 'Live from site',
+  view_photo_caption_entry:
+    'Entry boulevard — palms & perimeter compound wall',
+  view_photo_caption_avenue:
+    'Internal 30 ft avenue road with curated tree-line',
+  view_photo_caption_horticulture:
+    'Horticulture beds & underground utility corridors',
+  view_photo_caption_dusk:
+    'Dusk view — street-lit avenues coming alive at golden hour',
+  view_photo_caption_twilight:
+    'Twilight over the development — lit boulevards ready for owners',
+  view_premium_sector: 'Premium sector',
+  view_sqft_suffix: 'sq.ft.',
+  view_directions: 'Directions',
+  view_book_site_visit: 'Book Site Visit',
+  view_aerial_tour: 'Aerial Tour',
+  view_see_from_headline_pre: 'See it from the ',
+  view_see_from_headline_accent: 'sky',
+  view_drone_subtitle:
+    'A drone pass over {name} — roads, lighting, and landscape.',
+
+  // Drone tour page
+  drone_aerial_footage: 'Aerial Footage',
+  drone_tour_headline_pre: 'Drone',
+  drone_tour_headline_accent: 'Tour',
+  drone_tour_subtitle: 'Experience the estate from above before you visit.',
+
+  // Drone video player
+  drone_capture_badge: 'Drone Capture',
+  drone_tap_for_sound: 'Tap for sound',
+
+  // Feature pages (drone-tour, documents, vision, emi-calculator)
+  feature_back_to_home: 'Back to Home',
+
   // Navbar
   contact_us: 'Contact Us',
 
@@ -123,6 +170,47 @@ const hi: Strings = {
   why_feature_vault_desc:
     'कभी भी हमारे सुरक्षित क्लाउड संग्रह से विलेख, सर्वेक्षण और अनुमतियाँ देखें।',
 
+  // Plot card
+  plot_status_available: 'उपलब्ध',
+  plot_status_developing: 'विकासाधीन',
+  plot_status_sold: 'बिक चुका',
+  plot_plot_label: 'प्लॉट',
+  plot_premium_sector: 'प्रीमियम सेक्टर',
+  plot_verified: 'सत्यापित',
+  plot_viewing_today: 'लोग आज देख रहे हैं',
+
+  // Banashri Enclave immersive view
+  view_back_to_all_plots: 'सभी प्लॉट्स पर वापस',
+  view_view_on_map: 'नक्शे पर देखें',
+  view_hide_map: 'नक्शा छिपाएँ',
+  view_live_from_site: 'साइट से लाइव',
+  view_photo_caption_entry: 'प्रवेश मार्ग — ताड़ और परिधि की दीवार',
+  view_photo_caption_avenue: 'आंतरिक 30 फीट चौड़ी सड़क, संवर्धित वृक्ष-रेखा के साथ',
+  view_photo_caption_horticulture: 'बागवानी क्यारियाँ और भूमिगत उपयोगिता मार्ग',
+  view_photo_caption_dusk: 'संध्या दृश्य — सुनहरे समय में रोशन सड़कें',
+  view_photo_caption_twilight: 'विकास पर संध्या — मालिकों के लिए तैयार रोशन बुलेवार्ड',
+  view_premium_sector: 'प्रीमियम सेक्टर',
+  view_sqft_suffix: 'वर्ग फीट',
+  view_directions: 'दिशा-निर्देश',
+  view_book_site_visit: 'साइट विज़िट बुक करें',
+  view_aerial_tour: 'हवाई मार्ग',
+  view_see_from_headline_pre: 'इसे ',
+  view_see_from_headline_accent: 'आसमान',
+  view_drone_subtitle: '{name} पर ड्रोन पास — सड़कें, रोशनी, और परिदृश्य।',
+
+  // Drone tour page
+  drone_aerial_footage: 'हवाई फुटेज',
+  drone_tour_headline_pre: 'ड्रोन',
+  drone_tour_headline_accent: 'मार्ग',
+  drone_tour_subtitle: 'आने से पहले एस्टेट को ऊपर से देखें।',
+
+  // Drone video player
+  drone_capture_badge: 'ड्रोन कैप्चर',
+  drone_tap_for_sound: 'ध्वनि के लिए टैप करें',
+
+  // Feature pages
+  feature_back_to_home: 'होम पर वापस',
+
   // Navbar
   contact_us: 'संपर्क करें',
 
@@ -191,6 +279,47 @@ const kn: Strings = {
   why_feature_vault_title: 'ಡಿಜಿಟಲ್ ವಾಲ್ಟ್',
   why_feature_vault_desc:
     'ನಮ್ಮ ಸುರಕ್ಷಿತ ಕ್ಲೌಡ್ ಸಂಗ್ರಹದಿಂದ ಯಾವಾಗಲೂ ಡೀಡ್‌ಗಳು, ಸಮೀಕ್ಷೆಗಳು ಮತ್ತು ಅನುಮತಿಗಳನ್ನು ಪ್ರವೇಶಿಸಿ.',
+
+  // Plot card
+  plot_status_available: 'ಲಭ್ಯವಿದೆ',
+  plot_status_developing: 'ಅಭಿವೃದ್ಧಿಯಲ್ಲಿದೆ',
+  plot_status_sold: 'ಮಾರಲಾಗಿದೆ',
+  plot_plot_label: 'ಪ್ಲಾಟ್',
+  plot_premium_sector: 'ಪ್ರೀಮಿಯಂ ಸೆಕ್ಟರ್',
+  plot_verified: 'ಪರಿಶೀಲಿಸಲಾಗಿದೆ',
+  plot_viewing_today: 'ಜನರು ಇಂದು ನೋಡುತ್ತಿದ್ದಾರೆ',
+
+  // Banashri Enclave immersive view
+  view_back_to_all_plots: 'ಎಲ್ಲಾ ಪ್ಲಾಟ್‌ಗಳಿಗೆ ಹಿಂತಿರುಗಿ',
+  view_view_on_map: 'ನಕ್ಷೆಯಲ್ಲಿ ನೋಡಿ',
+  view_hide_map: 'ನಕ್ಷೆ ಮರೆಮಾಡಿ',
+  view_live_from_site: 'ಸೈಟ್‌ನಿಂದ ನೇರ',
+  view_photo_caption_entry: 'ಪ್ರವೇಶ ರಸ್ತೆ — ತಾಡಿ ಮರಗಳು ಮತ್ತು ಸುತ್ತುಗೋಡೆ',
+  view_photo_caption_avenue: 'ಒಳಗಿನ 30 ಅಡಿ ರಸ್ತೆ, ಆಯ್ಕೆಮಾಡಿದ ಮರ-ಸಾಲಿನೊಂದಿಗೆ',
+  view_photo_caption_horticulture: 'ತೋಟಗಾರಿಕೆ ಬೆಡ್‌ಗಳು ಮತ್ತು ಭೂಗತ ಉಪಯುಕ್ತತೆ ಮಾರ್ಗಗಳು',
+  view_photo_caption_dusk: 'ಸಂಜೆ ನೋಟ — ಚಿನ್ನದ ಸಮಯದಲ್ಲಿ ರಸ್ತೆದೀಪಗಳ ಸಾಲು',
+  view_photo_caption_twilight: 'ಅಭಿವೃದ್ಧಿಯ ಮೇಲೆ ಸಂಧ್ಯಾಕಾಲ — ಮಾಲೀಕರಿಗಾಗಿ ಸಿದ್ಧವಾದ ರಸ್ತೆಗಳು',
+  view_premium_sector: 'ಪ್ರೀಮಿಯಂ ಸೆಕ್ಟರ್',
+  view_sqft_suffix: 'ಚ.ಅ.',
+  view_directions: 'ದಿಕ್ಕುಗಳು',
+  view_book_site_visit: 'ಸೈಟ್ ಭೇಟಿ ಬುಕ್ ಮಾಡಿ',
+  view_aerial_tour: 'ವೈಮಾನಿಕ ಮಾರ್ಗ',
+  view_see_from_headline_pre: 'ಇದನ್ನು ',
+  view_see_from_headline_accent: 'ಆಕಾಶದಿಂದ',
+  view_drone_subtitle: '{name} ಮೇಲೆ ಡ್ರೋನ್ ಪಾಸ್ — ರಸ್ತೆಗಳು, ಬೆಳಕು, ಮತ್ತು ಭೂದೃಶ್ಯ.',
+
+  // Drone tour page
+  drone_aerial_footage: 'ವೈಮಾನಿಕ ದೃಶ್ಯ',
+  drone_tour_headline_pre: 'ಡ್ರೋನ್',
+  drone_tour_headline_accent: 'ಮಾರ್ಗ',
+  drone_tour_subtitle: 'ಭೇಟಿ ನೀಡುವ ಮೊದಲು ಎಸ್ಟೇಟ್ ಅನ್ನು ಮೇಲಿನಿಂದ ಅನುಭವಿಸಿ.',
+
+  // Drone video player
+  drone_capture_badge: 'ಡ್ರೋನ್ ಕ್ಯಾಪ್ಚರ್',
+  drone_tap_for_sound: 'ಧ್ವನಿಗಾಗಿ ಟ್ಯಾಪ್ ಮಾಡಿ',
+
+  // Feature pages
+  feature_back_to_home: 'ಮುಖಪುಟಕ್ಕೆ ಹಿಂತಿರುಗಿ',
 
   // Navbar
   contact_us: 'ಸಂಪರ್ಕಿಸಿ',

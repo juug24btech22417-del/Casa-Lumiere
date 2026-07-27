@@ -16,6 +16,7 @@ import { LocationMap } from '@/components/ui/LocationMap';
 import { DroneVideo } from '@/components/ui/DroneVideo';
 import { BookingModal } from '@/components/sections/BookingModal';
 import { PRICING, buildDirectionsUrl } from '@/lib/pricing';
+import { useLocale } from '@/lib/LocaleContext';
 
 interface BanashriEnclaveViewProps {
   /** Opens the booking modal */
@@ -27,25 +28,25 @@ interface BanashriEnclaveViewProps {
 const SITE_PHOTOS = [
   {
     src: '/site-progress-1.jpeg',
-    caption: 'Entry boulevard — palms & perimeter compound wall',
+    captionKey: 'view_photo_caption_entry',
   },
   {
     src: '/site-progress-2.jpeg',
-    caption: 'Internal 30 ft avenue road with curated tree-line',
+    captionKey: 'view_photo_caption_avenue',
   },
   {
     src: '/site-progress-3.jpeg',
-    caption: 'Horticulture beds & underground utility corridors',
+    captionKey: 'view_photo_caption_horticulture',
   },
   {
     src: '/site-progress-5.jpeg',
-    caption: 'Dusk view — street-lit avenues coming alive at golden hour',
+    captionKey: 'view_photo_caption_dusk',
   },
   {
     src: '/site-progress-4.jpeg',
-    caption: 'Twilight over the development — lit boulevards ready for owners',
+    captionKey: 'view_photo_caption_twilight',
   },
-];
+] as const;
 
 /**
  * BanashriEnclaveView — the cinematic "enter inside" experience for Plot A-01.
@@ -59,6 +60,8 @@ const SITE_PHOTOS = [
  */
 export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
   const pricing = PRICING.banashriEnclave;
+  const { t, locale } = useLocale();
+  const siteName = pricing.siteNameI18n[locale];
   const [photoIndex, setPhotoIndex] = useState(0);
   const [direction, setDirection] = useState(1);
   const [bookingOpen, setBookingOpen] = useState(false);
@@ -104,7 +107,7 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={SITE_PHOTOS[photoIndex].src}
-                alt={SITE_PHOTOS[photoIndex].caption}
+                alt={t(SITE_PHOTOS[photoIndex].captionKey)}
                 className="absolute inset-0 w-full h-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-deep-forest via-deep-forest/40 to-transparent" />
@@ -145,7 +148,7 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
           >
             <ArrowLeft size={16} className="text-ivory group-hover:text-gold transition-colors" />
             <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-ivory group-hover:text-gold transition-colors">
-              Back to all plots
+              {t('view_back_to_all_plots')}
             </span>
           </motion.button>
 
@@ -172,14 +175,14 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
                   showMap ? 'text-gold' : 'text-ivory'
                 )}
               >
-                {showMap ? 'Hide map' : 'View on map'}
+                {showMap ? t('view_hide_map') : t('view_view_on_map')}
               </span>
             </button>
 
             <div className="hidden md:flex items-center gap-2 px-3.5 py-2 rounded-full glass border border-gold/30">
               <span className="w-1.5 h-1.5 rounded-full bg-available animate-pulse" />
               <span className="text-[10px] font-mono uppercase tracking-[0.3em] text-gold">
-                {pricing.siteName}
+                {siteName}
               </span>
             </div>
             <div className="hidden lg:block px-3.5 py-2 rounded-full glass border border-cream/20">
@@ -201,10 +204,10 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
               transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             >
               <span className="inline-block text-gold/70 text-[10px] font-mono uppercase tracking-[0.5em] mb-3">
-                Live from site
+                {t('view_live_from_site')}
               </span>
               <p className="text-ivory font-serif text-2xl md:text-4xl leading-tight">
-                {SITE_PHOTOS[photoIndex].caption}
+                {t(SITE_PHOTOS[photoIndex].captionKey)}
               </p>
             </motion.div>
           </AnimatePresence>
@@ -224,10 +227,10 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
               </div>
               <div>
                 <p className="text-ivory font-serif text-lg md:text-xl leading-tight">
-                  {pricing.siteName}
+                  {siteName}
                 </p>
                 <p className="text-[10px] text-cream/50 font-mono uppercase tracking-widest mt-1">
-                  Premium sector
+                  {t('view_premium_sector')}
                 </p>
               </div>
             </div>
@@ -237,12 +240,12 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
                 <Maximize2 size={13} className="text-gold/70" />
                 <div className="text-left">
                   <p className="text-[9px] text-cream/50 uppercase tracking-widest font-mono">
-                    Plot
+                    {t('plot_plot_label')}
                   </p>
                   <p className="text-ivory text-sm font-medium">
                     {pricing.dimensions}{' '}
                     <span className="text-cream/60 font-light">
-                      ({pricing.sqft.toLocaleString()} sq.ft.)
+                      ({pricing.sqft.toLocaleString()} {t('view_sqft_suffix')})
                     </span>
                   </p>
                 </div>
@@ -252,17 +255,17 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-5 py-2.5 rounded-full border border-cream/30 text-ivory text-xs tracking-widest font-medium hover:border-gold/50 hover:text-gold transition-colors cursor-pointer"
-                aria-label="Open directions in Google Maps"
+                aria-label={t('view_directions')}
               >
                 <Navigation size={13} />
-                Directions
+                {t('view_directions')}
               </a>
               <Button
                 size="md"
                 onClick={() => setBookingOpen(true)}
                 className="animate-pulse-gold"
               >
-                Book Site Visit
+                {t('view_book_site_visit')}
               </Button>
             </div>
           </div>
@@ -315,19 +318,19 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
         >
           <div>
             <span className="text-gold/40 text-[10px] font-mono tracking-[0.5em] uppercase block mb-2">
-              Aerial Tour
+              {t('view_aerial_tour')}
             </span>
             <h3 className="text-2xl md:text-3xl font-serif text-ivory">
-              See it from the <span className="text-gold-gradient">sky</span>
+              {t('view_see_from_headline_pre')}<span className="text-gold-gradient">{t('view_see_from_headline_accent')}</span>
             </h3>
           </div>
           <p className="hidden md:block text-cream/50 text-xs max-w-xs text-right font-light">
-            A drone pass over {pricing.siteName} — roads, lighting, and landscape.
+            {t('view_drone_subtitle').replace('{name}', siteName)}
           </p>
         </motion.div>
         <DroneVideo
           src="/banashri-drone.mp4"
-          caption="Drone Capture"
+          caption={t('drone_capture_badge')}
           showBadge
           aspect="16/9"
           hasAudio
@@ -337,7 +340,7 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
       <BookingModal
         isOpen={bookingOpen}
         onClose={() => setBookingOpen(false)}
-        plotNumber={`${pricing.siteName} — ${pricing.plotNumber}`}
+        plotNumber={`${siteName} — ${pricing.plotNumber}`}
       />
     </motion.div>
   );
