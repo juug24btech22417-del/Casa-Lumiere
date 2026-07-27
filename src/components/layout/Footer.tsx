@@ -266,16 +266,12 @@ const Newsletter = () => {
     setError(null);
     setSuccess(null);
 
-    // Send ONLY what's actually required. We're discovering the
-    // schema on the fly because the leads table's column set
-    // differs from what the codebase assumed (an earlier version of
-    // the legal modal had used full_name / phone_number / email /
-    // ai_summary, but those columns don't exist in the actual
-    // Supabase project). Sending the empty object lets PostgREST
-    // tell us what columns are NOT NULL.
-    const { error: insertError } = await supabase.from('leads').insert([
-      {},
-    ]);
+    // Insert into `leads`. Run supabase/newsletter.sql once to ensure
+    // the table has an `email` column; after that this payload saves
+    // the signup.
+    const { error: insertError } = await supabase
+      .from('leads')
+      .insert([{ email }]);
 
     setSubmitting(false);
 
