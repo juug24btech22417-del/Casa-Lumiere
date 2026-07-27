@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import Cal, { getCalApi } from "@calcom/embed-react";
 import { motion, AnimatePresence } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -17,6 +18,17 @@ interface BookingModalProps {
 export const BookingModal = ({ isOpen, onClose, plotNumber }: BookingModalProps) => {
   const [activeTab, setActiveTab] = useState<'whatsapp' | 'calendar'>('whatsapp');
   const [form, setForm] = useState({ name: '', phone: '' });
+  const [mounted, setMounted] = useState(false);
+
+  // Portal target: document.body. This is critical because <SmoothScroll>
+  // wraps the page in a motion.div with `will-change: transform`, which
+  // makes that ancestor the containing block for any `position: fixed`
+  // descendants — so a modal rendered inside it would slide off-screen
+  // as the page scrolls. Portaling escapes that ancestor and re-anchors
+  // the modal to the viewport, which is what users expect.
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     (async function () {
@@ -32,10 +44,11 @@ export const BookingModal = ({ isOpen, onClose, plotNumber }: BookingModalProps)
   };
 
   if (!isOpen) return null;
+  if (!mounted) return null; // SSR + first-paint guard — portal needs document
 
   const inputClass = "w-full bg-white/[0.04] border border-white/10 rounded-xl py-3 px-4 text-cream text-sm focus:outline-none focus:border-gold/40 transition-colors placeholder:text-cream/15";
 
-  return (
+  return createPortal(
     <AnimatePresence>
       <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[100] flex items-center justify-center p-4">
         {/* Backdrop */}
@@ -100,6 +113,7 @@ export const BookingModal = ({ isOpen, onClose, plotNumber }: BookingModalProps)
           </div>
         </motion.div>
       </motion.div>
-    </AnimatePresence>
+    </AnimatePresence>,
+    document.body
   );
 };
