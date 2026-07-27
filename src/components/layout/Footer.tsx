@@ -242,9 +242,7 @@ const ShareButton = ({ copiedLabel }: { copiedLabel: string }) => {
 };
 
 /**
- * Newsletter signup form. Submits the email to Supabase `leads` table
- * with `ai_summary = "Newsletter signup"` (so the same table holds both
- * site-visit leads and newsletter signups, distinguishable by summary).
+ * Newsletter signup form. Submits the email to Supabase `leads` table.
  *   - Validation: HTML `type="email"` + `required` is enough.
  *   - Feedback: inline success message under the form, auto-clears in
  *     6s. Errors render in red. Never throws — Supabase failure logs.
@@ -268,34 +266,28 @@ const Newsletter = () => {
     setError(null);
     setSuccess(null);
 
+    // The leads table is shared with the booking/legal flows but its
+    // actual column set is whatever the Supabase project has — we
+    // discovered this the hard way (an `ai_summary` column we
+    // assumed existed turned out not to be there). Try the minimal
+    // set first: just email, the value we actually have. If the
+    // project requires other columns or has a unique constraint on
+    // email, the error message will say so and we'll add them.
     const { error: insertError } = await supabase.from('leads').insert([
-      {
-        // The leads table was originally designed for site-visit
-        // requests (full_name, phone_number, email, status, ai_summary)
-        // so its NOT NULL columns vary by deployment. Send explicit
-        // nulls for the optional ones so this works whether or not
-        // those columns have NOT NULL constraints.
-        full_name: null,
-        phone_number: null,
-        email,
-        status: 'new',
-        ai_summary: 'Newsletter signup',
-      },
+      { email },
     ]);
 
     setSubmitting(false);
 
     if (insertError) {
       console.warn('Newsletter insert failed:', insertError.message, insertError);
-      // Surface the real reason in the UI while debugging — switch to
-      // the friendly t() string once we know what's actually failing.
+      // Surface the real reason in the UI while debugging.
       setError(`${t('footer_newsletter_error')} (${insertError.message})`);
       return;
     }
 
     setSuccess(t('footer_newsletter_success'));
     setEmail('');
-    // Auto-clear the success line after a few seconds.
     if (resetTimer.current) clearTimeout(resetTimer.current);
     resetTimer.current = setTimeout(() => setSuccess(null), 6000);
   };
@@ -327,10 +319,8 @@ const Newsletter = () => {
         </button>
       </form>
 
-      {/* Status line — success (with check) or error. mt-2 + leading-
-          relaxed keeps it tucked under the input without shifting the
-          column. Either message is small enough that they don't push
-          other footer content around. */}
+      {/* Status line — success (with check) or error. min-h keeps the
+          footer column from jumping when a message appears. */}
       <div className="min-h-[1.25rem] mt-2">
         <AnimatePresence mode="wait">
           {success && (
