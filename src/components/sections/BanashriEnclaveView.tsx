@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowLeft,
@@ -66,23 +66,13 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
   const [direction, setDirection] = useState(1);
   const [bookingOpen, setBookingOpen] = useState(false);
   const [showMap, setShowMap] = useState(false);
-  const photoStageRef = useRef<HTMLDivElement>(null);
 
   const openBooking = () => {
-    // If the user has scrolled past the photo stage, bring it back
-    // into view first so the booking modal opens over the stage they
-    // actually engaged with — not over the drone video below it.
-    //
-    // Note: window.scrollTo (not scrollIntoView) is needed here.
-    // <SmoothScroll> uses a transformed container for inertia, so
-    // the page's native scroll position drives the content's
-    // translate. Scrolling by photoStage.offsetTop scrolls the
-    // ghost spacer, which moves the photo stage into view.
-    const el = photoStageRef.current;
-    if (el) {
-      const top = el.getBoundingClientRect().top + window.scrollY;
-      window.scrollTo({ top, behavior: 'smooth' });
-    }
+    // Modal opens centered on the current viewport — wherever the
+    // user happens to be. No scroll-back, because the modal uses
+    // a full-viewport backdrop blur, so the underlying section
+    // (photo stage vs drone video) is invisible to the user
+    // regardless of where they were when they tapped the button.
     setBookingOpen(true);
   };
 
@@ -110,7 +100,7 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
       className="relative w-full"
     >
       {/* ═══ STAGE 1 — PHOTO STAGE (78vh) ═══ */}
-      <div ref={photoStageRef} className="relative w-full h-[78vh] min-h-[640px] rounded-3xl overflow-hidden border border-champagne bg-deep-forest">
+      <div className="relative w-full h-[78vh] min-h-[640px] rounded-3xl overflow-hidden border border-champagne bg-deep-forest">
         {/* Photo layer */}
         <div className="absolute inset-0">
           <AnimatePresence mode="wait" custom={direction}>
