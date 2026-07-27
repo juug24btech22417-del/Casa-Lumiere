@@ -2,11 +2,11 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, ShieldCheck, FileText, Lock, Loader2, CheckCircle2 } from 'lucide-react';
+import { X, Lock, Loader2, CheckCircle2 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { CONTACT } from '@/lib/pricing';
 
-export type LegalRequestKind = 'privacy' | 'terms' | 'security';
+export type LegalRequestKind = 'security';
 
 interface LegalRequestModalProps {
   isOpen: boolean;
@@ -22,20 +22,6 @@ const KIND_META: Record<LegalRequestKind, {
   fields: ('name' | 'phone' | 'email' | 'message')[];
   messagePlaceholder: string;
 }> = {
-  privacy: {
-    title: 'Request Privacy Policy',
-    subtitle: 'We will email you our privacy policy and walk you through how we handle your information.',
-    icon: <ShieldCheck size={18} />,
-    fields: ['name', 'phone', 'email'],
-    messagePlaceholder: 'Any specific concern? (optional)',
-  },
-  terms: {
-    title: 'Request Terms of Service',
-    subtitle: 'Get our terms of service and any other agreement docs you need to review before committing.',
-    icon: <FileText size={18} />,
-    fields: ['name', 'phone', 'email'],
-    messagePlaceholder: 'Any specific concern? (optional)',
-  },
   security: {
     title: 'Security Archive Request',
     subtitle: 'Request copies of title verification, encumbrance certificates, or other ownership documents.',
