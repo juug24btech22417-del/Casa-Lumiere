@@ -22,7 +22,7 @@ export const BeforeAfterSlider = () => {
   const onTouchMove = useCallback((e: React.TouchEvent) => { updatePosition(e.touches[0].clientX); }, [updatePosition]);
 
   return (
-    <section className="py-12 md:py-28 relative overflow-hidden">
+    <section className="pt-2 md:-mt-16 md:pb-28 relative overflow-hidden pb-12">
       <div className="absolute inset-0 bg-gradient-to-b from-deep-forest via-surface to-deep-forest" />
       <div className="absolute top-1/2 right-0 w-[500px] h-[400px] bg-gold/[0.06] rounded-full blur-[160px] pointer-events-none" />
 
