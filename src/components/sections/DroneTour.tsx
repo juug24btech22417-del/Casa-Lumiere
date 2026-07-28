@@ -8,7 +8,7 @@ import { useLocale } from '@/lib/LocaleContext';
 export const DroneTour = () => {
   const { t } = useLocale();
   return (
-    <section className="pt-2 md:-mt-6 md:pb-28 relative overflow-hidden pb-12">
+    <section className="pt-2 md:-mt-12 md:pb-28 relative overflow-hidden pb-12">
       <div className="absolute inset-0 bg-gradient-to-b from-deep-forest via-surface to-deep-forest" />
       <div className="absolute top-0 left-1/3 w-[500px] h-[500px] bg-gold/[0.03] rounded-full blur-[150px] pointer-events-none" />
 
