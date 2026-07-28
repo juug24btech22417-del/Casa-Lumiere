@@ -86,10 +86,12 @@ export const InteractiveSitePlan = ({ plots, selectedId, onPlotClick }: SitePlan
           <motion.img
             src="/estate-layout.jpeg"
             alt="Banashri Enclave master plan"
-            initial={{ clipPath: 'inset(0 100% 0 0)' }}
-            whileInView={{ clipPath: 'inset(0 0% 0 0)' }}
-            viewport={{ once: true, margin: '-80px' }}
-            transition={{ duration: 1.6, ease: [0.65, 0, 0.35, 1] }}
+            loading="eager"
+            decoding="async"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true, margin: '-40px' }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="absolute inset-0 w-full h-full object-contain drop-shadow-[0_30px_60px_rgba(45,38,32,0.18)]"
           />
 

@@ -49,6 +49,18 @@ export default function RootLayout({
           fetchPriority="high"
         />
 
+        {/* Preload the master-plan image too — it sits inside the
+            same Interactive Explorer section, and Framer Motion's
+            whileInView trigger can be flaky on mobile so we want
+            the bytes already in the browser cache by the time the
+            user scrolls there. */}
+        <link
+          rel="preload"
+          as="image"
+          href="/estate-layout.jpeg"
+          fetchPriority="high"
+        />
+
         <LocaleProvider>
           <UnitProvider>
             {children}
