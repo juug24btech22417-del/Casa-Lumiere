@@ -28,6 +28,8 @@ const handleAnchorClick = (href: string) => (e: React.MouseEvent) => {
   // If we're on a different page, let the link navigate normally.
   if (typeof window !== 'undefined' && window.location.pathname !== '/') return;
   e.preventDefault();
+  e.stopPropagation();
+  console.log('[handleAnchorClick] click on', href, 'pathname=', window.location.pathname);
   scrollToAnchor(id);
 };
 
