@@ -76,7 +76,7 @@ export const InteractiveSitePlan = ({ plots, selectedId, onPlotClick }: SitePlan
         whileInView={{ opacity: 1, scale: 1, y: 0 }}
         viewport={{ once: true, margin: '-80px' }}
         transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute inset-6 md:inset-10 flex items-center justify-center"
+        className="absolute inset-3 md:inset-10 flex items-center justify-center"
       >
         <motion.div
           style={{ scale: imageScale, y: imageY }}
