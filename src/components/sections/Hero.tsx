@@ -95,7 +95,13 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
       </motion.div>
 
       {/* ══════ CONTENT ══════ */}
-      <div className="absolute inset-0 z-10 flex items-center justify-center px-6">
+      {/* pt-20 on mobile so the overline pill clears the fixed
+          navbar (which is ~64-80px tall) — otherwise the R logo
+          and the "Estates · Live and upcoming" pill collide at
+          the top of the viewport. Desktop is fine with just
+          items-center because the navbar is translucent and
+          overlays cleanly. */}
+      <div className="absolute inset-0 z-10 flex items-start sm:items-center justify-center px-6 pt-20 sm:pt-0">
         <motion.div
           className="w-full max-w-6xl flex flex-col items-center"
           style={{ opacity: contentOpacity, y: contentY }}
@@ -163,20 +169,18 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
                 whileHover={isActive ? { y: -4 } : undefined}
                 onClick={isActive ? handleClick : undefined}
                 disabled={!isActive}
+                // Mobile = centered (single-column stack, looks
+                // balanced when content is centered). sm+ = left
+                // aligned so it lines up with the rest of the
+                // desktop grid where the cards sit in a row.
                 className={[
-                  // Mobile = centered (single-column stack, looks
-                  // balanced when content is centered). sm+ = left
-                  // aligned so it lines up with the rest of the
-                  // desktop grid where the cards sit in a row.
                   'group relative flex flex-col text-center sm:text-left sm:items-start items-center p-4 rounded-xl border bg-white/[0.04] backdrop-blur-sm transition-all',
                   isActive
                     ? 'border-gold/30 hover:border-gold/60 hover:bg-white/[0.07] cursor-pointer'
                     : 'border-cream/15 cursor-default',
                 ].join(' ')}
               >
-                {/* Status badge — mx-auto centers it under mobile's
-                    text-center, then the sm: text-left override on
-                    the button pushes it back to the left edge. */}
+                {/* Status badge — centered on mobile, left on desktop. */}
                 <span
                   className={[
                     'inline-block self-center sm:self-start text-[9px] uppercase tracking-[0.2em] font-bold px-2 py-0.5 rounded-full border mb-2.5',
