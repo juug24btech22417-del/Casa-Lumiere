@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useScroll, useSpring, useTransform } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 
 interface SmoothScrollProps {
   children: React.ReactNode;
@@ -11,20 +11,18 @@ export const SmoothScroll = ({ children }: SmoothScrollProps) => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState(0);
 
-  // Standard scroll position tracker
+  // Standard scroll position tracker. Bind DIRECTLY to translate-y
+  // — earlier we ran scrollY through a useSpring for a soft luxury
+  // feel, but the spring under-damps enough that anchor-link clicks
+  // visually stop 1-2 sections short of the target. The viewport
+  // still scrolls to the right scrollY, but the wrapper's translate
+  // lags behind and overshoots/undershoots. Without the spring the
+  // wrapper tracks scrollY 1:1, so window.scrollTo lands the user
+  // exactly on whatever section they asked for.
   const { scrollY } = useScroll();
 
-  // Fine-tuned luxury spring physics interpolation
-  const springScroll = useSpring(scrollY, {
-    stiffness: 45, // Soft, heavy luxury travel feel
-    damping: 15,
-    mass: 0.15,
-    restDelta: 0.005,
-    restSpeed: 0.005,
-  });
-
-  // Translate scroll direction into translate3d movement
-  const y = useTransform(springScroll, (value) => -value);
+  // Translate scroll direction into translate3d movement.
+  const y = useTransform(scrollY, (value) => -value);
 
   useEffect(() => {
     const handleResize = () => {
