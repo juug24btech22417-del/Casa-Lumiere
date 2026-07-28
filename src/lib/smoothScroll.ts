@@ -20,6 +20,35 @@ export const scrollToAnchor = (id: string): void => {
   if (typeof window === 'undefined') return;
   const el = document.getElementById(id);
   if (!el) return;
-  const top = el.getBoundingClientRect().top + window.scrollY;
-  window.scrollTo({ top, behavior: 'smooth' });
+
+  // The page wraps content in <SmoothScroll>, a fixed-position
+  // motion.div that translates -scrollY. The ghost spacer is what
+  // actually scrolls the window. To land on the target, we need
+  // the target's position WITHIN the content wrapper's natural
+  // layout — i.e. where the ghost spacer should scroll to.
+  //
+  // Walk up from the target until we hit the content wrapper (the
+  // smooth-scroll content element). The walk sums every intervening
+  // sibling's offsetTop on the way up, giving us the target's
+  // natural offset from the top of the content. Then scroll the
+  // window to that offset.
+  //
+  // The wrapper element is identified by either the data attribute
+  // we set or by being the only fixed-position ancestor.
+  const wrapper = document.querySelector<HTMLElement>('[data-smooth-scroll-content]');
+  let target: number | null = null;
+  if (wrapper) {
+    let cur: HTMLElement | null = el;
+    let acc = 0;
+    while (cur && cur !== wrapper) {
+      acc += cur.offsetTop;
+      cur = cur.offsetParent as HTMLElement | null;
+    }
+    target = acc;
+  }
+  if (target == null) {
+    // Fallback: use the target's own offsetTop from the document.
+    target = el.getBoundingClientRect().top + window.scrollY;
+  }
+  window.scrollTo({ top: target, behavior: 'smooth' });
 };

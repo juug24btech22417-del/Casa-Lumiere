@@ -61,6 +61,7 @@ export const SmoothScroll = ({ children }: SmoothScrollProps) => {
       <motion.div
         ref={contentRef}
         style={{ y }}
+        data-smooth-scroll-content
         className="fixed top-0 left-0 w-full overflow-hidden flex flex-col will-change-transform z-10"
       >
         {children}
