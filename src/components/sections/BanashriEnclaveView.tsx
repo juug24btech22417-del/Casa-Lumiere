@@ -147,15 +147,19 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
         </AnimatePresence>
 
         {/* Top bar */}
-        <div className="absolute top-0 left-0 right-0 z-30 flex items-start justify-between p-5 md:p-7">
+        <div className="absolute top-0 left-0 right-0 z-30 flex items-center justify-between gap-3 p-5 md:p-7">
           <motion.button
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
             onClick={onBack}
-            className="group flex items-center gap-2.5 px-4 py-2.5 rounded-full glass border border-cream/30 hover:border-gold/50 transition-all cursor-pointer"
+            // whitespace-nowrap keeps the label on one line even
+            // when the photo stage is narrow on phones. shrink-0
+            // prevents the button from being squeezed by the right
+            // group.
+            className="group shrink-0 flex items-center gap-2.5 px-4 py-2.5 rounded-full glass border border-cream/30 hover:border-gold/50 transition-all cursor-pointer whitespace-nowrap"
           >
-            <ArrowLeft size={16} className="text-ivory group-hover:text-gold transition-colors" />
+            <ArrowLeft size={16} className="text-ivory group-hover:text-gold transition-colors shrink-0" />
             <span className="text-[11px] font-bold uppercase tracking-[0.25em] text-ivory group-hover:text-gold transition-colors">
               {t('view_back_to_all_plots')}
             </span>
@@ -165,13 +169,13 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.4, duration: 0.6 }}
-            className="flex items-center gap-2 md:gap-3"
+            className="flex items-center gap-2 md:gap-3 shrink-0"
           >
             <button
               type="button"
               onClick={() => setShowMap(s => !s)}
               className={cn(
-                "flex items-center gap-2 px-3.5 py-2 rounded-full glass border transition-all cursor-pointer",
+                "flex items-center gap-2 px-3.5 py-2 rounded-full glass border transition-all cursor-pointer whitespace-nowrap",
                 showMap
                   ? "border-gold/60 bg-gold/15"
                   : "border-cream/30 hover:border-gold/50"
@@ -229,7 +233,7 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
           transition={{ delay: 0.6, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="absolute bottom-0 left-0 right-0 z-30 p-5 md:p-7"
         >
-          <div className="glass rounded-2xl border border-cream/30 p-5 md:p-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-5">
+          <div className="rounded-2xl border border-cream/30 bg-deep-forest/95 backdrop-blur-md p-5 md:p-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-5">
             <div className="flex items-center gap-5">
               <div className="w-14 h-14 rounded-xl bg-gold/15 border border-gold/30 flex items-center justify-center font-serif text-gold text-xl font-bold">
                 {pricing.plotNumber}
