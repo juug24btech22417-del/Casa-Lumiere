@@ -15,8 +15,13 @@ interface DroneVideoProps {
   caption?: string;
   /** Show a "Drone Capture" badge in the top-left */
   showBadge?: boolean;
-  /** Custom aspect ratio. Default 16/9 */
-  aspect?: '16/9' | '4/3' | '21/9' | '9/16';
+  /**
+   * Custom aspect ratio. Accepts either a shorthand key from the
+   * list below (e.g. "16/9"), or a raw Tailwind aspect class to
+   * enable responsive overrides (e.g. "aspect-[4/3] md:aspect-[16/9]").
+   * Default 16/9.
+   */
+  aspect?: '16/9' | '4/3' | '21/9' | '9/16' | (string & {});
   /** Whether to autoplay + loop. Default true */
   autoplay?: boolean;
   /**
@@ -60,12 +65,17 @@ export const DroneVideo = ({
     return () => clearTimeout(t);
   }, [hasAudio]);
 
-  const aspectClass = {
-    '16/9': 'aspect-[16/9]',
-    '4/3': 'aspect-[4/3]',
-    '21/9': 'aspect-[21/9]',
-    '9/16': 'aspect-[9/16]',
-  }[aspect];
+  // Allow either a shorthand key from the typed union (resolved to
+  // a plain Tailwind aspect class) or a raw responsive class like
+  // "aspect-[4/3] md:aspect-[16/9]" for callers that need breakpoints.
+  const aspectClass = aspect.includes(' ')
+    ? aspect
+    : {
+        '16/9': 'aspect-[16/9]',
+        '4/3': 'aspect-[4/3]',
+        '21/9': 'aspect-[21/9]',
+        '9/16': 'aspect-[9/16]',
+      }[aspect];
 
   const togglePlay = () => {
     const v = videoRef.current;

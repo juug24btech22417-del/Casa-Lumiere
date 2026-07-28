@@ -28,7 +28,7 @@ export const DroneTour = () => {
           src="/banashri-drone.mp4"
           caption={t('drone_capture_badge')}
           showBadge
-          aspect="16/9"
+          aspect="aspect-[4/3] md:aspect-[16/9]"
           hasAudio
         />
       </div>
