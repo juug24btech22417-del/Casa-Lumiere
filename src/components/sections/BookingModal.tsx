@@ -103,7 +103,7 @@ export const BookingModal = ({ isOpen, onClose, plotNumber }: BookingModalProps)
               ) : (
                 <motion.div key="calendar" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} className="absolute inset-0 w-full h-full rounded-xl overflow-hidden bg-white/5 border border-white/10">
                   <Cal
-                    calLink="dhruv-bijapur-3xhyri/15min"
+                    calLink="mahesh-bijapur-4eslos/15min"
                     style={{ width: "100%", height: "100%", overflow: "scroll" }}
                     config={{ layout: 'month_view', theme: 'dark' }}
                   />
