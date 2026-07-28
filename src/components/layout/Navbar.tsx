@@ -126,12 +126,15 @@ export const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
                   href={link.href}
                   onClick={(e) => {
                     handleAnchorClick(link.href)(e);
-                    // Delay closing the mobile menu so the smooth-scroll
-                    // has time to start — closing immediately can race
-                    // the scroll handler and the page ends up not
-                    // moving. 250ms covers the smooth-scroll kickoff
-                    // while still feeling snappy to the user.
-                    setTimeout(() => setMobileOpen(false), 250);
+                    // Close the mobile menu only AFTER the smooth scroll
+                    // has finished. Closing it sooner — even with a
+                    // 250ms delay — triggers an AnimatePresence layout
+                    // shift that cancels the in-flight scroll halfway
+                    // (verified via on-screen diagnostic: scroll stopped
+                    // at ~30% of the target). 1200ms covers mobile
+                    // smooth-scroll durations; user feels the menu close
+                    // right as the target section lands.
+                    setTimeout(() => setMobileOpen(false), 1200);
                   }}
                   className="text-sm uppercase tracking-widest text-cream"
                 >
