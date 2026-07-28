@@ -55,8 +55,8 @@ export const EMICalculator = () => {
                 <label className="text-[10px] uppercase tracking-widest text-cream font-bold">Plot Price</label>
                 <span className="text-gold font-semibold text-sm">{formatINR(price)}</span>
               </div>
-              <input type="range" min={1000000} max={15000000} step={100000} value={price} onChange={e => setPrice(+e.target.value)} className={inputClass} />
-              <div className="flex justify-between text-[9px] text-cream/60 mt-1"><span>₹10L</span><span>₹1.5Cr</span></div>
+              <input type="range" min={500000} max={15000000} step={100000} value={price} onChange={e => setPrice(+e.target.value)} className={inputClass} />
+              <div className="flex justify-between text-[9px] text-cream/60 mt-1"><span>₹5L</span><span>₹1.5Cr</span></div>
             </div>
 
             {/* Down Payment */}
