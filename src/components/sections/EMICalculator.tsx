@@ -31,7 +31,7 @@ export const EMICalculator = () => {
   const inputClass = "w-full h-1.5 rounded-full appearance-none cursor-pointer bg-champagne accent-gold [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-gold [&::-webkit-slider-thumb]:shadow-gold [&::-webkit-slider-thumb]:cursor-pointer";
 
   return (
-    <section className="py-28 relative overflow-hidden">
+    <section className="py-12 md:py-28 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-deep-forest via-surface to-deep-forest" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gold/[0.04] rounded-full blur-[160px] pointer-events-none" />
 
