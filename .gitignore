@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Claude Code local settings — machine-specific permissions, not source.
+# Already tracked historically; new entries will be ignored.
+.claude/
