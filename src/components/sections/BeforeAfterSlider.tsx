@@ -47,22 +47,31 @@ export const BeforeAfterSlider = () => {
           onTouchMove={onTouchMove}
           onTouchEnd={onMouseUp}
         >
-          {/* AFTER layer (full width, always behind) */}
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
-            src="/vision-after.jpeg"
-            alt="Banashri Enclave — after development"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-
-          {/* "After" label */}
-          <div className="absolute top-5 right-5 px-4 py-2 bg-available/25 border border-available/40 rounded-full z-10 backdrop-blur-sm">
-            <span className="text-[10px] uppercase tracking-widest text-available font-bold">After Development</span>
-          </div>
-
-          {/* BEFORE layer (clipped by slider position) */}
+          {/* AFTER layer (full width, always behind) — clipped from
+              the LEFT so the "After Development" label disappears when
+              the slider is fully right (only Raw Land visible). */}
           <div
             className="absolute inset-0"
+            style={{ clipPath: `inset(0 0 0 ${position}%)` }}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/vision-after.jpeg"
+              alt="Banashri Enclave — after development"
+              className="absolute inset-0 w-full h-full object-cover"
+            />
+
+            {/* "After" label */}
+            <div className="absolute top-5 right-5 px-4 py-2 bg-available/25 border border-available/40 rounded-full backdrop-blur-sm">
+              <span className="text-[10px] uppercase tracking-widest text-available font-bold">After Development</span>
+            </div>
+          </div>
+
+          {/* BEFORE layer (clipped by slider position) — clipped from
+              the RIGHT so "Raw Land" disappears when the slider is
+              fully left (only After visible). */}
+          <div
+            className="absolute inset-0 z-10"
             style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
