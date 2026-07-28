@@ -31,7 +31,7 @@ export const WhatsAppButton = () => {
   if (!visible) return null;
 
   return (
-    <div className="fixed bottom-6 left-6 z-50 flex items-end gap-3">
+    <div className="fixed bottom-6 left-4 md:left-6 z-50 flex items-end gap-3">
       {/* Tooltip */}
       <AnimatePresence>
         {showTooltip && (
