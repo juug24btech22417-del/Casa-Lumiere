@@ -164,16 +164,22 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
                 onClick={isActive ? handleClick : undefined}
                 disabled={!isActive}
                 className={[
-                  'group relative text-left p-4 rounded-xl border bg-white/[0.04] backdrop-blur-sm transition-all',
+                  // Mobile = centered (single-column stack, looks
+                  // balanced when content is centered). sm+ = left
+                  // aligned so it lines up with the rest of the
+                  // desktop grid where the cards sit in a row.
+                  'group relative flex flex-col text-center sm:text-left sm:items-start items-center p-4 rounded-xl border bg-white/[0.04] backdrop-blur-sm transition-all',
                   isActive
                     ? 'border-gold/30 hover:border-gold/60 hover:bg-white/[0.07] cursor-pointer'
                     : 'border-cream/15 cursor-default',
                 ].join(' ')}
               >
-                {/* Status badge */}
+                {/* Status badge — mx-auto centers it under mobile's
+                    text-center, then the sm: text-left override on
+                    the button pushes it back to the left edge. */}
                 <span
                   className={[
-                    'inline-block text-[9px] uppercase tracking-[0.2em] font-bold px-2 py-0.5 rounded-full border mb-2.5',
+                    'inline-block self-center sm:self-start text-[9px] uppercase tracking-[0.2em] font-bold px-2 py-0.5 rounded-full border mb-2.5',
                     STATUS_STYLE[estate.status],
                   ].join(' ')}
                 >
@@ -184,7 +190,7 @@ export const Hero = ({ onExploreClick }: { onExploreClick: () => void }) => {
                 <h3 className="text-ivory text-base font-serif font-semibold leading-tight mb-1.5">
                   {estate.nameI18n[locale]}
                 </h3>
-                <p className="flex items-center gap-1.5 text-cream/60 text-[11px] font-light">
+                <p className="flex items-center justify-center sm:justify-start gap-1.5 text-cream/60 text-[11px] font-light">
                   <MapPin size={10} className="text-gold/60" />
                   {estate.locationI18n[locale]} · {estate.plotCount} {t('hero_card_plots_suffix')}
                 </p>
