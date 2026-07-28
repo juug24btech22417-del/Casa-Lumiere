@@ -119,7 +119,20 @@ export const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
           >
             <div className="flex flex-col items-center gap-6 py-8">
               {NAV_LINKS.map(link => (
-                <a key={link.label} href={link.href} onClick={(e) => { handleAnchorClick(link.href)(e); setMobileOpen(false); }} className="text-sm uppercase tracking-widest text-cream">
+                <a
+                  key={link.label}
+                  href={link.href}
+                  onClick={(e) => {
+                    handleAnchorClick(link.href)(e);
+                    // Delay closing the mobile menu so the smooth-scroll
+                    // has time to start — closing immediately can race
+                    // the scroll handler and the page ends up not
+                    // moving. 250ms covers the smooth-scroll kickoff
+                    // while still feeling snappy to the user.
+                    setTimeout(() => setMobileOpen(false), 250);
+                  }}
+                  className="text-sm uppercase tracking-widest text-cream"
+                >
                   {link.label}
                 </a>
               ))}
