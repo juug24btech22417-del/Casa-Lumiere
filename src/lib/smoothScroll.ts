@@ -21,34 +21,43 @@ export const scrollToAnchor = (id: string): void => {
   const el = document.getElementById(id);
   if (!el) return;
 
-  // The page wraps content in <SmoothScroll>, a fixed-position
-  // motion.div that translates -scrollY. The ghost spacer is what
-  // actually scrolls the window. To land on the target, we need
-  // the target's position WITHIN the content wrapper's natural
-  // layout — i.e. where the ghost spacer should scroll to.
+  // The page wraps content in <SmoothScroll>, a position:fixed
+  // motion.div that translates -scrollY. The translate is driven
+  // by a spring (stiffness: 45, damping: 15) — so even after
+  // window.scrollTo reaches the right scrollY, the wrapper's
+  // translate-y under-damps and visually stops short of the
+  // target. The spring physics ignore the target and follow
+  // scrollY with overshoot/undershoot.
   //
-  // Walk up from the target until we hit the content wrapper (the
-  // smooth-scroll content element). The walk sums every intervening
-  // sibling's offsetTop on the way up, giving us the target's
-  // natural offset from the top of the content. Then scroll the
-  // window to that offset.
-  //
-  // The wrapper element is identified by either the data attribute
-  // we set or by being the only fixed-position ancestor.
+  // Fix: disable the transform during the scroll, then restore
+  // once the smooth scroll completes. With transform:none the
+  // wrapper stays at viewport top:0 always (it's position:fixed),
+  // and the ghost spacer alone controls which part of the page
+  // is visible. window.scrollTo lands exactly on the target and
+  // stays there.
   const wrapper = document.querySelector<HTMLElement>('[data-smooth-scroll-content]');
-  let target: number | null = null;
-  if (wrapper) {
-    let cur: HTMLElement | null = el;
-    let acc = 0;
-    while (cur && cur !== wrapper) {
-      acc += cur.offsetTop;
-      cur = cur.offsetParent as HTMLElement | null;
-    }
-    target = acc;
+  if (!wrapper) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return;
   }
-  if (target == null) {
-    // Fallback: use the target's own offsetTop from the document.
-    target = el.getBoundingClientRect().top + window.scrollY;
-  }
+
+  const prevTransform = wrapper.style.transform;
+  wrapper.style.transform = 'none';
+
+  // Compute target — with transform stripped, getBoundingClientRect
+  // gives the natural viewport position of the target. Add
+  // window.scrollY to get the document position, which is where
+  // the ghost spacer (the actual scrolling element) should land.
+  const target = el.getBoundingClientRect().top + window.scrollY;
+
   window.scrollTo({ top: target, behavior: 'smooth' });
+
+  // Restore the transform after the smooth scroll settles. We
+  // wait 700ms because 'smooth' scroll on mobile can take that
+  // long, and we want the wrapper to take over translating
+  // again only after the scroll has actually finished — otherwise
+  // the user sees a visible jump if the spring kicks in mid-scroll.
+  window.setTimeout(() => {
+    wrapper.style.transform = prevTransform;
+  }, 700);
 };
