@@ -22,12 +22,12 @@ export const BeforeAfterSlider = () => {
   const onTouchMove = useCallback((e: React.TouchEvent) => { updatePosition(e.touches[0].clientX); }, [updatePosition]);
 
   return (
-    <section className="py-28 relative overflow-hidden">
+    <section className="py-12 md:py-28 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-deep-forest via-surface to-deep-forest" />
       <div className="absolute top-1/2 right-0 w-[500px] h-[400px] bg-gold/[0.06] rounded-full blur-[160px] pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-6 relative z-10">
-        <ScrollReveal className="text-center mb-16">
+        <ScrollReveal className="text-center mb-8 md:mb-16">
           <span className="text-gold text-[10px] uppercase tracking-[0.5em] font-bold block mb-4">The Vision</span>
           <h2 className="text-4xl md:text-6xl font-serif text-ivory mb-4">
             Before & <span className="text-gold-gradient">After</span>
@@ -40,7 +40,7 @@ export const BeforeAfterSlider = () => {
         {/* Slider container */}
         <div
           ref={containerRef}
-          className="relative aspect-[16/9] rounded-2xl overflow-hidden cursor-col-resize select-none glass border border-champagne bg-deep-forest"
+          className="relative aspect-[4/3] md:aspect-[16/9] rounded-2xl overflow-hidden cursor-col-resize select-none glass border border-champagne bg-deep-forest"
           onMouseMove={onMouseMove}
           onMouseUp={onMouseUp}
           onMouseLeave={onMouseUp}
