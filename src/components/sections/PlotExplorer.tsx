@@ -43,7 +43,7 @@ export const PlotExplorer = () => {
   }, []);
 
   return (
-    <section id="plots" className="py-28 relative overflow-hidden">
+    <section id="plots" className="py-16 md:py-28 relative overflow-hidden">
       {/* Rich section background (transparent to show grid) */}
       <div className="absolute top-20 right-0 w-[600px] h-[600px] bg-gold/[0.04] rounded-full blur-[180px] pointer-events-none" />
       <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-gold/[0.03] rounded-full blur-[140px] pointer-events-none" />

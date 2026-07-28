@@ -29,7 +29,7 @@ export const WhyChooseUs = () => {
   const { t } = useLocale();
 
   return (
-    <section id="why" className="py-28 relative overflow-hidden">
+    <section id="why" className="py-16 md:py-28 relative overflow-hidden">
       {/* Section background with depth (transparent to show grid) */}
       <div className="absolute top-0 left-0 w-[600px] h-[600px] bg-gold/[0.08] rounded-full blur-[160px] -translate-x-1/3 -translate-y-1/3 pointer-events-none" />
       <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-gold/[0.05] rounded-full blur-[140px] translate-x-1/3 translate-y-1/3 pointer-events-none" />
