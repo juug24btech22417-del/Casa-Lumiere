@@ -240,7 +240,7 @@ export const BanashriEnclaveView = ({ onBack }: BanashriEnclaveViewProps) => {
           transition={{ delay: 0.6, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="absolute bottom-0 left-0 right-0 z-30 p-5 md:p-7"
         >
-          <div className="glass rounded-2xl border border-cream/30 p-5 md:p-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-5">
+          <div className="rounded-2xl border border-cream/30 backdrop-blur-md bg-white/55 p-5 md:p-6 flex flex-col md:flex-row items-stretch md:items-center justify-between gap-5">
             <div className="flex items-center gap-5">
               <div className="w-14 h-14 rounded-xl bg-gold/15 border border-gold/30 flex items-center justify-center font-serif text-gold text-xl font-bold">
                 {pricing.plotNumber}
