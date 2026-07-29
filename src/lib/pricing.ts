@@ -99,7 +99,7 @@ export const CONTACT = {
   /** Display-only phone (with spaces) */
   phoneDisplay: '+91 93429 60200',
   /** Site brand name */
-  brand: 'Banashri Enclave',
+  brand: 'MSTR Properties',
 };
 
 /**

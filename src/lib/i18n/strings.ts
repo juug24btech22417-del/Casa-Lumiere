@@ -132,7 +132,7 @@ const en: Strings = {
 
   // Footer — bottom
   footer_back_to_top: 'Back to Top',
-  footer_copyright: '© 2026 {brand} Estates. All rights reserved.',
+  footer_copyright: '© 2026 {brand}. All rights reserved.',
 
   // Share / language picker
   share_link_copied: 'Link copied',
@@ -316,7 +316,7 @@ const hi: Strings = {
 
   // Footer — bottom
   footer_back_to_top: 'ऊपर जाएँ',
-  footer_copyright: '© 2026 {brand} एस्टेट्स. सर्वाधिकार सुरक्षित।',
+  footer_copyright: '© 2026 {brand}. सर्वाधिकार सुरक्षित।',
 
   // Share / language picker
   share_link_copied: 'लिंक कॉपी हो गया',
@@ -496,7 +496,7 @@ const kn: Strings = {
 
   // Footer — bottom
   footer_back_to_top: 'ಮೇಲಕ್ಕೆ ಹೋಗಿ',
-  footer_copyright: '© 2026 {brand} ಎಸ್ಟೇಟ್‌ಗಳು. ಎಲ್ಲ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.',
+  footer_copyright: '© 2026 {brand}. ಎಲ್ಲ ಹಕ್ಕುಗಳನ್ನು ಕಾಯ್ದಿರಿಸಲಾಗಿದೆ.',
 
   // Share / language picker
   share_link_copied: 'ಲಿಂಕ್ ನಕಲಿಸಲಾಗಿದೆ',
