@@ -61,6 +61,16 @@ export default function RootLayout({
           fetchPriority="high"
         />
 
+        {/* Preload the MSTR logo so the navbar wordmark is in
+            the browser cache before first paint — without this,
+            the rust wordmark pops in after the rest of the hero
+            has loaded. */}
+        <link
+          rel="preload"
+          as="image"
+          href="/mstr-logo.jpeg"
+        />
+
         <LocaleProvider>
           <UnitProvider>
             {children}

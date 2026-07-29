@@ -58,9 +58,20 @@ export const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-center gap-3 group">
-          <div className="w-10 h-10 border-2 border-gold rounded-lg flex items-center justify-center text-gold font-serif text-lg font-bold group-hover:bg-gold group-hover:text-ivory transition-all duration-400">
-            R
-          </div>
+          {/* Wordmark — the MSTR mark supplied by the user.
+              mix-blend-mode: screen drops the image's white
+              background so the rust letters render on top of
+              whatever sits behind the navbar (photo over hero,
+              glass over the scrolled state). The image's rust
+              tone matches the gold palette (#A8593A). */}
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/mstr-logo.jpeg"
+            alt="MSTR Properties"
+            style={{ mixBlendMode: 'screen' }}
+            className="h-9 sm:h-10 w-auto select-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.4)]"
+            draggable={false}
+          />
           <div className="hidden sm:flex flex-col leading-tight">
             <span className="font-serif text-xl text-ivory">MSTR Properties</span>
             <span className="text-[9px] uppercase tracking-[0.35em] text-gold-dark font-semibold">Premium Estate</span>

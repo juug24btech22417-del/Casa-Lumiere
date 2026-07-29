@@ -62,7 +62,17 @@ export const Footer = ({ onLegalClick }: FooterProps) => {
           {/* Brand */}
           <div className="space-y-5">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 border-2 border-gold rounded-lg flex items-center justify-center text-gold font-serif text-lg font-bold">R</div>
+              {/* MSTR wordmark. Footer has a light bg-surface, so
+                  the image's white background blends with the
+                  warm-white footer — no blend-mode or boxed
+                  treatment needed. */}
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/mstr-logo.jpeg"
+                alt={CONTACT.brand}
+                className="h-11 w-auto select-none"
+                draggable={false}
+              />
               <span className="font-serif text-xl text-ivory">{CONTACT.brand}</span>
             </div>
             <p className="text-cream text-sm leading-relaxed max-w-xs">
