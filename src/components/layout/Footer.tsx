@@ -62,15 +62,19 @@ export const Footer = ({ onLegalClick }: FooterProps) => {
           {/* Brand */}
           <div className="space-y-5">
             <div className="flex items-center gap-3">
-              {/* MSTR wordmark. Footer has a light bg-surface, so
-                  the image's white background blends with the
-                  warm-white footer — no blend-mode or boxed
-                  treatment needed. */}
+              {/* MSTR wordmark. mix-blend-mode: multiply drops
+                  the JPEG's white background so the cream bg
+                  shows through where the source was white, and
+                  the rust letters stay rust — looks like a real
+                  logo instead of a stamped PNG. Replace the
+                  JPEG with a transparent-background PNG and
+                  this still works. */}
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src="/mstr-logo.jpeg"
                 alt={CONTACT.brand}
-                className="h-11 w-auto select-none"
+                style={{ mixBlendMode: 'multiply' }}
+                className="h-12 w-auto select-none"
                 draggable={false}
               />
               <span className="font-serif text-xl text-ivory">{CONTACT.brand}</span>
