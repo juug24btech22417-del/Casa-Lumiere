@@ -6,7 +6,7 @@ import { ScrollReveal } from '@/components/ui/ScrollReveal';
 import { ChevronLeft, ChevronRight, Star, Quote } from 'lucide-react';
 
 const TESTIMONIALS = [
-  { name: "Vikram Sethi", role: "Tech Entrepreneur", content: "The level of transparency in their mapping and legal documentation is unheard of in rural land deals. RuralLand didn't just sell me a plot — they sold me peace of mind.", avatar: "VS" },
+  { name: "Vikram Sethi", role: "Tech Entrepreneur", content: "The level of transparency in their mapping and legal documentation is unheard of in rural land deals. MSTR Properties didn't just sell me a plot — they sold me peace of mind.", avatar: "VS" },
   { name: "Ananya Iyer", role: "Architectural Designer", content: "Seeing drone tours and GPS-mapped boundaries before even visiting saved me weeks. The digital experience perfectly mirrors the luxury of the land itself.", avatar: "AI" },
   { name: "Rohan Malhotra", role: "Estate Investor", content: "Premium plots, meticulous planning, and an AI assistant that actually knows the details. This is the future of real estate development in India.", avatar: "RM" },
 ];

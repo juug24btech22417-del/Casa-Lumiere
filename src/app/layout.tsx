@@ -17,7 +17,7 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "RuralLand — Premium Estate Development",
+  title: "MSTR Properties — Premium Estate Development",
   description:
     "A growing collection of hand-built estates in South India. Each one is its own project — planned, plotted, and built end-to-end.",
   keywords: ["rural land", "real estate", "premium plots", "land investment", "estate development"],

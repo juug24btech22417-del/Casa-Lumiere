@@ -38,7 +38,7 @@ const en: Strings = {
 
   // Why trust us section
   why_headline_1: 'Why Trust',
-  why_headline_2: 'RuralLand',
+  why_headline_2: 'MSTR Properties',
   why_subtitle:
     'We bridge the gap between traditional land acquisition and modern investment standards.',
   why_feature_legal_title: 'Legal Security',

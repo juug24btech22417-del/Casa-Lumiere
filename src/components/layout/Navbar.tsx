@@ -62,7 +62,7 @@ export const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
             R
           </div>
           <div className="hidden sm:flex flex-col leading-tight">
-            <span className="font-serif text-xl text-ivory">RuralLand</span>
+            <span className="font-serif text-xl text-ivory">MSTR Properties</span>
             <span className="text-[9px] uppercase tracking-[0.35em] text-gold-dark font-semibold">Premium Estate</span>
           </div>
         </a>

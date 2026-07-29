@@ -20,7 +20,7 @@ const QUICK_PROMPTS = [
 export const AIAssistant = () => {
   const [open, setOpen] = useState(false);
   const [messages, setMessages] = useState<ChatMessage[]>([
-    { role: 'assistant', content: "Welcome to RuralLand's Private Concierge. I can help with plot details, legal verification, and booking. How may I assist you?" }
+    { role: 'assistant', content: "Welcome to MSTR Properties' Private Concierge. I can help with plot details, legal verification, and booking. How may I assist you?" }
   ]);
   const [input, setInput] = useState('');
   const [loading, setLoading] = useState(false);

@@ -24,7 +24,7 @@ export const WhatsAppButton = () => {
   }, []);
 
   const message = encodeURIComponent(
-    "Hi RuralLand! I'd like to book a site visit session to explore available premium plots. Please share the available dates and timings. Thank you!"
+    "Hi MSTR Properties! I'd like to book a site visit session to explore available premium plots. Please share the available dates and timings. Thank you!"
   );
   const url = `https://wa.me/${PHONE}?text=${message}`;
 
