@@ -58,22 +58,15 @@ export const Navbar = ({ onContactClick }: { onContactClick: () => void }) => {
       <div className="max-w-7xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <a href="#" className="flex items-center gap-3 group">
-          {/* Wordmark — the MSTR mark supplied by the user. The
-              source JPEG has a white background; mix-blend-mode:
-              multiply drops that white (multiply with white is a
-              no-op, so the underlying bg shows through wherever
-              the JPEG was white) and keeps the rust-colored
-              letters. Net effect: the wordmark floats over
-              whatever sits behind the navbar (hero photo, glass
-              overlay) with no visible white rectangle. Replace
-              /mstr-logo.jpeg with a transparent-background PNG
-              and the same blend-mode keeps working — no code
-              change needed once that's done. */}
+          {/* Wordmark — the MSTR mark (transparent-bg PNG).
+              Floats cleanly over whatever sits behind the navbar
+              (hero photo, glass overlay) with no visible white
+              rectangle. Drop-shadow keeps it legible against
+              bright parts of the hero photo. */}
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/mstr-logo.jpeg"
+            src="/mstr-logo.png"
             alt="MSTR Properties"
-            style={{ mixBlendMode: 'multiply' }}
             className="h-9 sm:h-10 w-auto select-none drop-shadow-[0_1px_2px_rgba(0,0,0,0.3)]"
             draggable={false}
           />

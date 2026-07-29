@@ -68,7 +68,7 @@ export default function RootLayout({
         <link
           rel="preload"
           as="image"
-          href="/mstr-logo.jpeg"
+          href="/mstr-logo.png"
         />
 
         <LocaleProvider>
