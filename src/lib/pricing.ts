@@ -154,13 +154,13 @@ export const ESTATES: EstateMeta[] = [
     status: 'available',
   },
   {
-    slug: 'vasavi-enclaves',
-    name: 'Vasavi Enclaves',
+    slug: 'vasavi-estates',
+    name: 'Vasavi Estates',
     location: 'Guledgudd',
     nameI18n: {
-      en: 'Vasavi Enclaves',
-      hi: 'वासवी एनक्लेव',
-      kn: 'ವಾಸವಿ ಎನ್ಕ್ಲೇವ್',
+      en: 'Vasavi Estates',
+      hi: 'वासवी एस्टेट्स',
+      kn: 'ವಾಸವಿ ಎಸ್ಟೇಟ್ಸ್',
     },
     locationI18n: {
       en: 'Guledgudd',
@@ -171,13 +171,13 @@ export const ESTATES: EstateMeta[] = [
     status: 'coming-soon',
   },
   {
-    slug: 'malaprabha-estates',
-    name: 'Malaprabha Estates',
+    slug: 'malaprabha-nagar',
+    name: 'Malaprabha Nagar',
     location: 'Guledgudd',
     nameI18n: {
-      en: 'Malaprabha Estates',
-      hi: 'मालप्रभा एस्टेट्स',
-      kn: 'ಮಲಪ್ರಭಾ ಎಸ್ಟೇಟ್ಸ್',
+      en: 'Malaprabha Nagar',
+      hi: 'मालप्रभा नगर',
+      kn: 'ಮಲಪ್ರಭಾ ನಗರ',
     },
     locationI18n: {
       en: 'Guledgudd',
