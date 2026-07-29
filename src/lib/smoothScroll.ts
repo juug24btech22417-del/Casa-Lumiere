@@ -3,43 +3,49 @@
 /**
  * Smooth-scroll to a page anchor.
  *
- * The page wraps content in <SmoothScroll>, a position:fixed
- * motion.div that translates -scrollY. A sibling ghost spacer
- * (height = wrapper.scrollHeight) is what the browser actually
- * scrolls through — the wrapper just paints content on top of
- * the viewport at top:0.
+ * Architecture: <SmoothScroll> wraps content in a position:fixed
+ * motion.div that translates -scrollY (running through a soft
+ * useSpring for the weighted luxury feel). A sibling ghost spacer
+ * provides the actual scrollable height.
  *
- * With the wrapper translated by -scrollY, the target's
- * getBoundingClientRect().top equals its natural offset within
- * the wrapper MINUS the current scrollY. So:
- *
- *     naturalOffset = rect.top + window.scrollY
- *
- * That's the value we want to scroll the window to — the ghost
- * spacer's scrollHeight equals the wrapper's, so when
- * window.scrollY == naturalOffset the ghost has scrolled by
- * exactly that amount, which brings the target to viewport top.
- *
- * Callers should pass only the fragment without the `#` (e.g.
- * `scrollToAnchor('plots')`). The function silently no-ops if
- * the target doesn't exist on the current page.
+ * Challenge: the spring under-damps just enough that on plain
+ * `window.scrollTo(target)`, the wrapper's translate lags behind
+ * `scrollY` and the user sees the page stop 1-2 sections short
+ * of the target. To compensate, the SmoothScroll component
+ * exposes a window-level `__smoothScrollSnap(y)` that snaps the
+ * wrapper translate to `-y` for the duration of the browser's
+ * smooth scroll. We call that here, then `window.scrollTo`.
  */
+
+declare global {
+  interface Window {
+    /** Set by <SmoothScroll> on mount. Snaps the wrapper to
+     *  translateY(-targetY) for ~1.2s, bypassing the spring so
+     *  anchor nav lands exactly. */
+    __smoothScrollSnap?: (targetY: number) => void;
+  }
+}
+
 export const scrollToAnchor = (id: string): void => {
   if (typeof window === 'undefined') return;
   const el = document.getElementById(id);
   if (!el) return;
 
+  // No SmoothScroll wrapper on this page (rare): use native scroll.
   const wrapper = document.querySelector<HTMLElement>('[data-smooth-scroll-content]');
   if (!wrapper) {
-    // No SmoothScroll wrapper — the page scrolls natively.
     el.scrollIntoView({ behavior: 'smooth', block: 'start' });
     return;
   }
 
-  // Add the current scroll position to recover the target's
-  // natural offset within the wrapper (the value that maps
-  // directly to window.scrollY via the ghost spacer).
+  // Recover the target's natural offset within the wrapper. With
+  // the wrapper translated by -scrollY, getBoundingClientRect().top
+  // is shifted by -scrollY, so adding scrollY back gives the value
+  // scrollY needs to be for the target to hit viewport top.
   const naturalOffset = el.getBoundingClientRect().top + window.scrollY;
+
+  // Snap the wrapper instantly so the spring doesn't lag.
+  window.__smoothScrollSnap?.(naturalOffset);
 
   window.scrollTo({ top: naturalOffset, behavior: 'smooth' });
 };
